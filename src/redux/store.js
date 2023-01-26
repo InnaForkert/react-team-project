@@ -1,6 +1,6 @@
 import {
   persistStore,
-  persistReducer,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -8,19 +8,27 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+// import storage from 'redux-persist/lib/storage';
+import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit';
 
-const persistConfig = {
-  key: 'user',
-  storage,
-  whitelist: ['token'],
-};
+// const persistConfig = {
+//   key: 'user',
+//   storage,
+//   whitelist: ['token'],
+// };
 
-const rootReducer = combineReducers({});
+const placeholderSlice = createSlice({
+  name: 'placeholder',
+  initialState: {},
+  reducers: {},
+});
+
+const rootReducer = combineReducers({
+  placeholder: placeholderSlice.reducer,
+});
 
 export const store = configureStore({
-  rootReducer,
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
