@@ -11,6 +11,8 @@ import {
   store,
 } from 'redux/store';
 import { Provider } from 'react-redux';
+import 'modern-normalize/modern-normalize.css';
+import { GlobalStyleComponent } from 'assets/styles/GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -21,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       >
         <ThemeProvider theme={theme}>
           <App />
+          <GlobalStyleComponent />
         </ThemeProvider>
       </BrowserRouter>
       {/* </PersistGate> */}
