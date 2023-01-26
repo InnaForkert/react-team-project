@@ -2,6 +2,7 @@ import { Outlet } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Suspense } from 'react';
 import HomeTab from 'components/HomeTab/HomeTab';
+import Loader from 'components/Loader/Loader';
 
 export default function DashboardPage() {
   return (
@@ -13,7 +14,7 @@ export default function DashboardPage() {
       <Link to="diagram">diagram</Link>
       <br />
       <Link to="currency">currency for mobile version</Link>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>

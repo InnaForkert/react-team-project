@@ -1,5 +1,6 @@
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import Loader from './Loader/Loader';
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -20,7 +21,7 @@ export const App = () => {
         <br />
         <Link to="/home">dashboard</Link>
       </nav>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
