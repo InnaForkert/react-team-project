@@ -2,7 +2,7 @@ export const device = {
   mobileOnly: '(max-width: 479.98px)',
   mobile: '(min-width: 480px) and (max-width: 767.98px)',
   mobileFrom: '(min-width: 480px)',
-  tablet: '(min-width: 768px) and (max-width: 1199.98px)',
+  tablet: '(min-width: 768px) and (max-width: 1279.98px)',
   tabletFrom: '(min-width: 768px)',
   desktop: '(min-width: 1280px)',
 };
