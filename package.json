@@ -1,5 +1,4 @@
 {
-  "name": "wallet-app",
   "name": "react-team-project",
   "version": "0.1.0",
   "private": true,
@@ -11,10 +10,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.4",
     "chart.js": "^4.2.0",
+    "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
     "react": "^18.1.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.1.0",
+    "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.0.5",
     "react-router": "^6.7.0",
     "react-router-dom": "^6.7.0",
