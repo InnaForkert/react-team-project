@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { signUp } from 'redux/auth/operations';
 
 import css from './RegistrationForm.module.css';
@@ -12,8 +12,6 @@ const INITIAL_STATE = {
 };
 
 export const RegistrationForm = () => {
-  const selector = useSelector(state => state.auth);
-  console.log(selector);
   const [authData, setAuthData] = useState(INITIAL_STATE);
   const { email, password, confirmPassword, username } = authData;
   // const [isSubmitting, setIsSubmitting] = useState(false);

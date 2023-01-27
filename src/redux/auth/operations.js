@@ -27,7 +27,7 @@ const signUp = createAsyncThunk('auth/signUp', async (authData, thunkApi) => {
 
 const signIn = createAsyncThunk('auth/signIn', async (authData, thunkApi) => {
   try{
-    const {data} = axios.post('/api/auth/sign-in')
+    const {data} = await axios.post('/api/auth/sign-in', authData)
     token.set(data.token)
     return data
   }
