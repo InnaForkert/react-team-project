@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCategories, fetchTransactionsSummary } from './operations';
+import {
+  addTransaction,
+  fetchCategories,
+  fetchTransactionsSummary,
+  getAllTransactions,
+} from './operations';
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -32,8 +37,9 @@ const transactionsSlice = createSlice({
         state.expenseSummary = action.payload.expenseSummary;
         state.incomeSummary = action.payload.incomeSummary;
         state.periodTotal = action.payload.periodTotal;
-        
-       .addCase(addTransaction.pending, (state, { payload }) => {
+      })
+
+      .addCase(addTransaction.pending, (state, { payload }) => {
         state.isLoading = true;
         state.error = '';
       })
@@ -56,10 +62,7 @@ const transactionsSlice = createSlice({
       .addCase(getAllTransactions.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      })
-
-
-
+      }),
 });
 
 export const transactionsReducer = transactionsSlice.reducer;
