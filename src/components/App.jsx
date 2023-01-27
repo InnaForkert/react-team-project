@@ -8,7 +8,7 @@ const RegistrationPage = lazy(() =>
 );
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
 const HomeTab = lazy(() => import('./HomeTab/HomeTab'));
-const DiagramTab = lazy(() => import('./DiagramTab/DiagramTab'));
+const Statistics = lazy(() => import('./Statistics/Statistics'));
 const Currency = lazy(() => import('./Currency/Currency'));
 
 export const App = () => {
@@ -28,7 +28,7 @@ export const App = () => {
 
           <Route path="/" element={<DashboardPage />}>
             <Route path="/home" index element={<HomeTab />} />
-            <Route path="diagram" element={<DiagramTab />} />
+            <Route path="statistics" element={<Statistics />} />
             <Route path="currency" element={<Currency />} />
             {/* Currency for Mobile Version */}
             <Route path="*" element={<Navigate to="/home" replace />} />

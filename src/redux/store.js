@@ -9,9 +9,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
-import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
+import { transactionsCategoriesReducer } from './transactionsCategories/transactionsCategoriesSlice';
 
 // const persistConfig = {
 //   key: 'user',
@@ -19,15 +20,9 @@ import { authReducer } from './auth/authSlice';
 //   whitelist: ['token'],
 // };
 
-const placeholderSlice = createSlice({
-  name: 'placeholder',
-  initialState: {},
-  reducers: {},
-});
-
 const rootReducer = combineReducers({
-  placeholder: placeholderSlice.reducer,
-  auth: authReducer
+  auth: authReducer,
+  transactionsCategories: transactionsCategoriesReducer,
 });
 
 export const store = configureStore({
