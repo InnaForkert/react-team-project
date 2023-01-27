@@ -12,7 +12,7 @@ import {
 import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
-
+import { transactionsReducer } from './transactions/transactionsSlice';
 // const persistConfig = {
 //   key: 'user',
 //   storage,
@@ -27,7 +27,8 @@ const placeholderSlice = createSlice({
 
 const rootReducer = combineReducers({
   placeholder: placeholderSlice.reducer,
-  auth: authReducer
+  auth: authReducer,
+  transactions: transactionsReducer,
 });
 
 export const store = configureStore({
