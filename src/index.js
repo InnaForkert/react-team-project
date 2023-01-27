@@ -13,6 +13,7 @@ import {
 import { Provider } from 'react-redux';
 import 'modern-normalize/modern-normalize.css';
 import { GlobalStyleComponent } from 'assets/styles/GlobalStyles';
+import { GlobalFontComponent } from 'assets/fonts/FontStyled';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ThemeProvider theme={theme}>
           <App />
           <GlobalStyleComponent />
+          <GlobalFontComponent />
         </ThemeProvider>
       </BrowserRouter>
       {/* </PersistGate> */}
