@@ -15,11 +15,7 @@ export default function DashboardPage() {
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-      <AddTransactionBtn
-        type="button"
-        content={'ADD TRANSACTION'}
-        hasAccent={true}
-      />
+      <AddTransactionBtn type="button" content={'+'} hasAccent={true} />
     </Container>
   );
 }

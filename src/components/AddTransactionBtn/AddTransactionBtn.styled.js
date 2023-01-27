@@ -11,25 +11,26 @@ export const RoundBtn = styled.button`
   text-transform: uppercase;
   line-height: 1.5;
   font-size: ${({ theme }) => theme.fontSizes.md};
-  width: 100%;
-  min-width: ${({ theme }) => theme.spacing(70)};
-  max-width: ${({ theme }) => theme.spacing(75)};
+  width: 44px;
+  height: 44px;
+  /* min-width: ${({ theme }) => theme.spacing(70)};
+  max-width: ${({ theme }) => theme.spacing(75)}; */
   background-color: ${setBgColor};
   color: ${setColor};
   border: 1px solid ${setBorder};
-  border-radius: ${({ theme }) => theme.spacing(5)};
-  /* border-radius: 50%; */
-  padding-right: ${({ theme }) => theme.spacing(3)};
+  /* border-radius: ${({ theme }) => theme.spacing(5)}; */
+  border-radius: 50%;
+  /* padding-right: ${({ theme }) => theme.spacing(3)};
   padding-left: ${({ theme }) => theme.spacing(3)};
   padding-top: ${({ theme }) => theme.spacing(3)};
-  padding-bottom: ${({ theme }) => theme.spacing(3)};
+  padding-bottom: ${({ theme }) => theme.spacing(3)}; */
   transition: all ${({ theme }) => theme.animation.cubicBezier} 0s;
   cursor: pointer;
   &:hover,
   &:focus {
     box-shadow: ${({ theme }) => theme.shadows.regular};
   }
-  ${({ theme }) => theme.media.mobileFrom} {
+  /* ${({ theme }) => theme.media.mobileFrom} {
     min-width: ${({ theme }) => theme.spacing(75)};
-  }
+  } */
 `;
