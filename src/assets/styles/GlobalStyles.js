@@ -26,4 +26,7 @@ a {
   text-decoration:none;
 	color: inherit;
 }
+body {
+	font-family: ${({ theme }) => theme.fonts.primary};
+}
 `;

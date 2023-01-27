@@ -10,7 +10,6 @@ export const MainButton = styled.button`
   display: inline-block;
   text-transform: uppercase;
   line-height: 1.5;
-  font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.md};
   width: 100%;
   min-width: ${({ theme }) => theme.spacing(70)};
