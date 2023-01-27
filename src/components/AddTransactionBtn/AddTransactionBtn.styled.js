@@ -7,12 +7,16 @@ const setColor = props => (props.hasAccent ? `#ffffff` : `#4A56E2`);
 const setBorder = props => (props.hasAccent ? `#24CCA7` : `#4A56E2`);
 
 export const RoundBtn = styled.button`
+  position: fixed;
+  bottom: ${({ theme }) => theme.spacing(5)};
+  right: ${({ theme }) => theme.spacing(5)};
+
   display: inline-block;
   text-transform: uppercase;
   line-height: 1.5;
   font-size: ${({ theme }) => theme.fontSizes.md};
-  width: 44px;
-  height: 44px;
+  width: ${({ theme }) => theme.spacing(11)};
+  height: ${({ theme }) => theme.spacing(11)};
   /* min-width: ${({ theme }) => theme.spacing(70)};
   max-width: ${({ theme }) => theme.spacing(75)}; */
   background-color: ${setBgColor};
@@ -30,7 +34,8 @@ export const RoundBtn = styled.button`
   &:focus {
     box-shadow: ${({ theme }) => theme.shadows.regular};
   }
-  /* ${({ theme }) => theme.media.mobileFrom} {
-    min-width: ${({ theme }) => theme.spacing(75)};
-  } */
+  ${({ theme }) => theme.media.mobileFrom} {
+    bottom: ${({ theme }) => theme.spacing(10)};
+    right: ${({ theme }) => theme.spacing(10)};
+  }
 `;
