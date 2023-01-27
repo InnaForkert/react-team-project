@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { signIn } from 'redux/auth/operations';
 
 import css from './LoginForm.module.css';
+import Button from 'components/Button/Button';
 
 const INITIAL_STATE = {
   email: '',
@@ -52,9 +53,16 @@ export const LoginForm = () => {
             required
           />
         </label>
-        <button type="submit" /*disabled={isSubmitting}*/>Log in</button>
+        <Button
+          type="submit"
+          content={'Log in'}
+          hasAccent={true}
+          /*disabled={isSubmitting}*/
+        />
       </form>
-      <Link to="/register">Register</Link>
+      <NavLink to="/register">
+        <Button type="button" content={'Register'} />
+      </NavLink>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 export const device = {
   mobileOnly: '(max-width: 479.98px)',
-  mobile: '(max-width: 767.98px)',
+  mobile: '(min-width: 480px) and (max-width: 767.98px)',
+  mobileFrom: '(min-width: 480px)',
   tablet: '(min-width: 768px) and (max-width: 1199.98px)',
-  desktop: '(min-width: 1200px)',
+  tabletFrom: '(min-width: 768px)',
+  desktop: '(min-width: 1280px)',
 };
 
 export const theme = Object.freeze({
@@ -30,14 +32,19 @@ export const theme = Object.freeze({
     normal: 400,
     bold: 700,
   },
+  shadows: {
+    regular: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)',
+  },
   spacing: value => `${4 * value}px`,
   animation: {
     cubicBezier: '0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98)',
   },
   media: {
-    mobile: `@media screen and ${device.mobile}`,
-    tablet: `@media screen and ${device.tablet}`,
-    desktop: `@media screen and ${device.desktop}`,
     mobileOnly: `@media screen and ${device.mobileOnly}`,
+    mobile: `@media screen and ${device.mobile}`,
+    mobileFrom: `@media screen and ${device.mobileFrom}`,
+    tablet: `@media screen and ${device.tablet}`,
+    tabletFrom: `@media screen and ${device.tabletFrom}`,
+    desktop: `@media screen and ${device.desktop}`,
   },
 });
