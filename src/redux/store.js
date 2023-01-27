@@ -11,6 +11,8 @@ import {
 // import storage from 'redux-persist/lib/storage';
 import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit';
 
+import { authReducer } from './auth/authSlice';
+
 // const persistConfig = {
 //   key: 'user',
 //   storage,
@@ -25,6 +27,7 @@ const placeholderSlice = createSlice({
 
 const rootReducer = combineReducers({
   placeholder: placeholderSlice.reducer,
+  auth: authReducer
 });
 
 export const store = configureStore({
