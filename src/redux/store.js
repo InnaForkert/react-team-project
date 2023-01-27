@@ -9,24 +9,18 @@ import {
   REGISTER,
 } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
-import { combineReducers, configureStore, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
 import { transactionsReducer } from './transactions/transactionsSlice';
+
 // const persistConfig = {
 //   key: 'user',
 //   storage,
 //   whitelist: ['token'],
 // };
 
-const placeholderSlice = createSlice({
-  name: 'placeholder',
-  initialState: {},
-  reducers: {},
-});
-
 const rootReducer = combineReducers({
-  placeholder: placeholderSlice.reducer,
   auth: authReducer,
   transactions: transactionsReducer,
 });

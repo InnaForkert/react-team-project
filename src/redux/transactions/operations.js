@@ -2,14 +2,25 @@ import axios from 'axios';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://wallet.goit.ua';
+axios.defaults.baseURL = 'https://wallet.goit.ua/api';
 
-const addTransaction = createAsyncThunk(
+export const fetchCategories = createAsyncThunk(
+  'transactions/fetchCategories',
+  async (_, thunkApi) => {
+    try {
+      const { data } = await axios.get('/transaction-categories');
+      return data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
+  }
+);
+
+export const addTransaction = createAsyncThunk(
   'transactions/add',
   async (newTransaction, thunkApi) => {
     try {
       const { data } = await axios.post('/api/transactions', newTransaction);
-      // token.set(data.token);
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
@@ -17,12 +28,11 @@ const addTransaction = createAsyncThunk(
   }
 );
 
-const getAllTransactions = createAsyncThunk(
+export const getAllTransactions = createAsyncThunk(
   'transactions/getAll',
   async (_, thunkApi) => {
     try {
       const { data } = await axios.get('/api/transactions');
-      // token.set(data.token);
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
@@ -30,38 +40,21 @@ const getAllTransactions = createAsyncThunk(
   }
 );
 
-const getTransactionsCategories = createAsyncThunk(
-  'transactions/getCategories',
-  async (_, thunkApi) => {
-    try {
-      const { data } = await axios.get('/api/transaction-categories');
-      // token.set(data.token);
-      return data;
-    } catch (err) {
-      return thunkApi.rejectWithValue(err.message);
-    }
-  }
-);
+const now = new Date();
+const currentMonth = now.getMonth() + 1;
+const currentYear = now.getFullYear();
 
-const getTransactionsByMonth = createAsyncThunk(
-  'transactions/getTransactionsByMonth',
-  async (params, thunkApi) => {
+
+export const fetchTransactionsSummary = createAsyncThunk(
+  'transactions/fetchSummary',
+  async (date = { month: currentMonth, year: currentYear }, thunkApi) => {
     try {
-      const { month, year } = params;
       const { data } = await axios.get(
-        `/api/transactions-summary?month=${month}&year=${year}`
+        `transactions-summary?month=${date.month}&year=${date.year}`
       );
-      // token.set(data.token);
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
     }
   }
 );
-
-export {
-  addTransaction,
-  getAllTransactions,
-  getTransactionsCategories,
-  getTransactionsByMonth,
-};
