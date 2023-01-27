@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/266.c0b961ef.chunk.js","mappings":"uLAAe,SAASA,IACtB,OACE,+BACE,sCAGL,C","sources":["components/Currency/Currency.jsx"],"sourcesContent":["export default function Currency() {\n  return (\n    <>\n      <h1>Currency</h1>\n    </>\n  );\n}\n"],"names":["Currency"],"sourceRoot":""}

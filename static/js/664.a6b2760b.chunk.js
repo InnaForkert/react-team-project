@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_team_project=self.webpackChunkreact_team_project||[]).push([[664],{664:function(e,t,n){n.r(t),n.d(t,{default:function(){return c}});var r=n(184);function c(){return(0,r.jsx)(r.Fragment,{children:(0,r.jsx)("h1",{children:"LoginPage"})})}}}]);
-//# sourceMappingURL=664.a6b2760b.chunk.js.map
