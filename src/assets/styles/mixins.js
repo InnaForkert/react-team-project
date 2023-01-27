@@ -15,10 +15,3 @@ export const container = css`
     padding-inline: 16px;
   } ;
 `;
-
-export const device = {
-  mobileOnly: '(max-width: 479.98px)',
-  mobile: '(max-width: 767.98px)',
-  tablet: '(min-width: 768px) and (max-width: 1199.98px)',
-  desktop: '(min-width: 1200px)',
-};
