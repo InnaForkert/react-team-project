@@ -12,7 +12,7 @@ import {
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
-import { transactionsCategoriesReducer } from './transactionsCategories/transactionsCategoriesSlice';
+import { transactionsReducer } from './transactions/transactionsSlice';
 
 // const persistConfig = {
 //   key: 'user',
@@ -22,7 +22,7 @@ import { transactionsCategoriesReducer } from './transactionsCategories/transact
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  transactionsCategories: transactionsCategoriesReducer,
+  transactions: transactionsReducer,
 });
 
 export const store = configureStore({

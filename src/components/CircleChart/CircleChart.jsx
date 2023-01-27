@@ -1,8 +1,12 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories } from 'redux/transactionsCategories/operations';
-import { selectCategories } from 'redux/transactionsCategories/transactionsCategoriesSlice';
+import { fetchCategories } from 'redux/transactions/operations';
+import {
+  selectCategories,
+  selectPeriodTotal,
+  selectSummary,
+} from 'redux/transactions/transactionsSlice';
 import {
   StyledDoughnut,
   ChartContainer,
@@ -14,6 +18,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 function CircleChart() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
+  const total = useSelector(selectPeriodTotal);
+  const summary = useSelector(selectSummary);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -24,7 +30,7 @@ function CircleChart() {
     datasets: [
       {
         label: '',
-        data: [12, 19, 3, 5, 2, 3],
+        data: summary.map(el => el.total),
         backgroundColor: [
           '#FED057',
           '#FFD8D0',
@@ -55,7 +61,7 @@ function CircleChart() {
   return (
     <ChartContainer>
       <StyledDoughnut data={data} />
-      <ChartLabel>5000$</ChartLabel>
+      <ChartLabel>${total}</ChartLabel>
     </ChartContainer>
   );
 }
