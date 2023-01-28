@@ -6,6 +6,7 @@ import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
 import { Header } from 'components/Header/Header';
 import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
+import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
 
 export default function DashboardPage() {
   return (
@@ -24,6 +25,7 @@ export default function DashboardPage() {
           hasAccent={true}
           // handleClick={onAddTransactionBtnClick}
         />
+        <AddTransactionForm />
       </Container>
     </>
   );
