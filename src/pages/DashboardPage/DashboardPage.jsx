@@ -10,10 +10,10 @@ import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
 export default function DashboardPage() {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Container>
         <h1>DashboardPage</h1>
-        {/* <HomeTab /> */}
+        <HomeTab />
         <Navigation />
         <Suspense fallback={<Loader />}>
           <Outlet />
