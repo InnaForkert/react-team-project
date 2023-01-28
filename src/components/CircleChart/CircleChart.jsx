@@ -15,6 +15,13 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+ChartJS.overrides.doughnut.plugins = {
+  ...ChartJS.overrides.doughnut.plugins,
+  legend: {
+    display: false,
+  },
+};
+
 function CircleChart() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
@@ -26,7 +33,7 @@ function CircleChart() {
   }, [dispatch]);
 
   const data = {
-    labels: categories,
+    labels: categories.map(el => el.name),
     datasets: [
       {
         label: '',
@@ -56,12 +63,20 @@ function CircleChart() {
         borderWidth: 1,
       },
     ],
+    options: {
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+        },
+      },
+    },
   };
 
   return (
     <ChartContainer>
+      <ChartLabel>₴ {total}</ChartLabel>
       <StyledDoughnut data={data} />
-      <ChartLabel>${total}</ChartLabel>
     </ChartContainer>
   );
 }

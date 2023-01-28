@@ -18,8 +18,8 @@ export const theme = Object.freeze({
     background: '#E7EAF2',
   },
   fonts: {
-    primary: 'Circe, sans serif',
-    secondary: 'Poppins, sans serif',
+    primary: '"Circe", sans-serif',
+    secondary: 'Poppins, sans-serif',
   },
   fontSizes: {
     xs: '12px',
