@@ -1,6 +1,16 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Link,
+  /*useNavigate,*/ Navigate,
+} from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Loader from './Loader/Loader';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { currentUser } from 'redux/auth/operations';
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -12,29 +22,45 @@ const Statistics = lazy(() => import('./Statistics/Statistics'));
 const Currency = lazy(() => import('./Currency/Currency'));
 
 export const App = () => {
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
+  // const isAuth = useSelector(state => state.auth.isAuth);
+
+  useEffect(() => {
+    dispatch(currentUser());
+
+    // isAuth ? navigate('/home') : navigate('/login');
+  }, [dispatch /*navigate, isAuth*/]);
+
   return (
     <>
-      <nav>
-        <Link to="/login">login</Link>
-        <br />
-        <Link to="/register">register</Link>
-        <br />
-        <Link to="/home">dashboard</Link>
-      </nav>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
+      {!isRefreshing && (
+        <>
+          <nav>
+            <Link to="/login">login</Link>
+            <br />
+            <Link to="/register">register</Link>
+            <br />
+            <Link to="/home">dashboard</Link>
+          </nav>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegistrationPage />} />
+              <Route path="/" element={<DashboardPage />}>
+                <Route path="/home" index element={<HomeTab />} />
+                <Route path="statistics" element={<Statistics />} />
+                <Route path="currency" element={<Currency />} />
+                {/* Currency for Mobile Version */}
+                <Route path="*" element={<Navigate to="/home" replace />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </>
+      )}
 
-          <Route path="/" element={<DashboardPage />}>
-            <Route path="/home" index element={<HomeTab />} />
-            <Route path="statistics" element={<Statistics />} />
-            <Route path="currency" element={<Currency />} />
-            {/* Currency for Mobile Version */}
-            <Route path="*" element={<Navigate to="/home" replace />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      {isRefreshing && <Loader />}
     </>
   );
 };
