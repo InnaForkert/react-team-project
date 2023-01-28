@@ -18,7 +18,12 @@ const Statistics = lazy(() => import('./Statistics/Statistics'));
 const Currency = lazy(() => import('./Currency/Currency'));
 
 export const App = () => {
+  
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(currentUser());
+    dispatch(getAllTransactions());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(currentUser());
