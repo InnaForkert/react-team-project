@@ -25,7 +25,7 @@ const transactionsSlice = createSlice({
       })
 
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state = action.payload;
+        state.categories = action.payload;
       })
       .addCase(fetchTransactionsSummary.pending)
       .addCase(fetchTransactionsSummary.rejected, () => {
