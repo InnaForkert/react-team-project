@@ -1,8 +1,9 @@
 import s from './HomeTab.module.css';
+import { HomeTabContainer } from './HomeTab.styled';
 
 export default function HomeTab() {
   return (
-   <div className={s.container}>
+   <HomeTabContainer>
       <table className={s.table}>
         <thead className={s.thead}>
           <tr className={s.tr}>
@@ -26,6 +27,6 @@ export default function HomeTab() {
             </tr>)
             </tbody>
             </table>
-            </div>
+            </HomeTabContainer>
           );
 }
