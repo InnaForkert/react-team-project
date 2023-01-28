@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 import { Suspense } from 'react';
-import HomeTab from 'components/HomeTab/HomeTab';
+import HomeTab from 'components/HomeTab/HomeTabDesktop/HomeTabDesktop';
 import Loader from 'components/Loader/Loader';
 import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';

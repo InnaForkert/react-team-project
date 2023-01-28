@@ -12,7 +12,7 @@ const RegistrationPage = lazy(() =>
   import('pages/RegistrationPage/RegistrationPage')
 );
 const DashboardPage = lazy(() => import('pages/DashboardPage/DashboardPage'));
-const HomeTab = lazy(() => import('./HomeTab/HomeTab'));
+const HomeTab = lazy(() => import('./HomeTab/HomeTabDesktop/HomeTabDesktop'));
 const Statistics = lazy(() => import('./Statistics/Statistics'));
 const Currency = lazy(() => import('./Currency/Currency'));
 
