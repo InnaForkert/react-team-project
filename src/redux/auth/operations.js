@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'https://wallet.goit.ua'
+axios.defaults.baseURL = 'https://wallet.goit.ua/api'
 
 const token = {
   set(token){
@@ -16,7 +16,7 @@ const token = {
 
 const signUp = createAsyncThunk('auth/signUp', async (authData, thunkApi) => {
   try{
-    const {data} = await axios.post('/api/auth/sign-up', authData)
+    const {data} = await axios.post('/auth/sign-up', authData)
     token.set(data.token)
     return data
   }
@@ -27,7 +27,7 @@ const signUp = createAsyncThunk('auth/signUp', async (authData, thunkApi) => {
 
 const signIn = createAsyncThunk('auth/signIn', async (authData, thunkApi) => {
   try{
-    const {data} = await axios.post('/api/auth/sign-in', authData)
+    const {data} = await axios.post('/auth/sign-in', authData)
     token.set(data.token)
     return data
   }
@@ -36,4 +36,32 @@ const signIn = createAsyncThunk('auth/signIn', async (authData, thunkApi) => {
   }
 })
 
-export {signUp, signIn}
+const signOut = createAsyncThunk('auth/signOut', async (_, thunkApi) => {
+  try{
+    axios.post('/auth/sign-out')
+    token.unset()
+  }
+  catch(err){
+    return thunkApi.rejectWithValue(err.message)
+  }
+})
+
+const currentUser = createAsyncThunk('auth/currentUser', async (_, thunkApi) => {
+  const {auth} = thunkApi.getState()
+  const persistedToken = auth.token
+
+  if(!persistedToken){
+    return thunkApi.rejectWithValue('Unable to fetch user');
+  }
+
+  try{
+    token.set(persistedToken)
+    const {data} = await axios.get('/users/current')
+    return data
+  }
+  catch(err){
+    return thunkApi.rejectWithValue(err.message)
+  }
+})
+
+export {signUp, signIn, currentUser, signOut}
