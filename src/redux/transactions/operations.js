@@ -18,7 +18,7 @@ export const addTransaction = createAsyncThunk(
   'transactions/add',
   async (newTransaction, thunkApi) => {
     try {
-      const { data } = await axios.post('/api/transactions', newTransaction);
+      const { data } = await axios.post('/transactions', newTransaction);
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
@@ -30,7 +30,7 @@ export const getAllTransactions = createAsyncThunk(
   'transactions/getAll',
   async (_, thunkApi) => {
     try {
-      const { data } = await axios.get('/api/transactions');
+      const { data } = await axios.get('/transactions');
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
