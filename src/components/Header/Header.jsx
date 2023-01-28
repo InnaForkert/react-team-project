@@ -13,7 +13,21 @@ import {
   ExitText,
 } from './Header.styled';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from 'redux/auth/operations';
+
 export const Header = () => {
+  const dispatch = useDispatch();
+
+  const handleClickSignOut = () => {
+    dispatch(signOut());
+  };
+
+  const selectUsername = state => state.auth?.user?.username;
+  const username = useSelector(selectUsername);
+
+  console.log(username);
+
   return (
     <>
       <HeaderMain>
@@ -25,8 +39,8 @@ export const Header = () => {
             <LogoText>Wallet</LogoText>
           </NavItem>
           <Wrapper>
-            <Name>Name</Name>
-            <Button type="button">
+            <Name>{username}</Name>
+            <Button type="button" onClick={handleClickSignOut}>
               <ExitIcon>
                 <use href={sprite + '#icon-exit'}></use>
               </ExitIcon>
