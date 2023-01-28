@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import { currentUser } from 'redux/auth/operations';
+import { getAllTransactions } from 'redux/transactions/operations';
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -21,6 +22,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(currentUser());
+    dispatch(getAllTransactions());
   }, [dispatch]);
 
   return (
