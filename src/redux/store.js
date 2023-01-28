@@ -1,6 +1,6 @@
 import {
   persistStore,
-  // persistReducer,
+  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -8,20 +8,20 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
 import { transactionsReducer } from './transactions/transactionsSlice';
 
-// const persistConfig = {
-//   key: 'user',
-//   storage,
-//   whitelist: ['token'],
-// };
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: persistReducer(persistConfig, authReducer),
   transactions: transactionsReducer,
 });
 

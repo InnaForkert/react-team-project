@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://wallet.goit.ua/api';
-
 export const fetchCategories = createAsyncThunk(
   'transactions/fetchCategories',
   async (_, thunkApi) => {
