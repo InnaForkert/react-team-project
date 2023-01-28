@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactionsSummary } from 'redux/transactions/operations';
-import { SelectDate, SelectInput, SelectContainer } from './StatsTable.styled';
+import {
+  SelectDate,
+  SelectInput,
+  SelectContainer,
+  ColorRect,
+} from './StatsTable.styled';
 import { selectSummary } from 'redux/transactions/transactionsSlice';
 import { nanoid } from 'nanoid';
 
@@ -18,6 +23,18 @@ const months = [
   'October',
   'November',
   'December',
+];
+
+const colors = [
+  '#FED057',
+  '#FFD8D0',
+  '#FD9498',
+  '#C5BAFF',
+  '#6E78E8',
+  '#4A56E2',
+  '#81E1FF',
+  '#24CCA7',
+  '#00AD84',
 ];
 
 function StatsTable() {
@@ -84,16 +101,26 @@ function StatsTable() {
           <li data-value="2023">2023</li>
         </SelectDate>
       </SelectContainer>
-      {/* <TableHeader>Category, Sum</TableHeader> */}
-      <ul>
-        {summary.length > 0
-          ? summary.map(el => (
-              <li key={nanoid()}>
-                {el.name}: {el.total}
-              </li>
-            ))
-          : ''}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Sum</th>
+          </tr>
+        </thead>
+        {summary.length > 0 ? (
+          <tbody>
+            {summary.map((el, i) => (
+              <tr key={nanoid()}>
+                <ColorRect color={colors[i]}>{el.name}</ColorRect>
+                <td>{el.total}</td>
+              </tr>
+            ))}
+          </tbody>
+        ) : (
+          ''
+        )}
+      </table>
     </>
   );
 }

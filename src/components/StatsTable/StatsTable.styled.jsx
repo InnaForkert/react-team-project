@@ -85,3 +85,13 @@ export const SelectContainer = styled.div`
     }
   }
 `;
+
+export const ColorRect = styled.td`
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: ${props => props.color};
+  }
+`;
