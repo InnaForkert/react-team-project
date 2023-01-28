@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.4",
     "chart.js": "^4.0.0",
+    "formik": "^2.2.9",
     "framer-motion": "^8.5.4",
     "modern-normalize": "^1.1.0",
     "nanoid": "^4.0.0",

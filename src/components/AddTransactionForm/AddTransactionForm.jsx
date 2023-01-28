@@ -47,7 +47,12 @@ export const AddTransactionForm = () => {
       <form className={css.form} onSubmit={handleSubmit}>
         <div>
           <label>Income</label>
-          <Switch id="transactionType" />
+          <Switch
+            id="transactionType"
+            isChecked
+            size="lg"
+            colorScheme="green"
+          />
           <label>Expense</label>
         </div>
         <label className={css.inputLabel}>
