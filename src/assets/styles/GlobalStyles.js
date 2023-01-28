@@ -33,14 +33,34 @@ body {
 	background-color: ${({ theme }) => theme.colors.background};
 
 	${({ theme }) => theme.media.tablet} {
-	background-repeat: no-repeat, no-repeat;
-  background-image: url(${bg_pink}), url(${bg_violet});
-  background-position: top -150px right -254px, bottom -150px left -150px;
+	background-repeat: no-repeat;
+  background-image: url(${bg_pink});
+  background-position: top -150px right -254px;
   }
 
 	${({ theme }) => theme.media.desktop} {
-	background-repeat: no-repeat, no-repeat;
-  background-image: url(${bg_pink}), url(${bg_violet});
-  background-position: top -150px right -150px, bottom -150px left -150px;;
+	background-repeat: no-repeat;
+  background-image: url(${bg_pink});
+  background-position: top -150px right -150px;
+  }
+}
+body::before{
+	content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+	z-index: -1;
+
+	${({ theme }) => theme.media.tablet} {
+	background-repeat: no-repeat;
+  background-image: url(${bg_violet});
+  background-position: bottom -150px left -150px;
+  }
+
+	${({ theme }) => theme.media.desktop} {
+	background-repeat: no-repeat;
+  background-image: url(${bg_violet});
+  background-position: bottom -150px left -150px;
   }
 }`;

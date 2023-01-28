@@ -48,13 +48,7 @@ const transactionsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.categories = action.payload;
-        state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(fetchTransactionsSummary.pending, state => {
-        state.isLoading = true;
-        state.error = null;
+        state = action.payload;
       })
       .addCase(fetchTransactionsSummary.rejected, (state, action) => {
         state.isLoading = false;
