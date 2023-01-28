@@ -1,7 +1,13 @@
 import s from './HomeTabDesktop.module.css';
 import { HomeTabContainer } from './HomeTabDesktop.styled';
+import { getAllTransactions } from 'redux/transactions/operations';
+import { useSelector } from 'react-redux';
+import { normalizeFormatDate, normalizeNum } from 'services/normalizeService';
 
 export default function HomeTabDesktop() {
+  const transactions = useSelector((state) => getAllTransactions(state))
+  let filterTrans = [...transactions]
+  filterTrans.sort((a, b) => (a.date > b.date ? -1 : 1))
   return (
    <HomeTabContainer>
       <table className={s.table}>
@@ -24,7 +30,23 @@ export default function HomeTabDesktop() {
               <td>Комментар</td>
               <td>0</td>
               <td>0</td>
-            </tr>)
+          </tr>)
+          {transactions?.map((item) => {
+            console.log(item)
+            const text = item.income === false ? '-' : '+'
+            const colorTxt = item.income === false ? s.lose : s.profit
+
+            return (
+              <tr key={item.id} className={s.tr}>
+                <td>{normalizeFormatDate(item.date)}</td>
+                <td>{text}</td>
+                <td>{item.category}</td>
+                <td>{item.comment}</td>
+                <td className={colorTxt}>{normalizeNum(item.sum)}</td>
+                <td>{normalizeNum(item.balance)}</td>
+              </tr>
+            )
+          })}
             </tbody>
             </table>
             </HomeTabContainer>
