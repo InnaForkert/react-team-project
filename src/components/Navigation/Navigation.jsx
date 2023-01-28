@@ -8,7 +8,7 @@ export default function Navigation() {
           <NavLink to="home">Home</NavLink>
         </li>
         <li>
-          <NavLink to="diagram">Statistics</NavLink>
+          <NavLink to="statistics">Statistics</NavLink>
         </li>
         <li>
           <NavLink to="currency">Currency for mobile version</NavLink>
