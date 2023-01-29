@@ -1,107 +1,136 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Switch } from '@chakra-ui/react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 
-// import { Icons } from 'components/Icons/Icons';
-
-import { addTransaction } from 'redux/transactions/operations';
-
-import css from './AddTransactionForm.module.css';
+import {
+  addTransaction,
+  getAllTransactions,
+} from 'redux/transactions/operations';
+import { selectCategories } from 'redux/transactions/transactionsSlice';
 import Button from 'components/Button/Button';
 
-const INITIAL_STATE = {
+import css from './AddTransactionForm.module.css';
+
+const initialValues = {
   transactionDate: '',
-  type: '',
   categoryId: '',
   comment: '',
   amount: '',
 };
 
+const schema = yup.object().shape({
+  // categoryId: yup.string().required('Pls select category'),
+  amount: yup.number().required().positive().integer(),
+  comment: yup.string().min(2),
+  transactionDate: yup.date().required(),
+});
+
 export const AddTransactionForm = () => {
-  const [newTransaction, setNewTransaction] = useState(INITIAL_STATE);
-  const { type, categoryId, amount, transactionDate, comment } = newTransaction;
+  const categories = useSelector(selectCategories);
+  const expenseCategories = categories.filter(el => el.type !== 'INCOME');
+  const incomeCategories = categories.filter(el => el.type === 'INCOME');
+  const incomeCategoriesId = incomeCategories.map(el => {
+    return el.id;
+  });
+
+  // TOGGLE TRANSACTION TYPE====================================================
+  const [isIncomeTransaction, setIsIncomeTransaction] = useState(true);
+
+  const toggleTransactionType = () => {
+    setIsIncomeTransaction(!isIncomeTransaction);
+  };
+  // ====================================================
+
   const dispatch = useDispatch();
 
-  const handleChange = ({ target }) => {
-    setNewTransaction({ ...newTransaction, [target.name]: target.value });
-  };
+  const handleSubmit = (values, actions) => {
+    if (isIncomeTransaction) {
+      values.type = 'INCOME';
+      values.categoryId = incomeCategoriesId[0];
+    } else {
+      values.amount = -values.amount;
+      values.type = 'EXPENSE';
+    }
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(
-      addTransaction({
-        transactionDate,
-        type,
-        categoryId,
-        comment,
-        amount,
-      })
-    );
-    setNewTransaction(INITIAL_STATE);
+    console.log(values);
+    dispatch(addTransaction(values));
+    actions.resetForm();
   };
 
   return (
     <div className={css.wrapper}>
       <h2 className={css.formTitle}>Add transaction</h2>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <div>
-          <label>Income</label>
-          <Switch
-            id="transactionType"
-            isChecked
-            size="lg"
-            colorScheme="green"
-          />
-          <label>Expense</label>
-        </div>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
-            type="select"
-            name="categoryId"
-            onChange={handleChange}
-            value={categoryId}
-            placeholder="Select a category"
-            required
-          />
-        </label>
-        <div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
+        <Form className={css.form}>
+          <div>
+            <label for="transactionType">Income</label>
+            <Switch
+              onChange={toggleTransactionType}
+              id="transactionType"
+              size="lg"
+              colorScheme="green"
+              name="transactionType"
+            />
+            <label>Expense</label>
+          </div>
+          {!isIncomeTransaction && (
+            <label className={css.inputLabel}>
+              <Field
+                className={css.formInput}
+                as="select"
+                name="categoryId"
+                placeholder="Select a category"
+              >
+                {expenseCategories.map(({ id, name }) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="categoryId" component="div" />
+            </label>
+          )}
+
+          <div>
+            <label className={css.inputLabel}>
+              <Field
+                className={css.formInput}
+                type="text"
+                name="amount"
+                placeholder="0.00"
+              />
+              <ErrorMessage name="amount" component="div" />
+            </label>
+            <label className={css.inputLabel}>
+              <Field
+                className={css.formInput}
+                type="date"
+                name="transactionDate"
+                // placeholder={new Date().toISOString()}
+              />
+              <ErrorMessage name="transactionDate" component="div" />
+            </label>
+          </div>
           <label className={css.inputLabel}>
-            <input
+            <Field
               className={css.formInput}
               type="text"
-              name="amount"
-              onChange={handleChange}
-              value={amount}
-              placeholder="0.00"
-              required
+              name="comment"
+              placeholder="Comment"
             />
+            <ErrorMessage name="comment" component="div" />
           </label>
-          <label className={css.inputLabel}>
-            <input
-              className={css.formInput}
-              type="date"
-              name="transactionDate"
-              onChange={handleChange}
-              value={transactionDate}
-              required
-            />
-          </label>
-        </div>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
-            type="text"
-            name="comment"
-            onChange={handleChange}
-            value={comment}
-            placeholder="Comment"
-          />
-        </label>
 
-        <Button type="submit" content={'add'} hasAccent={true} />
-      </form>
+          <Button type="submit" content={'add'} hasAccent={true} />
+        </Form>
+      </Formik>
       <NavLink to="/home">
         <Button type="button" content={'cancel'} />
       </NavLink>
