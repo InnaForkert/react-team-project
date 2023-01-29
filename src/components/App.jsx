@@ -1,11 +1,15 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Loader from './Loader/Loader';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
+<<<<<<< Updated upstream
 import { currentUser, signOut } from 'redux/auth/operations';
+=======
+import { currentUser } from 'redux/auth/operations';
+>>>>>>> Stashed changes
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -18,10 +22,20 @@ const Currency = lazy(() => import('./Currency/Currency'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuth = useSelector(state => state.auth.isAuth);
 
   useEffect(() => {
     dispatch(currentUser());
+<<<<<<< Updated upstream
   }, [dispatch]);
+=======
+
+    if (isAuth) {
+      navigate('/home');
+    }
+  }, [dispatch, isAuth, navigate]);
+>>>>>>> Stashed changes
 
   const handleClickSignOut = () => {
     dispatch(signOut());

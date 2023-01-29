@@ -1,15 +1,17 @@
 import { Container } from 'components/Container/Container.styled';
 import { RegistrationForm } from 'components/RegistrationForm/RegistrationForm';
 
-import css from './RegistrationPage.module.css';
+// import css from './RegistrationPage.module.css';
+
+import { Registration, Title } from './Registration.styled';
 
 export default function RegistrationPage() {
   return (
     <Container>
-      <main className={css.registrationPage}>
-        <h1 className={css.pageTitle}>Finance App</h1>
+      <Registration>
+        <Title>Finance App</Title>
         <RegistrationForm />
-      </main>
+      </Registration>
     </Container>
   );
 }
