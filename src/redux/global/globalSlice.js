@@ -25,3 +25,5 @@ export const { toggleModalLogoutOpen, toggleModalAddTransactionOpen } =
 export const globalReducer = globalSlice.reducer;
 
 export const selectModalLogoutOpen = state => state.global.isModalLogoutOpen;
+export const selectModalAddTransactionOpen = state =>
+  state.global.isModalAddTransactionOpen;
