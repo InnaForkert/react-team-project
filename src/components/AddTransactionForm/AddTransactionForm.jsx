@@ -5,10 +5,7 @@ import { Switch } from '@chakra-ui/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
-import {
-  addTransaction,
-  getAllTransactions,
-} from 'redux/transactions/operations';
+import { addTransaction } from 'redux/transactions/operations';
 import { selectCategories } from 'redux/transactions/transactionsSlice';
 import Button from 'components/Button/Button';
 
