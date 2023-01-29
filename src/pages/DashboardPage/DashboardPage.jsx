@@ -8,6 +8,9 @@ import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
 import { Header } from 'components/Header/Header';
 import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
+import { useSelector } from 'react-redux';
+import { selectModalAddTransactionOpen } from 'redux/global/globalSlice';
+import { Modal } from 'components/Modal/Modal';
 
 import { getAllTransactions } from 'redux/transactions/operations';
 
@@ -17,6 +20,8 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
+  
+  const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
 
   return (
     <>
@@ -28,13 +33,9 @@ export default function DashboardPage() {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-        <AddTransactionBtn
-          type="button"
-          content={'+'}
-          hasAccent={true}
-          // handleClick={onAddTransactionBtnClick}
-        />
+        <AddTransactionBtn />
       </Container>
+      {isModalAddTransactionOpen && <Modal />}
     </>
   );
 }
