@@ -21,9 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         // basename="react-team-project"
         >
           <ThemeProvider theme={theme}>
-            <ChakraProvider>
-              <App />
-            </ChakraProvider>
+            <App />
             <GlobalStyleComponent />
             <GlobalFontComponent />
           </ThemeProvider>

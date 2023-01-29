@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Switch } from '@chakra-ui/react';
+import { ChakraProvider, Switch } from '@chakra-ui/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
@@ -78,13 +78,16 @@ export const AddTransactionForm = () => {
         <Form className={css.form}>
           <div>
             <label htmlFor="transactionType">Income</label>
-            <Switch
-              onChange={toggleTransactionType}
-              id="transactionType"
-              size="lg"
-              colorScheme="green"
-              name="transactionType"
-            />
+            <ChakraProvider>
+              <Switch
+                onChange={toggleTransactionType}
+                id="transactionType"
+                size="lg"
+                colorScheme="green"
+                name="transactionType"
+              />
+            </ChakraProvider>
+
             <label>Expense</label>
           </div>
           {!isIncomeTransaction && (
