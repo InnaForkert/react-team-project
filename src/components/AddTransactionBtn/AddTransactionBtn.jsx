@@ -3,14 +3,14 @@ import { RoundBtn } from './AddTransactionBtn.styled';
 export default function AddTransactionBtn({
   type,
   content,
-  handleClick = null,
+  onClick = null,
   disabled = false,
   hasAccent = false,
 }) {
   return (
     <RoundBtn
       type={type}
-      handleClick={handleClick}
+      onClick={onClick}
       disabled={disabled}
       hasAccent={hasAccent}
     >

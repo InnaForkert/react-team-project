@@ -6,9 +6,23 @@ import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
 import { Header } from 'components/Header/Header';
 import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
-import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  toggleModalAddTransactionOpen,
+  selectModalAddTransactionOpen,
+} from 'redux/global/globalSlice';
+import { Modal } from 'components/Modal/Modal';
+// import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
 
 export default function DashboardPage() {
+  const dispatch = useDispatch();
+
+  const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
+
+  const handleModalAddTransactionOpen = () => {
+    dispatch(toggleModalAddTransactionOpen());
+  };
+
   return (
     <>
       <Header />
@@ -23,10 +37,11 @@ export default function DashboardPage() {
           type="button"
           content={'+'}
           hasAccent={true}
-          // handleClick={onAddTransactionBtnClick}
+          onClick={handleModalAddTransactionOpen}
         />
-        <AddTransactionForm />
+        {/* <AddTransactionForm /> */}
       </Container>
+      {isModalAddTransactionOpen && <Modal />}
     </>
   );
 }
