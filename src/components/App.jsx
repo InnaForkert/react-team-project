@@ -5,11 +5,10 @@ import Loader from './Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-<<<<<<< Updated upstream
 import { currentUser, signOut } from 'redux/auth/operations';
-=======
+
 import { currentUser } from 'redux/auth/operations';
->>>>>>> Stashed changes
+import { getAllTransactions } from 'redux/transactions/operations';
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
@@ -27,19 +26,11 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(currentUser());
-<<<<<<< Updated upstream
-  }, [dispatch]);
-=======
 
     if (isAuth) {
       navigate('/home');
     }
   }, [dispatch, isAuth, navigate]);
->>>>>>> Stashed changes
-
-  const handleClickSignOut = () => {
-    dispatch(signOut());
-  };
 
   return (
     <>
@@ -50,7 +41,6 @@ export const App = () => {
         <br />
         <Link to="/home">dashboard</Link>
       </nav>
-      <button onClick={handleClickSignOut}>Log out</button>
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
