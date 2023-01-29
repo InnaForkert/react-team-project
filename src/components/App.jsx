@@ -18,16 +18,19 @@ const Currency = lazy(() => import('./Currency/Currency'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuth = useSelector(state => state.auth.isAuth);
+  // const navigate = useNavigate();
+  // const isAuth = useSelector(state => state.auth.isAuth);
 
   useEffect(() => {
     dispatch(currentUser());
 
-    if (isAuth) {
-      navigate('/home');
-    }
-  }, [dispatch, isAuth, navigate]);
+    // if (isAuth) {
+    //   navigate('/home');
+    // }
+  }, [
+    dispatch,
+    // isAuth, navigate
+  ]);
 
   return (
     <>
