@@ -67,7 +67,7 @@ export const AddTransactionForm = () => {
       >
         <Form className={css.form}>
           <div>
-            <label for="transactionType">Income</label>
+            <label htmlFor="transactionType">Income</label>
             <Switch
               onChange={toggleTransactionType}
               id="transactionType"
