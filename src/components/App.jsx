@@ -5,10 +5,7 @@ import Loader from './Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { currentUser, signOut } from 'redux/auth/operations';
-
 import { currentUser } from 'redux/auth/operations';
-import { getAllTransactions } from 'redux/transactions/operations';
 
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegistrationPage = lazy(() =>
