@@ -25,7 +25,7 @@ export default function DropdownMenu({ expenseCategories, handleDropDown }) {
   //   }, [dispatch, category, year]);
 
   function handleCategoryChange(e) {
-    setCategory(e.target.dataset.value);
+    setCategory(e.target.dataset.idx);
     handleDropDown(e.target.dataset.id);
     toggleCategoryDropdown();
   }
@@ -41,7 +41,7 @@ export default function DropdownMenu({ expenseCategories, handleDropDown }) {
       </SelectInput>
       <SelectDate name="category" onClick={handleCategoryChange}>
         {expenseCategories.map(({ id, name }, idx) => (
-          <li key={id} data-value={idx + 1} data-id={id}>
+          <li key={id} data-idx={idx + 1} data-id={id}>
             {name}
           </li>
         ))}
