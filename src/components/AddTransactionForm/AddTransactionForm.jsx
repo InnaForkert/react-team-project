@@ -111,7 +111,7 @@ export const AddTransactionForm = () => {
             </>
           )}
 
-          <div>
+          <div className={css.amountDateWrapper}>
             <label className={css.inputLabel}>
               <Field
                 className={css.formInput}
@@ -126,7 +126,6 @@ export const AddTransactionForm = () => {
                 className={css.formInput}
                 type="date"
                 name="transactionDate"
-                // placeholder={new Date().toISOString()}
               />
               <ErrorMessage name="transactionDate" component="div" />
             </label>
