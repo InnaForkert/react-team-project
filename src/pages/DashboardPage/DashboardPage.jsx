@@ -12,7 +12,6 @@ import {
   selectModalAddTransactionOpen,
 } from 'redux/global/globalSlice';
 import { Modal } from 'components/Modal/Modal';
-// import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -39,7 +38,6 @@ export default function DashboardPage() {
           hasAccent={true}
           onClick={handleModalAddTransactionOpen}
         />
-        {/* <AddTransactionForm /> */}
       </Container>
       {isModalAddTransactionOpen && <Modal />}
     </>
