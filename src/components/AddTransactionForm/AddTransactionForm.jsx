@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { Switch } from '@chakra-ui/react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -10,6 +9,7 @@ import { selectCategories } from 'redux/transactions/transactionsSlice';
 import Button from 'components/Button/Button';
 
 import css from './AddTransactionForm.module.css';
+import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
 
 const initialValues = {
   transactionDate: '',
@@ -33,7 +33,7 @@ export const AddTransactionForm = () => {
     return el.id;
   });
 
-  // TOGGLE TRANSACTION TYPE====================================================
+  // SWITCH TRANSACTION TYPE====================================================
   const [isIncomeTransaction, setIsIncomeTransaction] = useState(true);
 
   const toggleTransactionType = () => {
@@ -54,6 +54,7 @@ export const AddTransactionForm = () => {
 
     console.log(values);
     dispatch(addTransaction(values));
+    dispatch(toggleModalAddTransactionOpen());
     actions.resetForm();
   };
 
@@ -128,9 +129,14 @@ export const AddTransactionForm = () => {
           <Button type="submit" content={'add'} hasAccent={true} />
         </Form>
       </Formik>
-      <NavLink to="/home">
-        <Button type="button" content={'cancel'} />
-      </NavLink>
+
+      <Button
+        type="button"
+        content={'cancel'}
+        onClick={() => {
+          dispatch(toggleModalAddTransactionOpen());
+        }}
+      />
     </div>
   );
 };

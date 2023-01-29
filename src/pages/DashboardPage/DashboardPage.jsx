@@ -6,21 +6,12 @@ import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
 import { Header } from 'components/Header/Header';
 import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  toggleModalAddTransactionOpen,
-  selectModalAddTransactionOpen,
-} from 'redux/global/globalSlice';
+import { useSelector } from 'react-redux';
+import { selectModalAddTransactionOpen } from 'redux/global/globalSlice';
 import { Modal } from 'components/Modal/Modal';
 
 export default function DashboardPage() {
-  const dispatch = useDispatch();
-
   const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
-
-  const handleModalAddTransactionOpen = () => {
-    dispatch(toggleModalAddTransactionOpen());
-  };
 
   return (
     <>
@@ -32,12 +23,7 @@ export default function DashboardPage() {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-        <AddTransactionBtn
-          type="button"
-          content={'+'}
-          hasAccent={true}
-          onClick={handleModalAddTransactionOpen}
-        />
+        <AddTransactionBtn />
       </Container>
       {isModalAddTransactionOpen && <Modal />}
     </>
