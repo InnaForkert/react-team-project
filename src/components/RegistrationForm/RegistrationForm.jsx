@@ -3,9 +3,20 @@ import { useDispatch } from 'react-redux';
 import { signUp } from 'redux/auth/operations';
 import { NavLink } from 'react-router-dom';
 
-import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
-import { Icons } from 'components/Icons/Icons';
+import sprite from 'assets/icons/sprite.svg';
+import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
+
+import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
+
+
+import {
+  AuthWrapper,
+  Input,
+  AuthForm,
+  Title,
+  Label,
+} from './RegistrationForm.styled';
 
 import css from './RegistrationForm.module.css';
 
@@ -33,15 +44,16 @@ export const RegistrationForm = () => {
   };
 
   return (
-    <div className={css.registrationWrapper}>
-      <h2 className={css.formTitle}>
-        <Icons name="icon-wallet" size="40" />
+    <AuthWrapper>
+      <Title>
+        <LogoIcon>
+          <use href={sprite + '#icon-wallet'}></use>
+        </LogoIcon>
         Wallet
-      </h2>
-      <form className={css.registrationForm} onSubmit={handleSubmit}>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+      </Title>
+      <AuthForm onSubmit={handleSubmit}>
+        <Label>
+          <Input
             type="email"
             name="email"
             onChange={handleChange}
@@ -50,10 +62,9 @@ export const RegistrationForm = () => {
             placeholder="E-mail"
           />
           <MdEmail className={css.inputIcon} />
-        </label>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+        </Label>
+        <Label>
+          <Input
             type="password"
             name="password"
             onChange={handleChange}
@@ -64,10 +75,9 @@ export const RegistrationForm = () => {
             required
           />
           <MdLock className={css.inputIcon} />
-        </label>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+        </Label>
+        <Label>
+          <Input
             type="password"
             name="confirmPassword"
             onChange={handleChange}
@@ -78,10 +88,9 @@ export const RegistrationForm = () => {
             required
           />
           <MdLock className={css.inputIcon} />
-        </label>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+        </Label>
+        <Label>
+          <Input
             type="text"
             name="username"
             onChange={handleChange}
@@ -92,12 +101,12 @@ export const RegistrationForm = () => {
             required
           />
           <MdAccountBox className={css.inputIcon} />
-        </label>
+        </Label>
         <Button type="submit" content={'Register'} hasAccent={true} />
-      </form>
+      </AuthForm>
       <NavLink to="/login">
         <Button type="button" content={'Log in'} />
       </NavLink>
-    </div>
+    </AuthWrapper>
   );
 };

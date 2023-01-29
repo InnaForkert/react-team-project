@@ -2,13 +2,23 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { Icons } from 'components/Icons/Icons';
 import { MdEmail, MdLock } from 'react-icons/md';
 
 import { signIn } from 'redux/auth/operations';
 
 import css from './LoginForm.module.css';
 import Button from 'components/Button/Button';
+
+import sprite from 'assets/icons/sprite.svg';
+import { LogoIcon } from 'components/Header/Header.styled';
+
+import {
+  AuthWrapper,
+  Input,
+  AuthForm,
+  Title,
+  Label,
+} from 'components/RegistrationForm/RegistrationForm.styled';
 
 const INITIAL_STATE = {
   email: '',
@@ -31,15 +41,16 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className={css.loginWrapper}>
-      <h2 className={css.formTitle}>
-        <Icons name="icon-wallet" size="40" />
+    <AuthWrapper>
+      <Title>
+        <LogoIcon>
+          <use href={sprite + '#icon-wallet'}></use>
+        </LogoIcon>
         Wallet
-      </h2>
-      <form className={css.loginForm} onSubmit={handleSubmit}>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+      </Title>
+      <AuthForm onSubmit={handleSubmit}>
+        <Label>
+          <Input
             type="email"
             name="email"
             onChange={handleChange}
@@ -48,10 +59,9 @@ export const LoginForm = () => {
             placeholder="E-mail"
           />
           <MdEmail className={css.inputIcon} />
-        </label>
-        <label className={css.inputLabel}>
-          <input
-            className={css.formInput}
+        </Label>
+        <Label>
+          <Input
             type="password"
             name="password"
             onChange={handleChange}
@@ -62,12 +72,12 @@ export const LoginForm = () => {
             required
           />
           <MdLock className={css.inputIcon} />
-        </label>
+        </Label>
         <Button type="submit" content={'Log in'} hasAccent={true} />
-      </form>
+      </AuthForm>
       <NavLink to="/register">
         <Button type="button" content={'Register'} />
       </NavLink>
-    </div>
+    </AuthWrapper>
   );
 };

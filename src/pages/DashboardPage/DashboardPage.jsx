@@ -1,5 +1,7 @@
 import { Outlet } from 'react-router';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import HomeTab from 'components/HomeTab/HomeTab';
 import Loader from 'components/Loader/Loader';
 import Navigation from 'components/Navigation/Navigation';
@@ -10,7 +12,15 @@ import { useSelector } from 'react-redux';
 import { selectModalAddTransactionOpen } from 'redux/global/globalSlice';
 import { Modal } from 'components/Modal/Modal';
 
+import { getAllTransactions } from 'redux/transactions/operations';
+
 export default function DashboardPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllTransactions());
+  }, [dispatch]);
+  
   const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
 
   return (
