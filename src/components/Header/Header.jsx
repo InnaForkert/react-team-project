@@ -13,7 +13,33 @@ import {
   ExitText,
 } from './Header.styled';
 
+import { useDispatch, useSelector } from 'react-redux';
+// import { signOut } from 'redux/auth/operations';
+import {
+  selectModalLogoutOpen,
+  toggleModalLogoutOpen,
+} from 'redux/global/globalSlice';
+import { ModalLogout } from 'components/ModalLogout/ModalLogout';
+
 export const Header = () => {
+  const dispatch = useDispatch();
+
+  const isModalLogoutOpen = useSelector(selectModalLogoutOpen);
+
+  console.log(isModalLogoutOpen);
+  // const handleClickSignOut = () => {
+  //   dispatch(signOut());
+  // };
+
+  const handleModalLogoutOpen = () => {
+    dispatch(toggleModalLogoutOpen());
+  };
+
+  const selectUsername = state => state.auth?.user?.username;
+  const username = useSelector(selectUsername);
+
+  console.log(username);
+
   return (
     <>
       <HeaderMain>
@@ -25,8 +51,8 @@ export const Header = () => {
             <LogoText>Wallet</LogoText>
           </NavItem>
           <Wrapper>
-            <Name>Name</Name>
-            <Button type="button">
+            <Name>{username}</Name>
+            <Button type="button" onClick={handleModalLogoutOpen}>
               <ExitIcon>
                 <use href={sprite + '#icon-exit'}></use>
               </ExitIcon>
@@ -36,6 +62,7 @@ export const Header = () => {
             </Button>
           </Wrapper>
         </Container>
+        {isModalLogoutOpen && <ModalLogout />}
       </HeaderMain>
     </>
   );

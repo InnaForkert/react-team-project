@@ -1,62 +1,54 @@
-// import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-// import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+// import { signOut } from 'redux/auth/operations';
+import {
+  toggleModalAddTransactionOpen,
+  // toggleModalLogoutOpen,
+} from 'redux/global/globalSlice';
 
-import { Overlay, ModalWindow } from './Modal.styled';
+import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
 
-// import Loader from 'components/Loader/Loader';
+import {
+  ModalWindow,
+  Overlay,
+  // Box, Text
+} from './Modal.styled';
+// import Button from 'components/Button/Button';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export default function Modal({ modalActive, setModalActive }) {
-  //   const [showSpinner, setShowSpinner] = useState(true);
+export const Modal = ({ type, handleClick, hasAccent }) => {
+  const dispatch = useDispatch();
 
-  //   const hideSpinner = () => {
-  //     setShowSpinner(false);
-  //   };
+  const handleBackdropClick = event => {
+    if (event.target === event.currentTarget) {
+      // dispatch(toggleModalLogoutOpen());
+      dispatch(toggleModalAddTransactionOpen());
+    }
+  };
 
-  //   const handleBackdropClick = event => {
-  //     if (event.target === event.currentTarget) {
-  //       onImgClick('');
-  //     }
-  //   };
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        // dispatch(toggleModalLogoutOpen());
+        dispatch(toggleModalAddTransactionOpen());
+      }
+    };
 
-  //   useEffect(() => {
-  //     const handleKeyDown = e => {
-  //       console.log('keydown', e.code);
-  //       if (e.code === 'Escape') {
-  //         onImgClick('');
-  //       }
-  //     };
+    window.addEventListener('keydown', handleKeyDown);
 
-  //     window.addEventListener('keydown', handleKeyDown);
-  //     const largeImage = document.querySelector('#largeImage');
-  //     largeImage.addEventListener('load', hideSpinner);
-  //     return () => {
-  //       window.removeEventListener('keydown', handleKeyDown);
-  //     };
-  //   }, [onImgClick]);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [dispatch]);
 
   return createPortal(
-    <Overlay
-    //   onClick={handleBackdropClick}
-    >
-      {/* {showSpinner && (
-        <div style={{ zIndex: 2, position: 'absolute' }}>
-          <Loader />
-        </div>
-      )} */}
+    <Overlay onClick={handleBackdropClick}>
       <ModalWindow>
-        <form>Modal</form>
+        <AddTransactionForm />
       </ModalWindow>
     </Overlay>,
-
     modalRoot
   );
-}
-
-// Modal.propTypes = {
-//   largeImageURL: PropTypes.string.isRequired,
-//   alt: PropTypes.string.isRequired,
-//   onImgClick: PropTypes.func.isRequired,
-// };
+};

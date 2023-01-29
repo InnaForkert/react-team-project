@@ -13,6 +13,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { authReducer } from './auth/authSlice';
 import { transactionsReducer } from './transactions/transactionsSlice';
+import { globalReducer } from './global/globalSlice';
 
 const persistConfig = {
   key: 'auth',
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(persistConfig, authReducer),
   transactions: transactionsReducer,
+  global: globalReducer,
 });
 
 export const store = configureStore({
