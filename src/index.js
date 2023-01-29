@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from 'redux/store';
 import { Provider } from 'react-redux';
-import { ChakraProvider } from '@chakra-ui/react';
 import 'modern-normalize/modern-normalize.css';
 import { GlobalStyleComponent } from 'assets/styles/GlobalStyles';
 import { GlobalFontComponent } from 'assets/fonts/FontStyled';
