@@ -4,12 +4,17 @@
   "private": true,
   "homepage": "https://innaforkert.github.io/react-team-project/",
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.4",
     "chart.js": "^4.0.0",
+    "formik": "^2.2.9",
+    "framer-motion": "^8.5.4",
     "modern-normalize": "^1.1.0",
     "nanoid": "^4.0.0",
     "notiflix": "^3.2.6",
@@ -25,7 +30,8 @@
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.3"
+    "web-vitals": "^2.1.3",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
