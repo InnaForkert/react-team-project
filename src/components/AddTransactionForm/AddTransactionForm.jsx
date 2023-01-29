@@ -10,10 +10,11 @@ import Button from 'components/Button/Button';
 
 import css from './AddTransactionForm.module.css';
 import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
+import DropdownMenu from 'components/DropdownMenu/DropdownMenu';
 
 const initialValues = {
   transactionDate: '',
-  categoryId: '',
+  // categoryId: '',
   comment: '',
   amount: '',
 };
@@ -35,9 +36,11 @@ export const AddTransactionForm = () => {
 
   // SWITCH TRANSACTION TYPE====================================================
   const [isIncomeTransaction, setIsIncomeTransaction] = useState(true);
+  const [categoryIdFromDropdown, SetCategoryIdFromDropdown] = useState('');
+  console.log('categoryIdFromDropdown:', categoryIdFromDropdown);
 
   const toggleTransactionType = () => {
-    setIsIncomeTransaction(!isIncomeTransaction);
+    setIsIncomeTransaction(isIncomeTransaction => !isIncomeTransaction);
   };
   // ====================================================
 
@@ -50,6 +53,9 @@ export const AddTransactionForm = () => {
     } else {
       values.amount = -values.amount;
       values.type = 'EXPENSE';
+      categoryIdFromDropdown
+        ? (values.categoryId = categoryIdFromDropdown)
+        : (values.categoryId = expenseCategories[8].id);
     }
 
     console.log(values);
@@ -58,6 +64,9 @@ export const AddTransactionForm = () => {
     actions.resetForm();
   };
 
+  const handleDropDown = categoryId => {
+    SetCategoryIdFromDropdown(categoryId);
+  };
   return (
     <div className={css.wrapper}>
       <h2 className={css.formTitle}>Add transaction</h2>
@@ -79,21 +88,27 @@ export const AddTransactionForm = () => {
             <label>Expense</label>
           </div>
           {!isIncomeTransaction && (
-            <label className={css.inputLabel}>
-              <Field
-                className={css.formInput}
-                as="select"
-                name="categoryId"
-                placeholder="Select a category"
-              >
-                {expenseCategories.map(({ id, name }) => (
-                  <option key={id} value={id}>
-                    {name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="categoryId" component="div" />
-            </label>
+            <>
+              <label className={css.inputLabel}>
+                {/* <Field
+                  className={css.formInput}
+                  as="select"
+                  name="categoryId"
+                  placeholder="Select a category"
+                >
+                  {expenseCategories.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage name="categoryId" component="div" /> */}
+              </label>
+              <DropdownMenu
+                expenseCategories={expenseCategories}
+                handleDropDown={handleDropDown}
+              />
+            </>
           )}
 
           <div>
