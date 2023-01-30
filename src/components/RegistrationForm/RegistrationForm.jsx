@@ -6,9 +6,10 @@ import { NavLink } from 'react-router-dom';
 import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
+import { Box } from 'components/Box';
 
 import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
-
+import errorToast from 'components/Toasts/error';
 
 import {
   AuthWrapper,
@@ -20,27 +21,46 @@ import {
 
 import css from './RegistrationForm.module.css';
 
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  confirmPassword: '',
-  username: '',
-};
-
-export const RegistrationForm = () => {
-  const [authData, setAuthData] = useState(INITIAL_STATE);
-  const { email, password, confirmPassword, username } = authData;
+const RegistrationForm = () => {
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const dispatch = useDispatch();
+  dispatch(signUp());
 
-  const handleChange = ({ target }) => {
-    setAuthData({ ...authData, [target.name]: target.value });
+  const checkPassword = () => {
+    if (JSON.stringify(password) !== JSON.stringify(passwordConfirm)) {
+      return false;
+    }
+    return true;
   };
 
-  const handleSubmit = e => {
+  const onChangePassword = e => {
+    setPassword(e.target.value);
+  };
+
+  const onChangePassword1 = e => {
+    setPasswordConfirm(e.target.value);
+  };
+
+  const onSubmit = async e => {
     e.preventDefault();
-    dispatch(signUp({ email, password, username }));
-    setAuthData(INITIAL_STATE);
+    const checked = checkPassword();
+    if (passwordConfirm.length < 6)
+      return errorToast('Password must be length more 6 symbols');
+    if (!checked) {
+      return errorToast('Passwords do not match!');
+    }
+    const form = e.currentTarget;
+    const res = await dispatch(
+      signUp({
+        username: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
+    if (res.payload === 409) return errorToast('This user is registered');
+    form.reset();
   };
 
   return (
@@ -51,54 +71,59 @@ export const RegistrationForm = () => {
         </LogoIcon>
         Wallet
       </Title>
-      <AuthForm onSubmit={handleSubmit}>
+      <AuthForm onSubmit={onSubmit}>
         <Label>
           <Input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            value={email}
-            required
-            placeholder="E-mail"
+          type="email"
+          name="email"
+          placeholder="E-mail"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          required
           />
           <MdEmail className={css.inputIcon} />
         </Label>
         <Label>
           <Input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            value={password}
-            minLength="6"
-            maxLength="12"
-            placeholder="Password"
-            required
+          onChange={onChangePassword1}
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={passwordConfirm}
           />
           <MdLock className={css.inputIcon} />
         </Label>
         <Label>
           <Input
-            type="password"
-            name="confirmPassword"
-            onChange={handleChange}
-            value={confirmPassword}
-            minLength="6"
-            maxLength="12"
-            placeholder="Confirm password"
-            required
+          value={password}
+          onChange={onChangePassword}
+          type="password"
+          name="ConfirmPassword"
+          placeholder="Confirm password"
           />
+          {password.length > 0 && (
+          <Box
+            maxWidth="180px"
+            overflow="hidden"
+            backgroundColor="#e5f1e9"
+            mt="5px"
+            borderRadius="20px"
+          >
+            <Box
+              width={`${password.length * 30}px`}
+              backgroundColor={checkPassword() ? '#28ce65' : '#e6ed17'}
+              height="5px"
+            />
+          </Box>
+        )}
           <MdLock className={css.inputIcon} />
         </Label>
         <Label>
           <Input
-            type="text"
-            name="username"
-            onChange={handleChange}
-            value={username}
-            minLength="1"
-            maxLength="12"
-            placeholder="First name"
-            required
+          type="text"
+          name="name"
+          placeholder="First name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          required
           />
           <MdAccountBox className={css.inputIcon} />
         </Label>
@@ -110,3 +135,5 @@ export const RegistrationForm = () => {
     </AuthWrapper>
   );
 };
+
+export default RegistrationForm;
