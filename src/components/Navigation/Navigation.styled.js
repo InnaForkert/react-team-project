@@ -1,6 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const Nav = styled.ul`
+  margin-top: ${({ theme }) => theme.spacing(4)};
+  margin-bottom: ${({ theme }) => theme.spacing(4)};
+  ${({ theme }) => theme.media.tabletFrom} {
+    margin-top: ${({ theme }) => theme.spacing(10)};
+    margin-bottom: ${({ theme }) => theme.spacing(7)};
+  }
+`;
+
 export const List = styled.ul`
   display: flex;
   justify-content: center;

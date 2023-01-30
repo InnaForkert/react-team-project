@@ -20,16 +20,15 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
-  
+
   const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
 
   return (
     <>
       <Header />
       <Container>
-        <h1>DashboardPage</h1>
-        <HomeTab />
         <Navigation />
+        {/* <HomeTab /> */}
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>

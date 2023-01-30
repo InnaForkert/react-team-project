@@ -1,10 +1,10 @@
 import sprite from '../../assets/icons/sprite.svg';
-import { Icon, List, Text, NavItem } from './Navigation.styled';
+import { Nav, Icon, List, Text, NavItem } from './Navigation.styled';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 export default function Navigation() {
   return (
-    <nav>
+    <Nav>
       <List>
         <li>
           <NavItem to="home">
@@ -36,6 +36,6 @@ export default function Navigation() {
           </li>
         </MediaQuery>
       </List>
-    </nav>
+    </Nav>
   );
 }
