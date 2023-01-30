@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
-import { RoundBtn } from './AddTransactionBtn.styled';
+import { RoundBtn, Icon } from './AddTransactionBtn.styled';
+import sprite from '../../assets/icons/sprite.svg';
 
 export default function AddTransactionBtn() {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ export default function AddTransactionBtn() {
       hasAccent={true}
       onClick={handleModalAddTransactionOpen}
     >
-      +
+      <Icon>
+        <use href={sprite + '#icon-plus'}></use>
+      </Icon>
     </RoundBtn>
   );
 }
