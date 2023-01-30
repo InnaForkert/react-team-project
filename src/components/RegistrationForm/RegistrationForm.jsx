@@ -8,11 +8,10 @@ import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
 
-import {
-  // MdEmail,
-  MdLock,
-  // MdAccountBox
-} from 'react-icons/md';
+import // MdEmail,
+// MdLock,
+// MdAccountBox
+'react-icons/md';
 import errorToast from 'components/Toasts/error';
 
 import {
