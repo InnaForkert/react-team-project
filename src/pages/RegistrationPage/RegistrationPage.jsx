@@ -1,5 +1,5 @@
 import { Container } from 'components/Container/Container.styled';
-import { RegistrationForm } from 'components/RegistrationForm/RegistrationForm';
+import RegistrationForm from 'components/RegistrationForm/RegistrationForm';
 
 // import css from './RegistrationPage.module.css';
 
