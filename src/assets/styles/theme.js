@@ -37,6 +37,7 @@ export const theme = Object.freeze({
   },
   shadows: {
     regular: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)',
+    accentGreen: '0px 4px 4px #24cca738, 0px 4px 4px #24cca738',
   },
   spacing: value => `${4 * value}px`,
   animation: {
