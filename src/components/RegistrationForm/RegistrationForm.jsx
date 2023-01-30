@@ -7,18 +7,16 @@ import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 
-import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
-
-
 import {
   AuthWrapper,
   Input,
   AuthForm,
   Title,
   Label,
+  EmailIcon,
+  PasswordIcon,
+  UserIcon,
 } from './RegistrationForm.styled';
-
-import css from './RegistrationForm.module.css';
 
 const INITIAL_STATE = {
   email: '',
@@ -61,7 +59,7 @@ export const RegistrationForm = () => {
             required
             placeholder="E-mail"
           />
-          <MdEmail className={css.inputIcon} />
+          <EmailIcon />
         </Label>
         <Label>
           <Input
@@ -74,7 +72,7 @@ export const RegistrationForm = () => {
             placeholder="Password"
             required
           />
-          <MdLock className={css.inputIcon} />
+          <PasswordIcon />
         </Label>
         <Label>
           <Input
@@ -87,7 +85,7 @@ export const RegistrationForm = () => {
             placeholder="Confirm password"
             required
           />
-          <MdLock className={css.inputIcon} />
+          <PasswordIcon />
         </Label>
         <Label>
           <Input
@@ -100,7 +98,7 @@ export const RegistrationForm = () => {
             placeholder="First name"
             required
           />
-          <MdAccountBox className={css.inputIcon} />
+          <UserIcon />
         </Label>
         <Button type="submit" content={'Register'} hasAccent={true} />
       </AuthForm>

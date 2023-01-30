@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import img from 'assets/images/register_page.svg'
 
 export const Registration = styled.main`
-  display: flex;
-
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-size: ${({ theme }) => theme.fontSizes.title};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
@@ -12,12 +10,21 @@ export const Registration = styled.main`
 
   ${({ theme }) => theme.media.tabletFrom} {
     min-height: 1024px;
-    flex-direction: column;
   }
 
   ${({ theme }) => theme.media.desktop} {
     min-height: 720px;
-    flex-direction: row;
+
+    &::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 57vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+  }
   }
 `;
 
@@ -26,7 +33,7 @@ export const Title = styled.h1`
   font-size: inherit;
   font-weight: inherit;
 
-  ${({ theme }) => theme.media.mobileOnly} {
+  ${({ theme }) => theme.media.mobileAll} {
     position: absolute;
     width: 1px;
     height: 1px;

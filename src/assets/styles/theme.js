@@ -5,6 +5,7 @@ export const device = {
   tablet: '(min-width: 768px) and (max-width: 1279.98px)',
   tabletFrom: '(min-width: 768px)',
   desktop: '(min-width: 1280px)',
+  mobileAll:'(max-width: 767.98px)',
 };
 
 export const theme = Object.freeze({
@@ -43,6 +44,7 @@ export const theme = Object.freeze({
     mobileOnly: `@media screen and ${device.mobileOnly}`,
     mobile: `@media screen and ${device.mobile}`,
     mobileFrom: `@media screen and ${device.mobileFrom}`,
+    mobileAll: `@media screen and ${device.mobileAll}`,
     tablet: `@media screen and ${device.tablet}`,
     tabletFrom: `@media screen and ${device.tabletFrom}`,
     desktop: `@media screen and ${device.desktop}`,
