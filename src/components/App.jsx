@@ -1,4 +1,4 @@
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Loader from './Loader/Loader';
 
@@ -28,13 +28,6 @@ export const App = () => {
 
   return (
     <>
-      <nav>
-        <Link to="/login">login</Link>
-        <br />
-        <Link to="/register">register</Link>
-        <br />
-        <Link to="/home">dashboard</Link>
-      </nav>
       {isRefreshing ? (
         <Loader />
       ) : (
