@@ -49,6 +49,5 @@ export const theme = Object.freeze({
     tablet: `@media screen and ${device.tablet}`,
     tabletFrom: `@media screen and ${device.tabletFrom}`,
     desktop: `@media screen and ${device.desktop}`,
-    mobileAll: `@media screen and ${device.mobileAll}`,
   },
 });
