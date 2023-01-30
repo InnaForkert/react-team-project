@@ -9,7 +9,11 @@ import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
 
-import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
+import {
+  // MdEmail,
+  MdLock,
+  // MdAccountBox
+} from 'react-icons/md';
 import errorToast from 'components/Toasts/error';
 
 import {
@@ -56,7 +60,7 @@ const RegistrationForm = () => {
     setPasswordConfirm(e.target.value);
   };
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
     const checked = checkPassword();
     if (passwordConfirm.length < 6)
