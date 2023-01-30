@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactionsSummary } from 'redux/transactions/operations';
 import {
@@ -35,11 +35,24 @@ const colors = [
   '#81E1FF',
   '#24CCA7',
   '#00AD84',
+  '#FED057',
+  '#FFD8D0',
+  '#FD9498',
 ];
 
 function StatsTable() {
-  const dispatch = useDispatch();
   const summary = useSelector(selectSummary);
+  const dispatch = useDispatch();
+  const colored = useRef(summary);
+
+  useEffect(() => {
+    colored.current = summary.map((el, i) => ({
+      ...el,
+      color: colors[i],
+    }));
+    console.log(colored.current);
+  }, [summary, dispatch]);
+
   const [monthDropdownShown, setMonthDropdownShown] = useState(false);
   const [yearDropdownShown, setYearDropdownShown] = useState(false);
 
@@ -108,11 +121,11 @@ function StatsTable() {
             <th>Sum</th>
           </tr>
         </thead>
-        {summary.length > 0 ? (
+        {colored.current.length > 0 ? (
           <tbody>
-            {summary.map((el, i) => (
+            {colored.current.map(el => (
               <tr key={nanoid()}>
-                <ColorRect color={colors[i]}>{el.name}</ColorRect>
+                <ColorRect color={el.color}>{el.name}</ColorRect>
                 <td>{el.total}</td>
               </tr>
             ))}

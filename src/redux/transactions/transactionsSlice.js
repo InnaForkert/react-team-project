@@ -17,24 +17,14 @@ const transactionsSlice = createSlice({
     periodTotal: 0,
     isLoading: false,
     error: null,
-    colors: [
-      '#FED057',
-      '#FFD8D0',
-      '#FD9498',
-      '#C5BAFF',
-      '#6E78E8',
-      '#4A56E2',
-      '#81E1FF',
-      '#24CCA7',
-      '#00AD84',
-    ],
   },
   reducers: {
     addColors: state => {
-      state.categories = state.categories.map((el, i) => ({
+      state.categoriesSummary = state.categoriesSummary.map((el, i) => ({
         ...el,
         color: state.colors[i],
       }));
+      console.log(state.categoriesSummary);
     },
   },
   extraReducers: builder =>
