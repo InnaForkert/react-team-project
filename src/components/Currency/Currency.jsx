@@ -1,14 +1,6 @@
-import { useState, useEffect } from 'react';
-import fetchCurrency from 'services/CurrencyAPI';
-import {
-  TableContainer,
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  Td,
-  Th,
-} from './Currency.styled';
+import  {  useState, useEffect } from "react";
+import fetchCurrency from "services/CurrencyAPI";
+import { TableContainer, Table, TableBody, TableHead, TableRow, Td, Th, Title } from "./Currency.styled";
 
 export default function Currency() {
   const [currency, setCurrency] = useState([]);
@@ -27,6 +19,7 @@ export default function Currency() {
 
   return (
     <>
+      <Title>Currency</Title>
       <TableContainer>
         <Table>
           <TableHead>

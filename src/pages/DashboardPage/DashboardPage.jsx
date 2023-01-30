@@ -16,6 +16,7 @@ import { getAllTransactions } from 'redux/transactions/operations';
 import Currency from 'components/Currency/Currency';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
+
 export default function DashboardPage() {
   const dispatch = useDispatch();
 

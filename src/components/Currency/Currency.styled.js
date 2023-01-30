@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import CurrencyVector from '../../assets/images/CurrencyVector.svg'
 
 export const TableContainer = styled.div`
+margin-left: 50%;
+transform: translateX(-50%);
 font-size: ${({ theme }) => theme.fontSizes.sm};
 background-repeat: no-repeat, no-repeat;
 background-image: url(${CurrencyVector});
@@ -14,10 +16,16 @@ color: ${({ theme }) => theme.colors.white};
 width: 280px;
 height: 174px;
  ${({ theme }) => theme.media.tabletFrom} {
+  margin-left: auto;
+  margin-bottom: 20px;
+  margin-top: 32px;
+  transform: none;
   width: 336px;
   height: 182px;
  }
    ${({ theme }) => theme.media.desktop} {
+    margin-left: 0;
+    margin-right: auto;
      width: 393px;
      height: 331px;
     }
@@ -61,4 +69,8 @@ font-size: ${({ theme }) => theme.fontSizes.sm};
 
 export const Td = styled.td`
 
+`
+
+export const Title = styled.h1`
+display: none;
 `
