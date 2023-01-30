@@ -1,19 +1,41 @@
-import { NavLink } from 'react-router-dom';
+import sprite from '../../assets/icons/sprite.svg';
+import { Nav, Icon, List, Text, NavItem } from './Navigation.styled.js';
+import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 export default function Navigation() {
   return (
-    <nav>
-      <ul>
+    <Nav>
+      <List>
         <li>
-          <NavLink to="home">Home</NavLink>
+          <NavItem to="home">
+            <Icon>
+              <use href={sprite + '#icon-home'}></use>
+            </Icon>
+            <MediaQuery deviceName={'tabletFrom'}>
+              <Text>Home</Text>
+            </MediaQuery>
+          </NavItem>
         </li>
         <li>
-          <NavLink to="statistics">Statistics</NavLink>
+          <NavItem to="statistics">
+            <Icon>
+              <use href={sprite + '#icon-statistics'}></use>
+            </Icon>
+            <MediaQuery deviceName={'tabletFrom'}>
+              <Text>Statistics</Text>
+            </MediaQuery>
+          </NavItem>
         </li>
-        <li>
-          <NavLink to="currency">Currency for mobile version</NavLink>
-        </li>
-      </ul>
-    </nav>
+        <MediaQuery deviceName={'mobileAll'}>
+          <li>
+            <NavItem to="currency">
+              <Icon>
+                <use href={sprite + '#icon-balance'}></use>
+              </Icon>
+            </NavItem>
+          </li>
+        </MediaQuery>
+      </List>
+    </Nav>
   );
 }

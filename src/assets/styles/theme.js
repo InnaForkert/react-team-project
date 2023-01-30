@@ -1,6 +1,7 @@
 export const device = {
   mobileOnly: '(max-width: 479.98px)',
   mobile: '(min-width: 480px) and (max-width: 767.98px)',
+  mobileAll: '(max-width: 767.98px)',
   mobileFrom: '(min-width: 480px)',
   tablet: '(min-width: 768px) and (max-width: 1279.98px)',
   tabletFrom: '(min-width: 768px)',
@@ -15,6 +16,7 @@ export const theme = Object.freeze({
     accentBlue: '#4A56E2',
     accentGreen: '#24CCA7',
     accentPink: '#FF6596',
+    accentViolet: '#6e78e8',
     background: '#E7EAF2',
   },
   fonts: {
@@ -46,5 +48,6 @@ export const theme = Object.freeze({
     tablet: `@media screen and ${device.tablet}`,
     tabletFrom: `@media screen and ${device.tabletFrom}`,
     desktop: `@media screen and ${device.desktop}`,
+    mobileAll: `@media screen and ${device.mobileAll}`,
   },
 });
