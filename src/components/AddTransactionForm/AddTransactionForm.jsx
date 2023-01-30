@@ -1,16 +1,29 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChakraProvider, Switch } from '@chakra-ui/react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 import { addTransaction } from 'redux/transactions/operations';
 import { selectCategories } from 'redux/transactions/transactionsSlice';
 import Button from 'components/Button/Button';
 
-import css from './AddTransactionForm.module.css';
+// import css from './AddTransactionForm.module.css';
 import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
 import DropdownMenu from 'components/DropdownMenu/DropdownMenu';
+import {
+  FormTitle,
+  Wrapper,
+  FormBox,
+  InputLabel,
+  Input,
+  DateWrapper,
+  ToggleLabel,
+  ToggleBox,
+  InputComment,
+  InputAmount,
+} from './AddTransactionForm.styled';
+import { Container } from 'components/Container/Container.styled';
 
 const initialValues = {
   transactionDate: '',
@@ -68,33 +81,33 @@ export const AddTransactionForm = () => {
     SetCategoryIdFromDropdown(categoryId);
   };
   return (
-    <div className={css.wrapper}>
-      <h2 className={css.formTitle}>Add transaction</h2>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-      >
-        <Form className={css.form}>
-          <div>
-            <label htmlFor="transactionType">Income</label>
-            <ChakraProvider>
-              <Switch
-                onChange={toggleTransactionType}
-                id="transactionType"
-                size="lg"
-                colorScheme="green"
-                name="transactionType"
-              />
-            </ChakraProvider>
+    <Wrapper>
+      <Container>
+        <FormTitle>Add transaction</FormTitle>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          <FormBox>
+            <ToggleBox>
+              <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
+              <ChakraProvider>
+                <Switch
+                  onChange={toggleTransactionType}
+                  id="transactionType"
+                  size="lg"
+                  colorScheme="green"
+                  name="transactionType"
+                />
+              </ChakraProvider>
 
-            <label>Expense</label>
-          </div>
-          {!isIncomeTransaction && (
-            <>
-              <label className={css.inputLabel}>
-                {/* <Field
-                  className={css.formInput}
+              <ToggleLabel>Expense</ToggleLabel>
+            </ToggleBox>
+            {!isIncomeTransaction && (
+              <>
+                <InputLabel>
+                  {/* <Input
                   as="select"
                   name="categoryId"
                   placeholder="Select a category"
@@ -104,56 +117,43 @@ export const AddTransactionForm = () => {
                       {name}
                     </option>
                   ))}
-                </Field>
+                </Input>
                 <ErrorMessage name="categoryId" component="div" /> */}
-              </label>
-              <DropdownMenu
-                expenseCategories={expenseCategories}
-                handleDropDown={handleDropDown}
-              />
-            </>
-          )}
+                </InputLabel>
+                <DropdownMenu
+                  expenseCategories={expenseCategories}
+                  handleDropDown={handleDropDown}
+                />
+              </>
+            )}
 
-          <div className={css.amountDateWrapper}>
-            <label className={css.inputLabel}>
-              <Field
-                className={css.formInput}
-                type="text"
-                name="amount"
-                placeholder="0.00"
-              />
-              <ErrorMessage name="amount" component="div" />
-            </label>
-            <label className={css.inputLabel}>
-              <Field
-                className={css.formInput}
-                type="date"
-                name="transactionDate"
-              />
-              <ErrorMessage name="transactionDate" component="div" />
-            </label>
-          </div>
-          <label className={css.inputLabel}>
-            <Field
-              className={css.formInput}
-              type="text"
-              name="comment"
-              placeholder="Comment"
-            />
-            <ErrorMessage name="comment" component="div" />
-          </label>
+            <DateWrapper>
+              <InputLabel>
+                <InputAmount type="text" name="amount" placeholder="0.00" />
+                <ErrorMessage name="amount" component="div" />
+              </InputLabel>
+              <InputLabel>
+                <Input type="date" name="transactionDate" />
+                <ErrorMessage name="transactionDate" component="div" />
+              </InputLabel>
+            </DateWrapper>
+            <InputLabel>
+              <InputComment type="text" name="comment" placeholder="Comment" />
+              <ErrorMessage name="comment" component="div" />
+            </InputLabel>
 
-          <Button type="submit" content={'add'} hasAccent={true} />
-        </Form>
-      </Formik>
+            <Button type="submit" content={'add'} hasAccent={true} />
+          </FormBox>
+        </Formik>
 
-      <Button
-        type="button"
-        content={'cancel'}
-        onClick={() => {
-          dispatch(toggleModalAddTransactionOpen());
-        }}
-      />
-    </div>
+        <Button
+          type="button"
+          content={'cancel'}
+          onClick={() => {
+            dispatch(toggleModalAddTransactionOpen());
+          }}
+        />
+      </Container>
+    </Wrapper>
   );
 };

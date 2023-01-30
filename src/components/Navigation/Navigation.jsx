@@ -1,9 +1,10 @@
 import sprite from '../../assets/icons/sprite.svg';
-import { Nav, Icon, List, Text, NavItem } from './Navigation.styled.js';
+import { NavContainer, Nav, Icon, List, Text, NavItem } from './Navigation.styled.js';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 export default function Navigation() {
   return (
+    <NavContainer>
     <Nav>
       <List>
         <li>
@@ -36,6 +37,7 @@ export default function Navigation() {
           </li>
         </MediaQuery>
       </List>
-    </Nav>
+      </Nav>
+      </NavContainer>
   );
 }

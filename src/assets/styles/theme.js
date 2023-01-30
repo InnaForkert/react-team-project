@@ -13,6 +13,7 @@ export const theme = Object.freeze({
     white: '#ffffff',
     black: '000000',
     grey: '#BDBDBD',
+    lightGrey: '#e0e0e0',
     accentBlue: '#4A56E2',
     accentGreen: '#24CCA7',
     accentPink: '#FF6596',
@@ -36,6 +37,7 @@ export const theme = Object.freeze({
   },
   shadows: {
     regular: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25)',
+    accentGreen: '0px 4px 4px #24cca738, 0px 4px 4px #24cca738',
   },
   spacing: value => `${4 * value}px`,
   animation: {

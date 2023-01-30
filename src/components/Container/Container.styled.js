@@ -8,6 +8,9 @@ export const Container = styled.div`
   ${({ theme }) => theme.media.tablet} {
     max-width: ${({ theme }) => theme.spacing(192)};
     padding-inline: ${({ theme }) => theme.spacing(8)};
+    display: flex;
+    flex-wrap: wrap;
+    
   }
 
   ${({ theme }) => theme.media.desktop} {
