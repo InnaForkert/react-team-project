@@ -88,8 +88,6 @@ export const Input = styled.input`
 export const Label = styled.label`
   position: relative;
   width: 100%;
-  display: flex;
-  gap: 20px;
 `;
 
 const basedIconStyles = css`
@@ -98,7 +96,6 @@ const basedIconStyles = css`
 
   position: absolute;
   left: 8px;
-  bottom: 7px;
 
   color: ${({ theme }) => theme.colors.grey};
 
