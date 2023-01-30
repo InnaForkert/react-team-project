@@ -1,5 +1,5 @@
 import sprite from '../../assets/icons/sprite.svg';
-import { Nav, Icon, List, Text, NavItem } from './Navigation.styled';
+import { Nav, Icon, List, Text, NavItem } from './Navigation.styled.js';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 export default function Navigation() {
