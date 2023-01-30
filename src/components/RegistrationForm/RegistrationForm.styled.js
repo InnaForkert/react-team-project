@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { MdEmail, MdLock, MdAccountBox } from 'react-icons/md';
 
 export const AuthWrapper = styled.div`
   margin: auto;
@@ -11,10 +13,11 @@ export const AuthWrapper = styled.div`
 
   background: ${({ theme }) => theme.colors.white};
 
-  ${({ theme }) => theme.media.mobileOnly} {
+  ${({ theme }) => theme.media.mobileAll} {
     width: 100%;
     height: 100%;
   }
+
 
   ${({ theme }) => theme.media.tabletFrom} {
     margin-top: 0;
@@ -26,6 +29,7 @@ export const AuthWrapper = styled.div`
 
   ${({ theme }) => theme.media.desktop} {
     margin-top: auto;
+    z-index: 1;
   }
 `
 
@@ -36,7 +40,6 @@ export const AuthForm = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-
 
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.md};
@@ -59,7 +62,7 @@ export const Title = styled.h2`
   font-size: inherit;
   line-height: inherit;
 
-  ${({ theme }) => theme.media.mobileOnly} {
+  ${({ theme }) => theme.media.mobileAll} {
     font-size: ${({ theme }) => theme.fontSizes.sm};
     gap: 15px;
   }
@@ -89,7 +92,7 @@ export const Label = styled.label`
   gap: 20px;
 `;
 
-export const Icon = styled.svg`
+const basedIconStyles = css`
   width: 24px;
   height: 24px;
 
@@ -101,3 +104,14 @@ export const Icon = styled.svg`
 
   transition: color ${({ theme }) => theme.animation.cubicBezier};
 `;
+
+export const EmailIcon = styled(MdEmail)`
+  ${basedIconStyles}
+`
+export const PasswordIcon = styled(MdLock)`
+  ${basedIconStyles}
+`
+export const UserIcon = styled(MdAccountBox)`
+  ${basedIconStyles}
+`
+

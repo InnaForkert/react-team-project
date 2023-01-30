@@ -1,4 +1,4 @@
-import { Container } from 'components/Container/Container.styled';
+import { ContainerAuth } from 'components/Container/Container.styled';
 import { LoginForm } from 'components/LoginForm/LoginForm';
 
 import { Login, Title } from './LoginPage.styled';
@@ -7,11 +7,11 @@ import { Login, Title } from './LoginPage.styled';
 
 export default function LoginPage() {
   return (
-    <Container>
-      <Login>
+    <Login>
+      <ContainerAuth>
         <Title>Finance App</Title>
         <LoginForm />
-      </Login>
-    </Container>
+      </ContainerAuth>
+    </Login>
   );
 }

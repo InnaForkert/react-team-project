@@ -15,3 +15,21 @@ export const Container = styled.div`
     padding-inline: ${({ theme }) => theme.spacing(4)};
   }
 `;
+
+export const ContainerAuth = styled(Container)`
+  display: flex;
+
+  ${({ theme }) => theme.media.mobileAll} {
+    padding-inline: 0;
+    height: 100vh;
+    max-width: 100vw;
+  }
+
+  ${({ theme }) => theme.media.tablet} {
+    flex-direction: column;
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    flex-direction: row;
+  }
+`;
