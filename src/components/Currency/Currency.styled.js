@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import CurrencyVector from '../../assets/images/CurrencyVector.svg'
 
 export const TableContainer = styled.div`
+position: relative;
 margin-left: 50%;
 transform: translateX(-50%);
 font-size: ${({ theme }) => theme.fontSizes.sm};
@@ -65,6 +66,7 @@ padding: 12px;
 `
 export const TableBody = styled.tbody`
 font-size: ${({ theme }) => theme.fontSizes.sm};
+
 `
 
 export const Td = styled.td`
