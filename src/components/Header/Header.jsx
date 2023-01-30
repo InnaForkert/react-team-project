@@ -14,7 +14,6 @@ import {
 } from './Header.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-// import { signOut } from 'redux/auth/operations';
 import {
   selectModalLogoutOpen,
   toggleModalLogoutOpen,
@@ -27,9 +26,6 @@ export const Header = () => {
   const isModalLogoutOpen = useSelector(selectModalLogoutOpen);
 
   console.log(isModalLogoutOpen);
-  // const handleClickSignOut = () => {
-  //   dispatch(signOut());
-  // };
 
   const handleModalLogoutOpen = () => {
     dispatch(toggleModalLogoutOpen());
