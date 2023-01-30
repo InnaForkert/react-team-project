@@ -17,11 +17,13 @@ export const Login = styled.main`
 
     &::after{
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
-    width: 57vw;
+
+    width: calc((100vw - 1280px)/2 + 731px);
     height: 100vh;
+
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(25px);
   }

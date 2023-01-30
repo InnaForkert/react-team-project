@@ -1,17 +1,30 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
 import { ContainerAuth } from 'components/Container/Container.styled';
 import { LoginForm } from 'components/LoginForm/LoginForm';
 
 import { Login, Title } from './LoginPage.styled';
 
-// import css from './LoginPage.module.css';
-
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const isAuth = useSelector(state => state.auth.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/home');
+    }
+  }, [isAuth, navigate]);
+
   return (
-    <Login>
-      <ContainerAuth>
-        <Title>Finance App</Title>
-        <LoginForm />
-      </ContainerAuth>
-    </Login>
+    !isAuth && (
+      <Login>
+        <ContainerAuth>
+          <Title>Finance App</Title>
+          <LoginForm />
+        </ContainerAuth>
+      </Login>
+    )
   );
 }
