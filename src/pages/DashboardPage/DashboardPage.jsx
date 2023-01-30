@@ -2,7 +2,7 @@ import { Outlet } from 'react-router';
 import { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import HomeTab from 'components/HomeTab/HomeTab';
+// import HomeTab from 'components/HomeTab/HomeTab';
 import Loader from 'components/Loader/Loader';
 import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
@@ -20,16 +20,15 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(getAllTransactions());
   }, [dispatch]);
-  
+
   const isModalAddTransactionOpen = useSelector(selectModalAddTransactionOpen);
 
   return (
     <>
       <Header />
       <Container>
-        <h1>DashboardPage</h1>
-        <HomeTab />
         <Navigation />
+        {/* <HomeTab /> */}
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
