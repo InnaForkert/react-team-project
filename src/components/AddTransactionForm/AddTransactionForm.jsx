@@ -25,8 +25,18 @@ import {
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
 
+const setCurrentDate = () => {
+  const d = new Date();
+  let day = d.getDate();
+  if (day < 10) day = '0' + day;
+  let month = d.getMonth() + 1;
+  if (month < 10) month = '0' + month;
+  let year = d.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
 const initialValues = {
-  transactionDate: '',
+  transactionDate: setCurrentDate(),
   // categoryId: '',
   comment: '',
   amount: '',
@@ -80,6 +90,7 @@ export const AddTransactionForm = () => {
   const handleDropDown = categoryId => {
     SetCategoryIdFromDropdown(categoryId);
   };
+
   return (
     <Wrapper>
       <Container>
@@ -133,7 +144,11 @@ export const AddTransactionForm = () => {
                 <ErrorMessage name="amount" component="div" />
               </InputLabel>
               <InputLabel>
-                <Input type="date" name="transactionDate" />
+                <Input
+                  type="date"
+                  name="transactionDate"
+                  id="transactionDate"
+                />
                 <ErrorMessage name="transactionDate" component="div" />
               </InputLabel>
             </DateWrapper>
