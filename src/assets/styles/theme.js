@@ -6,7 +6,6 @@ export const device = {
   tablet: '(min-width: 768px) and (max-width: 1279.98px)',
   tabletFrom: '(min-width: 768px)',
   desktop: '(min-width: 1280px)',
-  mobileAll:'(max-width: 767.98px)',
 };
 
 export const theme = Object.freeze({
