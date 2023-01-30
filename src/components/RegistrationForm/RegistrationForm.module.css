@@ -74,3 +74,10 @@
 .formInput:focus + .inputIcon{
   color:#24CCA7;
 }
+
+.progressBar {
+  max-width: 180px;
+  background-color: #e5f1e9;
+  margin-top: 5px;
+  border-radius: 20px;
+}
