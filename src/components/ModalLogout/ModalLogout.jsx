@@ -8,7 +8,7 @@ import Button from 'components/Button/Button';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const ModalLogout = ({ type, handleClick, hasAccent }) => {
+export const ModalLogout = () => {
   const dispatch = useDispatch();
 
   const handleBackdropClick = event => {
