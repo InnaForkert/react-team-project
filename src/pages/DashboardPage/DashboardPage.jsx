@@ -2,7 +2,7 @@ import { Outlet } from 'react-router';
 import { Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import HomeTab from 'components/HomeTab/HomeTab';
+// import HomeTab from 'components/HomeTab/HomeTab';
 import Loader from 'components/Loader/Loader';
 import Navigation from 'components/Navigation/Navigation';
 import { Container } from 'components/Container/Container.styled';
