@@ -1,4 +1,3 @@
-import css from './RegistrationForm.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from 'redux/auth/operations';
@@ -117,7 +116,7 @@ const RegistrationForm = () => {
             name="ConfirmPassword"
             placeholder="Confirm password"
           />
-          {/* <PasswordIcon /> */}
+          <PasswordIcon />
           {password.length > 0 && (
             <Box
               maxWidth="180px"
@@ -133,7 +132,6 @@ const RegistrationForm = () => {
               />
             </Box>
           )}
-          <MdLock className={css.inputIcon} />
         </Label>
         <Label>
           <Input
