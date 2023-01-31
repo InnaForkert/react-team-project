@@ -6,6 +6,7 @@ import {
   SelectInput,
   SelectContainer,
   ColorRect,
+  StatsContainer,
 } from './StatsTable.styled';
 import { selectSummary } from 'redux/transactions/transactionsSlice';
 import { nanoid } from 'nanoid';
@@ -73,7 +74,7 @@ function StatsTable() {
   }
 
   return (
-    <>
+    <StatsContainer>
       <SelectContainer className={monthDropdownShown ? 'dropdownShown' : ''}>
         <SelectInput onClick={toggleMonthDropdown}>{months[month]}</SelectInput>
         <SelectDate name="month" onClick={handleMonthChange}>
@@ -121,7 +122,7 @@ function StatsTable() {
           ''
         )}
       </table>
-    </>
+    </StatsContainer>
   );
 }
 

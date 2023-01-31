@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import CurrencyVector from '../../assets/images/CurrencyVector.svg'
 
 export const TableContainer = styled.div`
+grid-area: cur;
 position: relative;
 margin-left: 50%;
 transform: translateX(-50%);
@@ -17,6 +18,8 @@ color: ${({ theme }) => theme.colors.white};
 width: 280px;
 height: 174px;
  ${({ theme }) => theme.media.tabletFrom} {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
   margin-left: auto;
   margin-bottom: 20px;
   margin-top: 32px;
@@ -25,6 +28,8 @@ height: 174px;
   height: 182px;
  }
    ${({ theme }) => theme.media.desktop} {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
     margin-left: 0;
     margin-right: auto;
      width: 393px;

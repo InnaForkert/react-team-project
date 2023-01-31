@@ -1,13 +1,16 @@
+
 import CircleChart from 'components/CircleChart/CircleChart';
-import { Container } from 'components/Container/Container.styled';
 import StatsTable from 'components/StatsTable/StatsTable';
+import { Title } from './Statistics.styled';
+
 
 function Statistics() {
   return (
-    <Container>
+    <>
+      <Title>Statistics</Title>
       <CircleChart />
       <StatsTable />
-    </Container>
+    </>
   );
 }
 

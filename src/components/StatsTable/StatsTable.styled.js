@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 import arrow from '../../assets/icons/all_icons/dropdownArrow.svg';
 
+export const StatsContainer = styled.div`
+${({ theme }) => theme.media.tabletFrom} {
+grid-column: 2 / 3;
+grid-row: 3 / 4;
+}
+${({ theme }) => theme.media.desktop} {
+grid-column: 3 / 4;
+grid-row: 2 / 5;
+}
+`
 export const SelectDate = styled.ul`
   width: 100%;
   position: absolute;
