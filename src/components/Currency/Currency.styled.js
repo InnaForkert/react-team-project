@@ -23,12 +23,16 @@ height: 174px;
   transform: none;
   width: 336px;
   height: 182px;
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
  }
    ${({ theme }) => theme.media.desktop} {
     margin-left: 0;
     margin-right: auto;
      width: 393px;
      height: 331px;
+     grid-column: 1 / 2;
+     grid-row: 3 / 4;
     }
 `
 export const Table = styled.table`

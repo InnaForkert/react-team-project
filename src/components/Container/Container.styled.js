@@ -8,14 +8,15 @@ export const Container = styled.div`
   ${({ theme }) => theme.media.tablet} {
     max-width: ${({ theme }) => theme.spacing(192)};
     padding-inline: ${({ theme }) => theme.spacing(8)};
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     
   }
 
   ${({ theme }) => theme.media.desktop} {
     max-width: ${({ theme }) => theme.spacing(320)};
     padding-inline: ${({ theme }) => theme.spacing(4)};
+    display: grid;
+    
   }
 `;
 

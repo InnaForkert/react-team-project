@@ -65,8 +65,8 @@ function CircleChart() {
 
   return (
     <ChartContainer>
-      <ChartLabel>₴ {formattedTotal}</ChartLabel>
       <StyledDoughnut data={data} />
+      <ChartLabel>₴ {formattedTotal}</ChartLabel>
     </ChartContainer>
   );
 }
