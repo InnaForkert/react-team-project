@@ -22,12 +22,13 @@ export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
   const token = useSelector(state => state.auth.token);
+  const isAuth = useSelector(state => state.auth.isAuth);
 
   useEffect(() => {
-    if (token) {
+    if (!isAuth && token) {
       dispatch(currentUser());
     }
-  }, [dispatch, token]);
+  }, [dispatch, token, isAuth]);
 
   return (
     <>
@@ -38,9 +39,15 @@ export const App = () => {
           <Routes>
             <Route path="/login" element={<ProtectedLoginPage />} />
             <Route path="/register" element={<ProtectedRegistrationPage />} />
-            <Route path="/" element={
-                  <ProtectedRoute redirectTo="/login" component={<DashboardPage/>} />
-                }>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute
+                  redirectTo="/login"
+                  component={<DashboardPage />}
+                />
+              }
+            >
               <Route path="/home" index element={<HomeTab />} />
               <Route path="statistics" element={<Statistics />} />
               <Route path="currency" element={<Currency />} />

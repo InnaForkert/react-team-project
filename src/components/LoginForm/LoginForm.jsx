@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 import { signIn } from 'redux/auth/operations';
 
 import Button from 'components/Button/Button';
 import errorToast from 'components/Toasts/error';
+import { LoginSchema } from 'services/schema';
 
 import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
@@ -17,35 +18,41 @@ import {
   Label,
   EmailIcon,
   PasswordIcon,
+  Error,
 } from 'components/RegistrationForm/RegistrationForm.styled';
-
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-};
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const error = useSelector(state => state.auth.error);
 
-  const [authData, setAuthData] = useState(INITIAL_STATE);
-  const { email, password } = authData;
+  const loginFormik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
 
-  const handleChange = ({ target }) => {
-    setAuthData({ ...authData, [target.name]: target.value });
-  };
+    validationSchema: LoginSchema,
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+    onSubmit: (values, actions) => {
+      const { email, password } = values;
+      console.log('work');
 
-    const resp = await dispatch(signIn({ email, password }));
+      dispatch(signIn({ email, password })).then(resp =>
+        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+      );
+    },
+  });
 
-    if (resp?.error) {
-      return errorToast(error);
-    }
+  const {
+    values,
+    isSubmitting,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = loginFormik;
 
-    setAuthData(INITIAL_STATE);
-  };
+  const { email, password } = values;
 
   return (
     <AuthWrapper>
@@ -58,29 +65,44 @@ export const LoginForm = () => {
       <AuthForm onSubmit={handleSubmit}>
         <Label>
           <Input
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={email}
+            id="email"
             type="email"
             name="email"
-            onChange={handleChange}
-            value={email}
-            required
             placeholder="E-mail"
           />
-          <EmailIcon />
+          <EmailIcon
+            style={{ color: errors.email && touched.email && 'red' }}
+          />
+          {errors.email && touched.email && <Error>{errors.email}</Error>}
         </Label>
         <Label>
           <Input
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={password}
+            id="password"
             type="password"
             name="password"
-            onChange={handleChange}
-            value={password}
-            minLength="6"
-            maxLength="12"
             placeholder="Password"
-            required
           />
-          <PasswordIcon />
+          <PasswordIcon
+            style={{
+              color: errors.password && touched.password && 'red',
+            }}
+          />
+          {errors.password && touched.password && (
+            <Error>{errors.password}</Error>
+          )}
         </Label>
-        <Button type="submit" content={'Log in'} hasAccent={true} />
+        <Button
+          style={{ opacity: isSubmitting && 0.35 }}
+          type="submit"
+          content={'Log in'}
+          hasAccent={true}
+        />
       </AuthForm>
       <NavLink to="/register">
         <Button type="button" content={'Register'} />

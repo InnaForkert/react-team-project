@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signUp } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+
+import { signUp } from 'redux/auth/operations';
 
 import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
+import { RegisterSchema } from 'services/schema';
 
 import errorToast from 'components/Toasts/error';
 
@@ -19,46 +21,41 @@ import {
   EmailIcon,
   PasswordIcon,
   UserIcon,
+  Error,
 } from './RegistrationForm.styled';
-
-const INITIAL_STATE = {
-  email: '',
-  password: '',
-  confirmPassword: '',
-  username: '',
-};
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
-  const [authData, setAuthData] = useState(INITIAL_STATE);
-  const { email, password, confirmPassword, username } = authData;
-  const error = useSelector(state => state.auth.error);
 
-  const checkPassword = () => {
-    return JSON.stringify(password) !== JSON.stringify(confirmPassword);
-  };
+  const registerFormik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      username: '',
+    },
 
-  const handleChange = ({ target }) => {
-    setAuthData({ ...authData, [target.name]: target.value });
-  };
+    validationSchema: RegisterSchema,
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+    onSubmit: (values, actions) => {
+      const { username, email, password } = values;
 
-    if (password.length < 6)
-      return errorToast('Password length should be at least 6 symbols');
-    if (!checkPassword()) {
-      return errorToast('Passwords do not match!');
-    }
+      dispatch(signUp({ username, email, password })).then(resp =>
+        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+      );
+    },
+  });
 
-    const resp = await dispatch(signUp({ username, email, password }));
-
-    if (resp?.error) {
-      return errorToast(error);
-    }
-
-    setAuthData(INITIAL_STATE);
-  };
+  const {
+    values,
+    isSubmitting,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = registerFormik;
+  const { email, password, confirmPassword, username } = values;
 
   return (
     <AuthWrapper>
@@ -72,40 +69,53 @@ export const RegistrationForm = () => {
         <Label>
           <Input
             onChange={handleChange}
+            onBlur={handleBlur}
+            value={email}
+            id="email"
             type="email"
             name="email"
             placeholder="E-mail"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            required
           />
-          <EmailIcon />
+          <EmailIcon
+            style={{ color: errors.email && touched.email && 'red' }}
+          />
+          {errors.email && touched.email && <Error>{errors.email}</Error>}
         </Label>
         <Label>
           <Input
             onChange={handleChange}
+            onBlur={handleBlur}
+            value={password}
+            id="password"
             type="password"
             name="password"
-            value={password}
-            minLength="6"
-            maxLength="12"
             placeholder="Password"
-            required
           />
-          <PasswordIcon />
+          <PasswordIcon
+            style={{
+              color: errors.password && touched.password && 'red',
+            }}
+          />
+          {errors.password && touched.password && (
+            <Error>{errors.password}</Error>
+          )}
         </Label>
         <Label>
           <Input
-            value={confirmPassword}
             onChange={handleChange}
+            onBlur={handleBlur}
+            value={confirmPassword}
+            id="confirmPassword"
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
-            minLength="6"
-            maxLength="12"
-            required
           />
-          <PasswordIcon />
-          {password.length > 0 && (
+          <PasswordIcon
+            style={{
+              color: errors.confirmPassword && touched.confirmPassword && 'red',
+            }}
+          />
+          {confirmPassword.length > 0 && (
             <Box
               position="absolute"
               bottom="-8px"
@@ -116,8 +126,10 @@ export const RegistrationForm = () => {
               borderRadius="2px"
             >
               <Box
-                width={`${password.length * 34.1}px`}
-                backgroundColor={checkPassword() ? '#28ce65' : '#e6ed17'}
+                width={`${confirmPassword.length * 34.1}px`}
+                backgroundColor={
+                  errors.password || errors.confirmPassword ? 'red' : '#28ce65'
+                }
                 height="5px"
               />
             </Box>
@@ -126,18 +138,28 @@ export const RegistrationForm = () => {
         <Label>
           <Input
             onChange={handleChange}
-            type="text"
-            name="name"
+            onBlur={handleBlur}
             value={username}
-            minLength="1"
-            maxLength="12"
+            id="username"
+            type="text"
+            name="username"
             placeholder="First name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            required
           />
-          <UserIcon />
+          <UserIcon
+            style={{
+              color: errors.username && touched.username && 'red',
+            }}
+          />
+          {errors.username && touched.username && (
+            <Error>{errors.username}</Error>
+          )}
         </Label>
-        <Button type="submit" content={'Register'} hasAccent={true} />
+        <Button
+          style={{ opacity: isSubmitting && 0.35 }}
+          type="submit"
+          content={'Register'}
+          hasAccent={true}
+        />
       </AuthForm>
       <NavLink to="/login">
         <Button type="button" content={'Log in'} />
