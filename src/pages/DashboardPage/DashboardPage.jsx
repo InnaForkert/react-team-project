@@ -16,6 +16,7 @@ import { getAllTransactions } from 'redux/transactions/operations';
 import Currency from 'components/Currency/Currency';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 import Balance from 'components/Balance/Balance';
+import { Main } from './DashboardPage.styled';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
@@ -29,18 +30,20 @@ export default function DashboardPage() {
   return (
     <>
       <Header />
-      <Container>
-        <Navigation />
-        <Balance/>
-        <MediaQuery deviceName={'tabletFrom'}>
-          <Currency />
-        </MediaQuery>
-        {/* <HomeTab /> */}
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-        <AddTransactionBtn />
-      </Container>
+      <Main>
+        <Container>
+          <Navigation />
+          <Balance />
+          <MediaQuery deviceName={'tabletFrom'}>
+            <Currency />
+          </MediaQuery>
+          {/* <HomeTab /> */}
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+          <AddTransactionBtn />
+        </Container>
+      </Main>
       {isModalAddTransactionOpen && <Modal />}
     </>
   );
