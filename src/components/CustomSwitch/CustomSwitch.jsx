@@ -1,15 +1,15 @@
-import css from './CustomSwitch.module.css';
+// import css from './CustomSwitch.module.css';
+import { Input, Label } from './CustomSwitch.styled';
 
 export const CustomSwitch = ({ toggleTransactionType }) => (
   <>
-    <input
+    <Input
       defaultChecked
-      className={css.inputSwitch}
       type="checkbox"
       name="transactionType"
       id="transactionType"
       onChange={toggleTransactionType}
-    ></input>
-    <label className={css.labelSwitch} htmlFor="transactionType"></label>
+    ></Input>
+    <Label htmlFor="transactionType"></Label>
   </>
 );
