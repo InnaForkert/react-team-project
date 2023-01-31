@@ -157,3 +157,8 @@
 .lose {
   color: var(--red-color);
 }
+
+.tbody {
+  height: 400px;
+  overflow: scroll;
+}

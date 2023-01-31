@@ -1,13 +1,14 @@
 import s from './HomeTabDesktop.module.css';
 import { HomeTabContainer } from './HomeTabDesktop.styled';
-import { getAllTransactions } from 'redux/transactions/operations';
+
 import { useSelector } from 'react-redux';
 import { normalizeFormatDate, normalizeNum } from 'services/normalizeService';
 
 export default function HomeTabDesktop() {
-  const transactions = useSelector((state) => getAllTransactions(state))
-  let filterTrans = [...transactions]
-  filterTrans.sort((a, b) => (a.date > b.date ? -1 : 1))
+  const transactions = useSelector((state) => (state.transactions.allTransactions))
+  let filterTrans = [...transactions].sort((a, b) => (a.date > b.date ? -1 : 1))
+  
+  console.log(transactions);
   return (
    <HomeTabContainer>
       <table className={s.table}>
@@ -31,7 +32,7 @@ export default function HomeTabDesktop() {
               <td>0</td>
               <td>0</td>
           </tr>)
-          {transactions?.map((item) => {
+          {filterTrans?.map((item) => {
             console.log(item)
             const text = item.income === false ? '-' : '+'
             const colorTxt = item.income === false ? s.lose : s.profit
