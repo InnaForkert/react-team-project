@@ -2,25 +2,21 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NavContainer = styled.div`
-/* display: inline-block; */
-margin-left: 50%;
-transform: translateX(-50%);
-${({ theme }) => theme.media.tabletFrom} {
-grid-column: 1 / 2;
- grid-row: 1 / 2;
-  margin-left: 0;
-  transform: none;
-${({ theme }) => theme.media.desktop}
- /* grid-column: 1 / 2;
- grid-row: 1 / 2; */
-}
-`
+  padding-top: ${({ theme }) => theme.spacing(4)};
+  margin-left: 50%;
+  transform: translateX(-50%);
+  ${({ theme }) => theme.media.tabletFrom} {
+    padding-top: ${({ theme }) => theme.spacing(10)};
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin-left: 0;
+    transform: none;
+  }
+`;
 
 export const Nav = styled.ul`
-  margin-top: ${({ theme }) => theme.spacing(4)};
   margin-bottom: ${({ theme }) => theme.spacing(4)};
   ${({ theme }) => theme.media.tabletFrom} {
-    margin-top: ${({ theme }) => theme.spacing(10)};
     margin-bottom: ${({ theme }) => theme.spacing(7)};
   }
 `;
@@ -76,4 +72,3 @@ export const Text = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   line-height: 1.5;
 `;
-
