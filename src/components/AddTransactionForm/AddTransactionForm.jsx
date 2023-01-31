@@ -14,6 +14,7 @@ import DropdownMenu from 'components/DropdownMenu/DropdownMenu';
 import {
   FormTitle,
   Wrapper,
+  ModalWrap,
   FormBox,
   InputLabel,
   Input,
@@ -94,31 +95,32 @@ export const AddTransactionForm = () => {
   return (
     <Wrapper>
       <Container>
-        <FormTitle>Add transaction</FormTitle>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-        >
-          <FormBox>
-            <ToggleBox>
-              <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
-              <ChakraProvider>
-                <Switch
-                  onChange={toggleTransactionType}
-                  id="transactionType"
-                  size="lg"
-                  colorScheme="green"
-                  name="transactionType"
-                />
-              </ChakraProvider>
+        <ModalWrap>
+          <FormTitle>Add transaction</FormTitle>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+          >
+            <FormBox>
+              <ToggleBox>
+                <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
+                <ChakraProvider>
+                  <Switch
+                    onChange={toggleTransactionType}
+                    id="transactionType"
+                    size="lg"
+                    colorScheme="green"
+                    name="transactionType"
+                  />
+                </ChakraProvider>
 
-              <ToggleLabel>Expense</ToggleLabel>
-            </ToggleBox>
-            {!isIncomeTransaction && (
-              <>
-                <InputLabel>
-                  {/* <Input
+                <ToggleLabel>Expense</ToggleLabel>
+              </ToggleBox>
+              {!isIncomeTransaction && (
+                <>
+                  <InputLabel>
+                    {/* <Input
                   as="select"
                   name="categoryId"
                   placeholder="Select a category"
@@ -130,44 +132,49 @@ export const AddTransactionForm = () => {
                   ))}
                 </Input>
                 <ErrorMessage name="categoryId" component="div" /> */}
+                  </InputLabel>
+                  <DropdownMenu
+                    expenseCategories={expenseCategories}
+                    handleDropDown={handleDropDown}
+                  />
+                </>
+              )}
+
+              <DateWrapper>
+                <InputLabel>
+                  <InputAmount type="text" name="amount" placeholder="0.00" />
+                  <ErrorMessage name="amount" component="div" />
                 </InputLabel>
-                <DropdownMenu
-                  expenseCategories={expenseCategories}
-                  handleDropDown={handleDropDown}
-                />
-              </>
-            )}
-
-            <DateWrapper>
+                <InputLabel>
+                  <Input
+                    type="date"
+                    name="transactionDate"
+                    id="transactionDate"
+                  />
+                  <ErrorMessage name="transactionDate" component="div" />
+                </InputLabel>
+              </DateWrapper>
               <InputLabel>
-                <InputAmount type="text" name="amount" placeholder="0.00" />
-                <ErrorMessage name="amount" component="div" />
-              </InputLabel>
-              <InputLabel>
-                <Input
-                  type="date"
-                  name="transactionDate"
-                  id="transactionDate"
+                <InputComment
+                  type="text"
+                  name="comment"
+                  placeholder="Comment"
                 />
-                <ErrorMessage name="transactionDate" component="div" />
+                <ErrorMessage name="comment" component="div" />
               </InputLabel>
-            </DateWrapper>
-            <InputLabel>
-              <InputComment type="text" name="comment" placeholder="Comment" />
-              <ErrorMessage name="comment" component="div" />
-            </InputLabel>
 
-            <Button type="submit" content={'add'} hasAccent={true} />
-          </FormBox>
-        </Formik>
+              <Button type="submit" content={'add'} hasAccent={true} />
+            </FormBox>
+          </Formik>
 
-        <Button
-          type="button"
-          content={'cancel'}
-          onClick={() => {
-            dispatch(toggleModalAddTransactionOpen());
-          }}
-        />
+          <Button
+            type="button"
+            content={'cancel'}
+            onClick={() => {
+              dispatch(toggleModalAddTransactionOpen());
+            }}
+          />
+        </ModalWrap>
       </Container>
     </Wrapper>
   );

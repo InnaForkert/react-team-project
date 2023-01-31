@@ -125,3 +125,7 @@ export const InputAmount = styled(Field)`
     }
   }
 `;
+
+export const ModalWrap = styled('div')`
+  margin: 0 auto;
+`;
