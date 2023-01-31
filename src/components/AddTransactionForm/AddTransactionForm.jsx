@@ -48,7 +48,7 @@ const initialValues = {
 const schema = yup.object().shape({
   // categoryId: yup.string().required('Pls select category'),
   amount: yup.number().required().positive(),
-  comment: yup.string().min(2),
+  comment: yup.string().min(2).max(1000),
   transactionDate: yup
     .date()
     .required()
