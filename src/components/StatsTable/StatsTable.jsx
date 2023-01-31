@@ -14,7 +14,6 @@ import {
   Summary,
   Expense,
   Income,
-  // TableContainer,
   Selects,
 } from './StatsTable.styled';
 import {
@@ -67,7 +66,6 @@ function StatsTable() {
       ...el,
       color: colors[i],
     }));
-    console.log(colored.current);
   }, [summary, dispatch]);
 
   const [monthDropdownShown, setMonthDropdownShown] = useState(false);

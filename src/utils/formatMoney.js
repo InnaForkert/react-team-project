@@ -7,7 +7,6 @@ export function formatMoney(num) {
     .split(' ');
   if (arr[arr.length - 1].includes('.')) {
     if (arr[arr.length - 1].length > 6) {
-      console.log(arr[arr.length - 1]);
       arr[arr.length - 1] = arr[arr.length - 1].slice(0, 6);
       return arr.join(' ');
     }

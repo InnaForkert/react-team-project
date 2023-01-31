@@ -32,7 +32,6 @@ function CircleChart() {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-  console.log(summary);
   const data = {
     labels: summary.map(el => el.name),
     datasets: [
