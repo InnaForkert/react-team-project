@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from 'redux/auth/operations';
 import { NavLink } from 'react-router-dom';
 
@@ -8,10 +8,6 @@ import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
 
-import // MdEmail,
-// MdLock,
-// MdAccountBox
-'react-icons/md';
 import errorToast from 'components/Toasts/error';
 
 import {
@@ -25,57 +21,43 @@ import {
   UserIcon,
 } from './RegistrationForm.styled';
 
-// const INITIAL_STATE = {
-//   email: '',
-//   password: '',
-//   confirmPassword: '',
-//   username: '',
-// };
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  confirmPassword: '',
+  username: '',
+};
 
-// export const RegistrationForm = () => {
-// const [authData, setAuthData] = useState(INITIAL_STATE);
-// const { email, password, confirmPassword, username } = authData;
-
-const RegistrationForm = () => {
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-
+export const RegistrationForm = () => {
   const dispatch = useDispatch();
-  dispatch(signUp());
+  const [authData, setAuthData] = useState(INITIAL_STATE);
+  const { email, password, confirmPassword, username } = authData;
+  const error = useSelector(state => state.auth.error);
 
   const checkPassword = () => {
-    if (JSON.stringify(password) !== JSON.stringify(passwordConfirm)) {
-      return false;
-    }
-    return true;
+    return JSON.stringify(password) !== JSON.stringify(confirmPassword);
   };
 
-  const onChangePassword = e => {
-    setPassword(e.target.value);
+  const handleChange = ({ target }) => {
+    setAuthData({ ...authData, [target.name]: target.value });
   };
 
-  const onChangePassword1 = e => {
-    setPasswordConfirm(e.target.value);
-  };
-
-  const onSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const checked = checkPassword();
-    if (passwordConfirm.length < 6)
-      return errorToast('Password must be length more 6 symbols');
-    if (!checked) {
+
+    if (password.length < 6)
+      return errorToast('Password length should be at least 6 symbols');
+    if (!checkPassword()) {
       return errorToast('Passwords do not match!');
     }
-    const form = e.currentTarget;
-    const res = dispatch(
-      signUp({
-        username: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    if (res.payload === 409) return errorToast('This user is registered');
-    form.reset();
+
+    const resp = await dispatch(signUp({ username, email, password }));
+
+    if (resp?.error) {
+      return errorToast(error);
+    }
+
+    setAuthData(INITIAL_STATE);
   };
 
   return (
@@ -86,9 +68,10 @@ const RegistrationForm = () => {
         </LogoIcon>
         Wallet
       </Title>
-      <AuthForm onSubmit={onSubmit}>
+      <AuthForm onSubmit={handleSubmit}>
         <Label>
           <Input
+            onChange={handleChange}
             type="email"
             name="email"
             placeholder="E-mail"
@@ -99,33 +82,41 @@ const RegistrationForm = () => {
         </Label>
         <Label>
           <Input
-            onChange={onChangePassword1}
+            onChange={handleChange}
             type="password"
             name="password"
+            value={password}
+            minLength="6"
+            maxLength="12"
             placeholder="Password"
-            value={passwordConfirm}
+            required
           />
           <PasswordIcon />
         </Label>
         <Label>
           <Input
-            value={password}
-            onChange={onChangePassword}
+            value={confirmPassword}
+            onChange={handleChange}
             type="password"
-            name="ConfirmPassword"
+            name="confirmPassword"
             placeholder="Confirm password"
+            minLength="6"
+            maxLength="12"
+            required
           />
           <PasswordIcon />
           {password.length > 0 && (
             <Box
-              maxWidth="180px"
+              position="absolute"
+              bottom="-8px"
+              width="409.5px"
               overflow="hidden"
               backgroundColor="#e5f1e9"
-              mt="5px"
-              borderRadius="20px"
+              height="4px"
+              borderRadius="2px"
             >
               <Box
-                width={`${password.length * 30}px`}
+                width={`${password.length * 34.1}px`}
                 backgroundColor={checkPassword() ? '#28ce65' : '#e6ed17'}
                 height="5px"
               />
@@ -134,8 +125,12 @@ const RegistrationForm = () => {
         </Label>
         <Label>
           <Input
+            onChange={handleChange}
             type="text"
             name="name"
+            value={username}
+            minLength="1"
+            maxLength="12"
             placeholder="First name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             required
@@ -150,5 +145,3 @@ const RegistrationForm = () => {
     </AuthWrapper>
   );
 };
-
-export default RegistrationForm;

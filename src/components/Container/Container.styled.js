@@ -8,28 +8,13 @@ export const Container = styled.div`
   ${({ theme }) => theme.media.tablet} {
     max-width: ${({ theme }) => theme.spacing(192)};
     padding-inline: ${({ theme }) => theme.spacing(8)};
-    display: grid;                       
-    /* grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(auto, auto);
-    grid-template-areas:
-      "nav nav nav nav cur cur cur cur cur"
-      "bal bal bal bal cur cur cur cur cur"
-      "ht ht ht ht ht ht ht ht ht"
-      "st st st st st st st st st"; */
-    
+    display: grid;  
   }
 
   ${({ theme }) => theme.media.desktop} {
     max-width: ${({ theme }) => theme.spacing(320)};
     padding-inline: ${({ theme }) => theme.spacing(4)};
     display: grid;
-    /* display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-auto-rows: minmax(auto, auto);
-    grid-template-areas:
-      "nav nav nav ht ht ht ht ht ht"
-      "bal bal bal ht ht ht ht ht ht"
-      "cur cur cur ht ht ht ht ht ht"; */
   }
 `
 

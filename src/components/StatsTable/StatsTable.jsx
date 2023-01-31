@@ -14,7 +14,7 @@ import {
   Summary,
   Expense,
   Income,
-  TableContainer,
+  // TableContainer,
   Selects,
 } from './StatsTable.styled';
 import {
@@ -103,7 +103,7 @@ function StatsTable() {
   }
 
   return (
-    <TableContainer>
+    <>
       <Selects>
         <SelectContainer className={monthDropdownShown ? 'dropdownShown' : ''}>
           <SelectInput onClick={toggleMonthDropdown}>
@@ -163,7 +163,7 @@ function StatsTable() {
       <Summary>
         Income:<Income>{formatMoney(income)}</Income>
       </Summary>
-    </TableContainer>
+    </>
   );
 }
 
