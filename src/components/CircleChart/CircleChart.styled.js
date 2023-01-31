@@ -23,7 +23,6 @@ export const ChartContainer = styled.div`
     width: 336px;
     grid-column: 1 / 2;
     grid-row: 4 / 5;
-    
   }
 
   ${({ theme }) => theme.media.desktop} {

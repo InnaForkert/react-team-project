@@ -10,12 +10,16 @@ export const Selects = styled.div`
 
 export const TableContainer = styled.div`
   ${({ theme }) => theme.media.tabletFrom} {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
     width: 336px;
     display: flex;
     flex-direction: column;
   }
   ${({ theme }) => theme.media.desktop} {
     width: 395px;
+    grid-column: 3 / 4;
+    grid-row: 2 / 5;
   }
 `;
 

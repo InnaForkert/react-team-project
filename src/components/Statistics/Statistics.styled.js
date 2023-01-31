@@ -29,5 +29,3 @@ export const TabletStats = styled.div`
   grid-row: 2 / 7;
 }
 `;
-
-export const LeftPanel = styled.div``;
