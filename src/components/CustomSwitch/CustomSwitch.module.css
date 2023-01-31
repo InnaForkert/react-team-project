@@ -46,7 +46,7 @@
   background-color: #fff;
 }
 
-.labelSwitch :active:after {
+/* .labelSwitch :active:after {
   width: 160px;
   border: 2px solid red;
-}
+} */

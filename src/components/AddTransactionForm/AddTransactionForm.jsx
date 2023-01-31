@@ -47,9 +47,12 @@ const initialValues = {
 
 const schema = yup.object().shape({
   // categoryId: yup.string().required('Pls select category'),
-  amount: yup.number().required().positive().integer(),
+  amount: yup.number().required().positive(),
   comment: yup.string().min(2),
-  transactionDate: yup.date().required(),
+  transactionDate: yup
+    .date()
+    .required()
+    .max(setCurrentDate(), 'Forbidden. Please choose a date in past'),
 });
 
 export const AddTransactionForm = () => {
@@ -130,7 +133,13 @@ export const AddTransactionForm = () => {
               )}
               <DateWrapper>
                 <InputLabel>
-                  <InputAmount type="text" name="amount" placeholder="0.00" />
+                  <InputAmount
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="amount"
+                    placeholder="0.00"
+                  />
                   <ErrorMessageBox name="amount" component="div" />
                 </InputLabel>
                 <InputLabel>
