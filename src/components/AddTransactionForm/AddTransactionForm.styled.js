@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
+import { Form, Field, ErrorMessage } from 'formik';
+
+export const ErrorMessageBox = styled(ErrorMessage)`
+  color: red;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+`;
 
 export const Wrapper = styled.div`
   text-align: center;
@@ -48,7 +53,7 @@ export const InputLabel = styled.label`
   width: 100%;
   display: flex;
   gap: ${({ theme }) => theme.spacing(5)};
-  flex: 1 1;
+  flex-direction: column;
 `;
 
 export const Input = styled(Field)`
@@ -80,10 +85,17 @@ export const ToggleLabel = styled.label`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.lightGrey};
+  &.income {
+    color: ${({ theme }) => theme.colors.accentGreen};
+  }
+  &.expense {
+    color: ${({ theme }) => theme.colors.accentPink};
+  }
 `;
 
 export const ToggleBox = styled.div`
   display: flex;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing(5)}; ;
 `;
 
@@ -124,4 +136,8 @@ export const InputAmount = styled(Field)`
       text-align: center;
     }
   }
+`;
+
+export const ModalWrap = styled.div`
+  margin: 0 auto;
 `;

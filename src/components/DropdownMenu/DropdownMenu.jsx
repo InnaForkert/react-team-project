@@ -13,16 +13,9 @@ export default function DropdownMenu({ expenseCategories, handleDropDown }) {
     return null;
   });
 
-  //   const dispatch = useDispatch();
-
   const [categoryDropdownShown, setCategoryDropdownShown] = useState(false);
 
   const [category, setCategory] = useState(0);
-  //   const [categoryId, setCategoryId] = useState('');
-
-  //   useEffect(() => {
-  //     dispatch(fetchTransactionsSummary({ category: +category + 1, year }));
-  //   }, [dispatch, category, year]);
 
   function handleCategoryChange(e) {
     setCategory(e.target.dataset.idx);
@@ -36,7 +29,11 @@ export default function DropdownMenu({ expenseCategories, handleDropDown }) {
 
   return (
     <SelectContainer className={categoryDropdownShown ? 'dropdownShown' : ''}>
-      <SelectInput type="button" onClick={toggleCategoryDropdown}>
+      <SelectInput
+        type="button"
+        onClick={toggleCategoryDropdown}
+        className={category === 0 ? '' : 'selected'}
+      >
         {categories[category]}
       </SelectInput>
       <SelectDate name="category" onClick={handleCategoryChange}>
