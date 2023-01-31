@@ -10,7 +10,6 @@ import {
   StyledDoughnut,
   ChartContainer,
   ChartLabel,
-  Masker,
 } from './CircleChart.styled';
 import { formatMoney } from 'utils/formatMoney';
 
