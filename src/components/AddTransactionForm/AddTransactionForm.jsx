@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChakraProvider, Switch } from '@chakra-ui/react';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { addTransaction } from 'redux/transactions/operations';
@@ -26,6 +26,7 @@ import {
   ErrorMessageBox,
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
+import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
 
 const setCurrentDate = () => {
   const d = new Date();
@@ -60,7 +61,7 @@ export const AddTransactionForm = () => {
   });
 
   // SWITCH TRANSACTION TYPE====================================================
-  const [isIncomeTransaction, setIsIncomeTransaction] = useState(true);
+  const [isIncomeTransaction, setIsIncomeTransaction] = useState(false);
   const [categoryIdFromDropdown, SetCategoryIdFromDropdown] = useState('');
   console.log('categoryIdFromDropdown:', categoryIdFromDropdown);
 
@@ -107,17 +108,20 @@ export const AddTransactionForm = () => {
               <ToggleBox>
                 <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
                 <ChakraProvider>
-                  <Switch
+                  {/* <Switch
+                    defaultChecked
                     onChange={toggleTransactionType}
                     id="transactionType"
                     size="lg"
                     colorScheme="green"
                     name="transactionType"
-                  />
+                  /> */}
+                  <CustomSwitch toggleTransactionType={toggleTransactionType} />
                 </ChakraProvider>
 
                 <ToggleLabel>Expense</ToggleLabel>
               </ToggleBox>
+
               {!isIncomeTransaction && (
                 <DropdownMenu
                   expenseCategories={expenseCategories}
