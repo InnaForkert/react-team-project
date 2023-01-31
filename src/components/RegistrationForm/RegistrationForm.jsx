@@ -1,4 +1,3 @@
-import css from './RegistrationForm.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from 'redux/auth/operations';
@@ -9,11 +8,10 @@ import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
 
-import {
-  // MdEmail,
-  MdLock,
-  // MdAccountBox
-} from 'react-icons/md';
+import // MdEmail,
+// MdLock,
+// MdAccountBox
+'react-icons/md';
 import errorToast from 'components/Toasts/error';
 
 import {
@@ -117,7 +115,7 @@ const RegistrationForm = () => {
             name="ConfirmPassword"
             placeholder="Confirm password"
           />
-          {/* <PasswordIcon /> */}
+          <PasswordIcon />
           {password.length > 0 && (
             <Box
               maxWidth="180px"
@@ -133,7 +131,6 @@ const RegistrationForm = () => {
               />
             </Box>
           )}
-          <MdLock className={css.inputIcon} />
         </Label>
         <Label>
           <Input

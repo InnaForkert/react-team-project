@@ -15,14 +15,19 @@ export const ChartContainer = styled.div`
   width: 100%;
   ${({ theme }) => theme.media.mobileFrom} {
     width: 280px;
+    margin-inline: auto;
   }
 
   ${({ theme }) => theme.media.tabletFrom} {
     width: 336px;
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
   }
 
   ${({ theme }) => theme.media.desktop} {
     width: 288px;
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
   }
 
   margin-bottom: 32px;
@@ -32,7 +37,7 @@ export const ChartLabel = styled.p`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -50%);
   z-index: -1;
 
   font-weight: ${({ theme }) => theme.fontWeight.bold};

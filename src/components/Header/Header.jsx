@@ -25,16 +25,12 @@ export const Header = () => {
 
   const isModalLogoutOpen = useSelector(selectModalLogoutOpen);
 
-  console.log(isModalLogoutOpen);
-
   const handleModalLogoutOpen = () => {
     dispatch(toggleModalLogoutOpen());
   };
 
   const selectUsername = state => state.auth?.user?.username;
   const username = useSelector(selectUsername);
-
-  console.log(username);
 
   return (
     <>
