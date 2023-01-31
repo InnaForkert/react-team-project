@@ -5,7 +5,6 @@ const fetchCurrency = async () => {
     const response = await axios.get(
       'https://ewallet-api.onrender.com/api/currency?type=cash'
     );
-    console.log(response);
     return response.data;
   } catch (error) {
     throw error;
