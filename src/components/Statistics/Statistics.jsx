@@ -1,6 +1,6 @@
 import CircleChart from 'components/CircleChart/CircleChart';
 import StatsTable from 'components/StatsTable/StatsTable';
-import { Title, TabletStats, LeftPanel } from './Statistics.styled';
+import { Title, TabletStats } from './Statistics.styled';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 function Statistics() {
@@ -14,10 +14,10 @@ function Statistics() {
 
       <MediaQuery deviceName={'tabletFrom'}>
         <TabletStats>
-          <LeftPanel>
+          <div>
             <Title>Statistics</Title>
             <CircleChart />
-          </LeftPanel>
+          </div>
           <StatsTable />
         </TabletStats>
       </MediaQuery>

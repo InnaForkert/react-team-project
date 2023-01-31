@@ -16,6 +16,7 @@ import WithAuthRedirect from 'hoc/WithAuthRedirect';
 import { getAllTransactions } from 'redux/transactions/operations';
 import Currency from 'components/Currency/Currency';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
+import Balance from 'components/Balance/Balance';
 
 function DashboardPage() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function DashboardPage() {
       <Header />
       <Container>
         <Navigation />
+        <Balance/>
         <MediaQuery deviceName={'tabletFrom'}>
           <Currency />
         </MediaQuery>

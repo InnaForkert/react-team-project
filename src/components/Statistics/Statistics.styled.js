@@ -10,6 +10,14 @@ export const Title = styled.h1`
   ${({ theme }) => theme.media.tabletFrom} {
     margin-top: 0;
     margin-bottom: 20px;
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    margin-top: 40px;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
   }
 `;
 
@@ -19,5 +27,3 @@ export const TabletStats = styled.div`
   justify-content: center;
   align-items: top;
 `;
-
-export const LeftPanel = styled.div``;
