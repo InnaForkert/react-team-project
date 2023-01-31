@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Title = styled.h1`
   font-family: ${({ theme }) => theme.fonts.secondary};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
@@ -14,20 +13,17 @@ export const Title = styled.h1`
     grid-column: 1 / 2;
     grid-row: 3 / 4;
   }
-${({ theme }) => theme.media.desktop} {   
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  margin-top: 32px;
-}
+
+  ${({ theme }) => theme.media.desktop} {
+    margin-top: 40px;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
 `;
 
 export const TabletStats = styled.div`
- grid-column: 2 / 3;
-  grid-row: 3 / 7;
-  ${({ theme }) => theme.media.desktop} {   
-  grid-column: 3 / 4;
-  grid-row: 2 / 7;
-}
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: top;
 `;
-
-export const LeftPanel = styled.div``;
