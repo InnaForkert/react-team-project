@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router';
 
 import { ContainerAuth } from 'components/Container/Container.styled';
 import { LoginForm } from 'components/LoginForm/LoginForm';
+import WithAuthRedirect from 'hoc/WithAuthRedirect';
 
 import { Login, Title } from './LoginPage.styled';
 
-export default function LoginPage() {
+function LoginPage() {
   const navigate = useNavigate();
   const isAuth = useSelector(state => state.auth.isAuth);
 
@@ -28,3 +29,7 @@ export default function LoginPage() {
     )
   );
 }
+
+const ProtectedLoginPage = WithAuthRedirect(LoginPage, '/home');
+
+export default ProtectedLoginPage;
