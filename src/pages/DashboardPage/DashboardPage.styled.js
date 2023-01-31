@@ -9,3 +9,13 @@ export const Main = styled.main`
     min-height: calc(100vh - 80px);
   }
 `;
+
+export const LeftColumn = styled.div`
+  width: 480px;
+  /* padding: 0 69px 0 0; */
+`;
+
+export const RightColumn = styled.div`
+  width: 800px;
+  padding: 45px 0 69px 0;
+`;

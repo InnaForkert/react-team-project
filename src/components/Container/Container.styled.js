@@ -8,15 +8,15 @@ export const Container = styled.div`
   ${({ theme }) => theme.media.tablet} {
     max-width: ${({ theme }) => theme.spacing(192)};
     padding-inline: ${({ theme }) => theme.spacing(8)};
-    display: grid;  
   }
 
   ${({ theme }) => theme.media.desktop} {
+    display: grid;
+
     max-width: ${({ theme }) => theme.spacing(320)};
     padding-inline: ${({ theme }) => theme.spacing(4)};
-    display: grid;
   }
-`
+`;
 
 export const ContainerAuth = styled(Container)`
   display: flex;
@@ -33,5 +33,16 @@ export const ContainerAuth = styled(Container)`
 
   ${({ theme }) => theme.media.desktop} {
     flex-direction: row;
+  }
+`;
+
+export const Grid = styled.div`
+  ${({ theme }) => theme.media.tablet} {
+    display: grid;
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    display: flex;
+    justify-content: space-between;
   }
 `;

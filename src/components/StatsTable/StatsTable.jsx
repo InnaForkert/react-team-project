@@ -17,6 +17,7 @@ import {
   Selects,
 } from './StatsTable.styled';
 import {
+  selectAllTransactions,
   selectExpenseSum,
   selectIncomeSum,
   selectSummary,
@@ -60,6 +61,7 @@ function StatsTable() {
   const income = useSelector(selectIncomeSum);
   const dispatch = useDispatch();
   const colored = useRef(summary);
+  const all = useSelector(selectAllTransactions);
 
   useEffect(() => {
     colored.current = summary.map((el, i) => ({
@@ -78,7 +80,7 @@ function StatsTable() {
 
   useEffect(() => {
     dispatch(fetchTransactionsSummary({ month: +month + 1, year }));
-  }, [dispatch, month, year]);
+  }, [dispatch, month, year, all]);
 
   function handleMonthChange(e) {
     setMonth(e.target.dataset.value);
