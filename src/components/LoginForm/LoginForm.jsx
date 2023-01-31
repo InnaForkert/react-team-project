@@ -1,23 +1,22 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
-import { MdEmail, MdLock } from 'react-icons/md';
 
 import { signIn } from 'redux/auth/operations';
 
-import css from './LoginForm.module.css';
 import Button from 'components/Button/Button';
+import errorToast from 'components/Toasts/error';
 
 import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
-
 import {
   AuthWrapper,
   Input,
   AuthForm,
   Title,
   Label,
+  EmailIcon,
+  PasswordIcon,
 } from 'components/RegistrationForm/RegistrationForm.styled';
 
 const INITIAL_STATE = {
@@ -26,17 +25,25 @@ const INITIAL_STATE = {
 };
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+  const error = useSelector(state => state.auth.error);
+
   const [authData, setAuthData] = useState(INITIAL_STATE);
   const { email, password } = authData;
-  const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
     setAuthData({ ...authData, [target.name]: target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    dispatch(signIn({ email, password }));
+
+    const resp = await dispatch(signIn({ email, password }));
+
+    if (resp?.error) {
+      return errorToast(error);
+    }
+
     setAuthData(INITIAL_STATE);
   };
 
@@ -58,7 +65,7 @@ export const LoginForm = () => {
             required
             placeholder="E-mail"
           />
-          <MdEmail className={css.inputIcon} />
+          <EmailIcon />
         </Label>
         <Label>
           <Input
@@ -71,7 +78,7 @@ export const LoginForm = () => {
             placeholder="Password"
             required
           />
-          <MdLock className={css.inputIcon} />
+          <PasswordIcon />
         </Label>
         <Button type="submit" content={'Log in'} hasAccent={true} />
       </AuthForm>

@@ -88,6 +88,20 @@ export const Input = styled.input`
 export const Label = styled.label`
   position: relative;
   width: 100%;
+
+  /* &:nth-child(3)::after{
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #E5F1EF;
+
+    border-radius: 50%;
+
+    box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5);
+  } */
 `;
 
 const basedIconStyles = css`

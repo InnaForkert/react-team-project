@@ -11,14 +11,13 @@ import AddTransactionBtn from 'components/AddTransactionBtn/AddTransactionBtn';
 import { useSelector } from 'react-redux';
 import { selectModalAddTransactionOpen } from 'redux/global/globalSlice';
 import { Modal } from 'components/Modal/Modal';
-import WithAuthRedirect from 'hoc/WithAuthRedirect';
 
 import { getAllTransactions } from 'redux/transactions/operations';
 import Currency from 'components/Currency/Currency';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 import Balance from 'components/Balance/Balance';
 
-function DashboardPage() {
+export default function DashboardPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function DashboardPage() {
       <Header />
       <Container>
         <Navigation />
-        <Balance/>
+        <Balance />
         <MediaQuery deviceName={'tabletFrom'}>
           <Currency />
         </MediaQuery>
@@ -46,7 +45,3 @@ function DashboardPage() {
     </>
   );
 }
-
-const ProtectedDashboardPage = WithAuthRedirect(DashboardPage, '/login');
-
-export default ProtectedDashboardPage;

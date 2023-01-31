@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function successToast(errorMes) {
   return toast.success(errorMes, {

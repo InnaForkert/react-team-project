@@ -4,10 +4,12 @@ import { signUp, signIn, currentUser, signOut } from './operations';
 
 const handlePending = state => {
   state.status = 'loading';
+  state.error = null;
 };
 
-const handleRejected = state => {
+const handleRejected = (state, {payload}) => {
   state.status = 'error';
+  state.error = Array.isArray(payload)? payload[0] : payload
 };
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
   status: null,
   isAuth: false,
   isRefreshing: false,
+  error: null
 };
 
 const authSlice = createSlice({
@@ -49,6 +52,7 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isAuth = true;
         state.status = 'success';
+        state.error = null
       })
 
       .addCase(signIn.fulfilled, (state, { payload }) => {
@@ -56,12 +60,14 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isAuth = true;
         state.status = 'success';
+        state.error = null
       })
 
       .addCase(currentUser.fulfilled, (state, { payload }) => {
         state.user = payload;
         state.isAuth = true;
         state.isRefreshing = false;
+        state.error = null
       })
 
       .addCase(signOut.fulfilled, state => {
@@ -70,6 +76,7 @@ const authSlice = createSlice({
         state.status = null;
         state.isAuth = false;
         state.isRefreshing = false;
+        state.error = null
       }),
 });
 
