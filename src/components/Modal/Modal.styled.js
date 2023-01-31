@@ -24,6 +24,8 @@ export const Overlay = styled.div`
 
 export const ModalWindow = styled.div`
   max-width: 100vw;
+  position: absolute;
+  top: 10%;
 `;
 
 export const Box = styled.div`

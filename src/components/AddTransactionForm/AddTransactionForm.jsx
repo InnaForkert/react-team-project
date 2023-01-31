@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChakraProvider, Switch } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -62,18 +62,13 @@ export const AddTransactionForm = () => {
   const incomeCategoriesId = incomeCategories.map(el => {
     return el.id;
   });
-
-  // SWITCH TRANSACTION TYPE====================================================
+  const dispatch = useDispatch();
   const [isIncomeTransaction, setIsIncomeTransaction] = useState(false);
   const [categoryIdFromDropdown, SetCategoryIdFromDropdown] = useState('');
-  console.log('categoryIdFromDropdown:', categoryIdFromDropdown);
 
   const toggleTransactionType = () => {
     setIsIncomeTransaction(isIncomeTransaction => !isIncomeTransaction);
   };
-  // ====================================================
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     if (isIncomeTransaction) {
@@ -87,7 +82,6 @@ export const AddTransactionForm = () => {
         : (values.categoryId = expenseCategories[8].id);
     }
 
-    console.log(values);
     dispatch(addTransaction(values));
     dispatch(toggleModalAddTransactionOpen());
     actions.resetForm();
@@ -109,7 +103,9 @@ export const AddTransactionForm = () => {
           >
             <FormBox>
               <ToggleBox>
-                <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
+                <ToggleLabel className={isIncomeTransaction ? 'income' : ''}>
+                  Income
+                </ToggleLabel>
                 <ChakraProvider>
                   {/* <Switch
                     defaultChecked
@@ -122,7 +118,9 @@ export const AddTransactionForm = () => {
                   <CustomSwitch toggleTransactionType={toggleTransactionType} />
                 </ChakraProvider>
 
-                <ToggleLabel>Expense</ToggleLabel>
+                <ToggleLabel className={!isIncomeTransaction ? 'expense' : ''}>
+                  Expense
+                </ToggleLabel>
               </ToggleBox>
 
               {!isIncomeTransaction && (

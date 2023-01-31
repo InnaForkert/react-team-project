@@ -85,10 +85,17 @@ export const ToggleLabel = styled.label`
   font-weight: ${({ theme }) => theme.fontWeight.bold};
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.lightGrey};
+  &.income {
+    color: ${({ theme }) => theme.colors.accentGreen};
+  }
+  &.expense {
+    color: ${({ theme }) => theme.colors.accentPink};
+  }
 `;
 
 export const ToggleBox = styled.div`
   display: flex;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing(5)}; ;
 `;
 
