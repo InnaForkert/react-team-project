@@ -1,7 +1,7 @@
-import { BalanceContainer } from './Balance.styled';
+import { Title } from "./Balance.styled";
 
 export default function Balance() {
   return (
-<BalanceContainer>Balance</BalanceContainer>
-  );
+    <Title>Balance</Title>
+  )
 }

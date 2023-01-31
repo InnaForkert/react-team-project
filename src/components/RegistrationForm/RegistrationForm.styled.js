@@ -112,3 +112,11 @@ export const UserIcon = styled(MdAccountBox)`
   ${basedIconStyles}
 `
 
+export const Error = styled.p`
+  position: absolute;
+  bottom: -16px;
+  left: 40px;
+  line-height:0;
+  color: red;
+
+`

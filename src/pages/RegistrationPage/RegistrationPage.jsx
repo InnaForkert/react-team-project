@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 
 import { ContainerAuth } from 'components/Container/Container.styled';
-import RegistrationForm from 'components/RegistrationForm/RegistrationForm';
+import { RegistrationForm } from 'components/RegistrationForm/RegistrationForm';
+import WithAuthRedirect from 'hoc/WithAuthRedirect';
 
 import { Registration, Title } from './Registration.styled';
 
-export default function RegistrationPage() {
+function RegistrationPage() {
   const navigate = useNavigate();
   const isAuth = useSelector(state => state.auth.isAuth);
 
@@ -28,3 +29,7 @@ export default function RegistrationPage() {
     )
   );
 }
+
+const ProtectedRegistrationPage = WithAuthRedirect(RegistrationPage, '/home');
+
+export default ProtectedRegistrationPage;

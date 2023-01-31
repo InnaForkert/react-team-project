@@ -1,9 +1,17 @@
 import { Triangle } from 'react-loader-spinner';
-import  {  useState, useEffect } from "react";
-import fetchCurrency from "services/CurrencyAPI";
-import { TableContainer, Table, TableBody, TableHead, TableRow, Td, Th, Title } from "./Currency.styled";
+import { useState, useEffect } from 'react';
+import fetchCurrency from 'services/CurrencyAPI';
+import {
+  TableContainer,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  Td,
+  Th,
+  Title,
+} from './Currency.styled';
 import { useNavigate } from 'react-router';
-
 
 export default function Currency() {
   const [currency, setCurrency] = useState([]);
@@ -14,7 +22,7 @@ export default function Currency() {
     async function fetch() {
       try {
         const data = await fetchCurrency();
-        setCurrency(data.data);
+        setCurrency(data);
       } catch (error) {
         throw error;
       }
@@ -22,10 +30,7 @@ export default function Currency() {
     fetch();
   }, []);
 
-
-
   const windowListener = () => {
-  
     if (window.screen.availWidth > 768) {
       navigate('/home', { replace: true });
     }
@@ -51,24 +56,29 @@ export default function Currency() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {!!currency.length ? Array.isArray &&
-              currency.map((el, key) => (
-                <TableRow key={key}>
-                  <Td>{el.ccy}</Td>
+            {!!currency.length ? (
+              Array.isArray &&
+              currency.map(el => (
+                <TableRow key={el._id}>
+                  <Td>{el.code}</Td>
                   <Td>{Math.floor(el.buy * 100) / 100}</Td>
-                  <Td>{Math.floor(el.sale * 100) / 100}</Td>
+                  <Td>{Math.floor(el.sell * 100) / 100}</Td>
                 </TableRow>
-              )) : (<Triangle
+              ))
+            ) : (
+              <Triangle
                 type="TailSpin"
                 color="#ff6c00"
                 height={80}
                 width={80}
                 wrapperStyle={{
-                position: 'absolute',    
-                top: '40%',
-                left: '50%',
-                transform: 'translate(-50%)',
-             }}/>)}
+                  position: 'absolute',
+                  top: '40%',
+                  left: '50%',
+                  transform: 'translate(-50%)',
+                }}
+              />
+            )}
           </TableBody>
         </Table>
       </TableContainer>

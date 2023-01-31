@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 const fetchCurrency = async () => {
   try {
     const response = await axios.get(
-      "https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11"
+      'https://ewallet-api.onrender.com/api/currency?type=cash'
     );
-    return response;
+    return response.data;
   } catch (error) {
     throw error;
   }

@@ -1,17 +1,15 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signUp } from 'redux/auth/operations';
 import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+
+import { signUp } from 'redux/auth/operations';
 
 import sprite from 'assets/icons/sprite.svg';
 import { LogoIcon } from 'components/Header/Header.styled';
 import Button from 'components/Button/Button';
 import { Box } from 'components/Box';
+import { RegisterSchema } from 'services/schema';
 
-import // MdEmail,
-// MdLock,
-// MdAccountBox
-'react-icons/md';
 import errorToast from 'components/Toasts/error';
 
 import {
@@ -23,60 +21,41 @@ import {
   EmailIcon,
   PasswordIcon,
   UserIcon,
+  Error,
 } from './RegistrationForm.styled';
 
-// const INITIAL_STATE = {
-//   email: '',
-//   password: '',
-//   confirmPassword: '',
-//   username: '',
-// };
-
-// export const RegistrationForm = () => {
-// const [authData, setAuthData] = useState(INITIAL_STATE);
-// const { email, password, confirmPassword, username } = authData;
-
-const RegistrationForm = () => {
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-
+export const RegistrationForm = () => {
   const dispatch = useDispatch();
-  dispatch(signUp());
 
-  const checkPassword = () => {
-    if (JSON.stringify(password) !== JSON.stringify(passwordConfirm)) {
-      return false;
-    }
-    return true;
-  };
+  const registerFormik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      username: '',
+    },
 
-  const onChangePassword = e => {
-    setPassword(e.target.value);
-  };
+    validationSchema: RegisterSchema,
 
-  const onChangePassword1 = e => {
-    setPasswordConfirm(e.target.value);
-  };
+    onSubmit: (values, actions) => {
+      const { username, email, password } = values;
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const checked = checkPassword();
-    if (passwordConfirm.length < 6)
-      return errorToast('Password must be length more 6 symbols');
-    if (!checked) {
-      return errorToast('Passwords do not match!');
-    }
-    const form = e.currentTarget;
-    const res = dispatch(
-      signUp({
-        username: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    if (res.payload === 409) return errorToast('This user is registered');
-    form.reset();
-  };
+      dispatch(signUp({ username, email, password })).then(resp =>
+        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+      );
+    },
+  });
+
+  const {
+    values,
+    isSubmitting,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = registerFormik;
+  const { email, password, confirmPassword, username } = values;
 
   return (
     <AuthWrapper>
@@ -86,47 +65,71 @@ const RegistrationForm = () => {
         </LogoIcon>
         Wallet
       </Title>
-      <AuthForm onSubmit={onSubmit}>
+      <AuthForm onSubmit={handleSubmit}>
         <Label>
           <Input
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={email}
+            id="email"
             type="email"
             name="email"
             placeholder="E-mail"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            required
           />
-          <EmailIcon />
+          <EmailIcon
+            style={{ color: errors.email && touched.email && 'red' }}
+          />
+          {errors.email && touched.email && <Error>{errors.email}</Error>}
         </Label>
         <Label>
           <Input
-            onChange={onChangePassword1}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={password}
+            id="password"
             type="password"
             name="password"
             placeholder="Password"
-            value={passwordConfirm}
           />
-          <PasswordIcon />
+          <PasswordIcon
+            style={{
+              color: errors.password && touched.password && 'red',
+            }}
+          />
+          {errors.password && touched.password && (
+            <Error>{errors.password}</Error>
+          )}
         </Label>
         <Label>
           <Input
-            value={password}
-            onChange={onChangePassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={confirmPassword}
+            id="confirmPassword"
             type="password"
-            name="ConfirmPassword"
+            name="confirmPassword"
             placeholder="Confirm password"
           />
-          <PasswordIcon />
-          {password.length > 0 && (
+          <PasswordIcon
+            style={{
+              color: errors.confirmPassword && touched.confirmPassword && 'red',
+            }}
+          />
+          {confirmPassword.length > 0 && (
             <Box
-              maxWidth="180px"
+              position="absolute"
+              bottom="-8px"
+              width="409.5px"
               overflow="hidden"
               backgroundColor="#e5f1e9"
-              mt="5px"
-              borderRadius="20px"
+              height="4px"
+              borderRadius="2px"
             >
               <Box
-                width={`${password.length * 30}px`}
-                backgroundColor={checkPassword() ? '#28ce65' : '#e6ed17'}
+                width={`${confirmPassword.length * 34.1}px`}
+                backgroundColor={
+                  errors.password || errors.confirmPassword ? 'red' : '#28ce65'
+                }
                 height="5px"
               />
             </Box>
@@ -134,15 +137,29 @@ const RegistrationForm = () => {
         </Label>
         <Label>
           <Input
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={username}
+            id="username"
             type="text"
-            name="name"
+            name="username"
             placeholder="First name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            required
           />
-          <UserIcon />
+          <UserIcon
+            style={{
+              color: errors.username && touched.username && 'red',
+            }}
+          />
+          {errors.username && touched.username && (
+            <Error>{errors.username}</Error>
+          )}
         </Label>
-        <Button type="submit" content={'Register'} hasAccent={true} />
+        <Button
+          style={{ opacity: isSubmitting && 0.35 }}
+          type="submit"
+          content={'Register'}
+          hasAccent={true}
+        />
       </AuthForm>
       <NavLink to="/login">
         <Button type="button" content={'Log in'} />
@@ -150,5 +167,3 @@ const RegistrationForm = () => {
     </AuthWrapper>
   );
 };
-
-export default RegistrationForm;

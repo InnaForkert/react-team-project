@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChakraProvider, Switch } from '@chakra-ui/react';
-import { Formik, ErrorMessage } from 'formik';
+import { ChakraProvider } from '@chakra-ui/react';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { addTransaction } from 'redux/transactions/operations';
@@ -14,6 +14,7 @@ import DropdownMenu from 'components/DropdownMenu/DropdownMenu';
 import {
   FormTitle,
   Wrapper,
+  ModalWrap,
   FormBox,
   InputLabel,
   Input,
@@ -22,11 +23,23 @@ import {
   ToggleBox,
   InputComment,
   InputAmount,
+  ErrorMessageBox,
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
+import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
+
+const setCurrentDate = () => {
+  const d = new Date();
+  let day = d.getDate();
+  if (day < 10) day = '0' + day;
+  let month = d.getMonth() + 1;
+  if (month < 10) month = '0' + month;
+  let year = d.getFullYear();
+  return `${year}-${month}-${day}`;
+};
 
 const initialValues = {
-  transactionDate: '',
+  transactionDate: setCurrentDate(),
   // categoryId: '',
   comment: '',
   amount: '',
@@ -34,9 +47,12 @@ const initialValues = {
 
 const schema = yup.object().shape({
   // categoryId: yup.string().required('Pls select category'),
-  amount: yup.number().required().positive().integer(),
-  comment: yup.string().min(2),
-  transactionDate: yup.date().required(),
+  amount: yup.number().required().positive(),
+  comment: yup.string().min(2).max(1000),
+  transactionDate: yup
+    .date()
+    .required()
+    .max(setCurrentDate(), 'Forbidden. Please choose a date in past'),
 });
 
 export const AddTransactionForm = () => {
@@ -46,18 +62,13 @@ export const AddTransactionForm = () => {
   const incomeCategoriesId = incomeCategories.map(el => {
     return el.id;
   });
-
-  // SWITCH TRANSACTION TYPE====================================================
-  const [isIncomeTransaction, setIsIncomeTransaction] = useState(true);
+  const dispatch = useDispatch();
+  const [isIncomeTransaction, setIsIncomeTransaction] = useState(false);
   const [categoryIdFromDropdown, SetCategoryIdFromDropdown] = useState('');
-  console.log('categoryIdFromDropdown:', categoryIdFromDropdown);
 
   const toggleTransactionType = () => {
     setIsIncomeTransaction(isIncomeTransaction => !isIncomeTransaction);
   };
-  // ====================================================
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     if (isIncomeTransaction) {
@@ -71,7 +82,6 @@ export const AddTransactionForm = () => {
         : (values.categoryId = expenseCategories[8].id);
     }
 
-    console.log(values);
     dispatch(addTransaction(values));
     dispatch(toggleModalAddTransactionOpen());
     actions.resetForm();
@@ -80,79 +90,86 @@ export const AddTransactionForm = () => {
   const handleDropDown = categoryId => {
     SetCategoryIdFromDropdown(categoryId);
   };
+
   return (
     <Wrapper>
       <Container>
-        <FormTitle>Add transaction</FormTitle>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-        >
-          <FormBox>
-            <ToggleBox>
-              <ToggleLabel htmlFor="transactionType">Income</ToggleLabel>
-              <ChakraProvider>
-                <Switch
-                  onChange={toggleTransactionType}
-                  id="transactionType"
-                  size="lg"
-                  colorScheme="green"
-                  name="transactionType"
-                />
-              </ChakraProvider>
+        <ModalWrap>
+          <FormTitle>Add transaction</FormTitle>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+          >
+            <FormBox>
+              <ToggleBox>
+                <ToggleLabel className={isIncomeTransaction ? 'income' : ''}>
+                  Income
+                </ToggleLabel>
+                <ChakraProvider>
+                  {/* <Switch
+                    defaultChecked
+                    onChange={toggleTransactionType}
+                    id="transactionType"
+                    size="lg"
+                    colorScheme="green"
+                    name="transactionType"
+                  /> */}
+                  <CustomSwitch toggleTransactionType={toggleTransactionType} />
+                </ChakraProvider>
 
-              <ToggleLabel>Expense</ToggleLabel>
-            </ToggleBox>
-            {!isIncomeTransaction && (
-              <>
-                <InputLabel>
-                  {/* <Input
-                  as="select"
-                  name="categoryId"
-                  placeholder="Select a category"
-                >
-                  {expenseCategories.map(({ id, name }) => (
-                    <option key={id} value={id}>
-                      {name}
-                    </option>
-                  ))}
-                </Input>
-                <ErrorMessage name="categoryId" component="div" /> */}
-                </InputLabel>
+                <ToggleLabel className={!isIncomeTransaction ? 'expense' : ''}>
+                  Expense
+                </ToggleLabel>
+              </ToggleBox>
+
+              {!isIncomeTransaction && (
                 <DropdownMenu
                   expenseCategories={expenseCategories}
                   handleDropDown={handleDropDown}
                 />
-              </>
-            )}
-
-            <DateWrapper>
+              )}
+              <DateWrapper>
+                <InputLabel>
+                  <InputAmount
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    name="amount"
+                    placeholder="0.00"
+                  />
+                  <ErrorMessageBox name="amount" component="div" />
+                </InputLabel>
+                <InputLabel>
+                  <Input
+                    type="date"
+                    name="transactionDate"
+                    id="transactionDate"
+                  />
+                  <ErrorMessageBox name="transactionDate" component="div" />
+                </InputLabel>
+              </DateWrapper>
               <InputLabel>
-                <InputAmount type="text" name="amount" placeholder="0.00" />
-                <ErrorMessage name="amount" component="div" />
+                <InputComment
+                  type="text"
+                  name="comment"
+                  placeholder="Comment"
+                />
+                <ErrorMessageBox name="comment" component="div" />
               </InputLabel>
-              <InputLabel>
-                <Input type="date" name="transactionDate" />
-                <ErrorMessage name="transactionDate" component="div" />
-              </InputLabel>
-            </DateWrapper>
-            <InputLabel>
-              <InputComment type="text" name="comment" placeholder="Comment" />
-              <ErrorMessage name="comment" component="div" />
-            </InputLabel>
 
-            <Button type="submit" content={'add'} hasAccent={true} />
-          </FormBox>
-        </Formik>
+              <Button type="submit" content={'add'} hasAccent={true} />
+            </FormBox>
+          </Formik>
 
-        <Button
-          type="button"
-          content={'cancel'}
-          onClick={() => {
-            dispatch(toggleModalAddTransactionOpen());
-          }}
-        />
+          <Button
+            type="button"
+            content={'cancel'}
+            onClick={() => {
+              dispatch(toggleModalAddTransactionOpen());
+            }}
+          />
+        </ModalWrap>
       </Container>
     </Wrapper>
   );

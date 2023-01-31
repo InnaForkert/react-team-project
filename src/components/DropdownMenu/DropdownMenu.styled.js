@@ -72,6 +72,10 @@ export const SelectInput = styled.button`
   /* copy */
   transition: border-color 200ms, color 200ms, background-color 200ms;
 
+  &.selected {
+    color: #000000;
+  }
+
   &::after {
     content: url(${arrow});
     width: 18px;

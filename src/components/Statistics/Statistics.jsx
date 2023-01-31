@@ -13,11 +13,9 @@ function Statistics() {
       </MediaQuery>
 
       <MediaQuery deviceName={'tabletFrom'}>
+        <Title>Statistics</Title>
+        <CircleChart />
         <TabletStats>
-          <div>
-            <Title>Statistics</Title>
-            <CircleChart />
-          </div>
           <StatsTable />
         </TabletStats>
       </MediaQuery>
