@@ -41,9 +41,9 @@ export default function DashboardPage() {
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
-          <AddTransactionBtn />
         </Container>
       </Main>
+      <AddTransactionBtn />
       {isModalAddTransactionOpen && <Modal />}
     </>
   );
