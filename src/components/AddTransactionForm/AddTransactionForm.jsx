@@ -23,6 +23,7 @@ import {
   ToggleBox,
   InputComment,
   InputAmount,
+  ErrorMessageBox,
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
 
@@ -118,32 +119,15 @@ export const AddTransactionForm = () => {
                 <ToggleLabel>Expense</ToggleLabel>
               </ToggleBox>
               {!isIncomeTransaction && (
-                <>
-                  <InputLabel>
-                    {/* <Input
-                  as="select"
-                  name="categoryId"
-                  placeholder="Select a category"
-                >
-                  {expenseCategories.map(({ id, name }) => (
-                    <option key={id} value={id}>
-                      {name}
-                    </option>
-                  ))}
-                </Input>
-                <ErrorMessage name="categoryId" component="div" /> */}
-                  </InputLabel>
-                  <DropdownMenu
-                    expenseCategories={expenseCategories}
-                    handleDropDown={handleDropDown}
-                  />
-                </>
+                <DropdownMenu
+                  expenseCategories={expenseCategories}
+                  handleDropDown={handleDropDown}
+                />
               )}
-
               <DateWrapper>
                 <InputLabel>
                   <InputAmount type="text" name="amount" placeholder="0.00" />
-                  <ErrorMessage name="amount" component="div" />
+                  <ErrorMessageBox name="amount" component="div" />
                 </InputLabel>
                 <InputLabel>
                   <Input
@@ -151,7 +135,7 @@ export const AddTransactionForm = () => {
                     name="transactionDate"
                     id="transactionDate"
                   />
-                  <ErrorMessage name="transactionDate" component="div" />
+                  <ErrorMessageBox name="transactionDate" component="div" />
                 </InputLabel>
               </DateWrapper>
               <InputLabel>
@@ -160,7 +144,7 @@ export const AddTransactionForm = () => {
                   name="comment"
                   placeholder="Comment"
                 />
-                <ErrorMessage name="comment" component="div" />
+                <ErrorMessageBox name="comment" component="div" />
               </InputLabel>
 
               <Button type="submit" content={'add'} hasAccent={true} />
