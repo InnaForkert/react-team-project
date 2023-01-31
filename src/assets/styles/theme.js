@@ -5,13 +5,14 @@ export const device = {
   mobileFrom: '(min-width: 480px)',
   tablet: '(min-width: 768px) and (max-width: 1279.98px)',
   tabletFrom: '(min-width: 768px)',
+  tillDesktop: '(max-width: 1279.98px)',
   desktop: '(min-width: 1280px)',
 };
 
 export const theme = Object.freeze({
   colors: {
     white: '#ffffff',
-    black: '000000',
+    black: '#000000',
     grey: '#BDBDBD',
     lightGrey: '#e0e0e0',
     accentBlue: '#4A56E2',
