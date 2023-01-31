@@ -11,6 +11,7 @@ export const ChartContainer = styled.div`
   position: relative;
   display: grid;
   place-items: center;
+ 
 
   width: 100%;
   ${({ theme }) => theme.media.mobileFrom} {
@@ -21,7 +22,7 @@ export const ChartContainer = styled.div`
   ${({ theme }) => theme.media.tabletFrom} {
     width: 336px;
     grid-column: 1 / 2;
-    grid-row: 3 / 4;
+    grid-row: 4 / 5;
   }
 
   ${({ theme }) => theme.media.desktop} {
@@ -44,3 +45,4 @@ export const ChartLabel = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   line-height: calc(27 / 18);
 `;
+

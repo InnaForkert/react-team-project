@@ -2,16 +2,17 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NavContainer = styled.div`
-display: inline-block;
-
-grid-area: nav;
+/* display: inline-block; */
 margin-left: 50%;
 transform: translateX(-50%);
 ${({ theme }) => theme.media.tabletFrom} {
-  grid-column: 1 / 2;
-grid-row: 1 / 2;
+grid-column: 1 / 2;
+ grid-row: 1 / 2;
   margin-left: 0;
   transform: none;
+${({ theme }) => theme.media.desktop}
+ /* grid-column: 1 / 2;
+ grid-row: 1 / 2; */
 }
 `
 

@@ -31,7 +31,7 @@ export default function DashboardPage() {
       <Header />
       <Container>
         <Navigation />
-        <Balance />
+        <Balance/>
         <MediaQuery deviceName={'tabletFrom'}>
           <Currency />
         </MediaQuery>
