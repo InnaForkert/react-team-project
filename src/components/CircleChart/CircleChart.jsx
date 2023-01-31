@@ -10,7 +10,9 @@ import {
   StyledDoughnut,
   ChartContainer,
   ChartLabel,
+  Masker,
 } from './CircleChart.styled';
+import { formatMoney } from 'utils/formatMoney';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -25,6 +27,8 @@ function CircleChart() {
   const dispatch = useDispatch();
   const total = useSelector(selectPeriodTotal);
   const summary = useSelector(selectSummary);
+
+  const formattedTotal = formatMoney(total);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -46,18 +50,8 @@ function CircleChart() {
           '#24CCA7',
           '#00AD84',
         ],
-        borderColor: [
-          '#FED057',
-          '#FFD8D0',
-          '#FD9498',
-          '#C5BAFF',
-          '#6E78E8',
-          '#4A56E2',
-          '#81E1FF',
-          '#24CCA7',
-          '#00AD84',
-        ],
-        borderWidth: 1,
+        borderWidth: 0,
+        cutout: 95,
       },
     ],
     options: {
@@ -72,7 +66,7 @@ function CircleChart() {
 
   return (
     <ChartContainer>
-      <ChartLabel>₴ {total}</ChartLabel>
+      <ChartLabel>₴ {formattedTotal}</ChartLabel>
       <StyledDoughnut data={data} />
     </ChartContainer>
   );

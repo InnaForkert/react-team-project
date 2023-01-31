@@ -1,6 +1,70 @@
 import styled from 'styled-components';
 import arrow from '../../assets/icons/all_icons/dropdownArrow.svg';
 
+export const Summary = styled.p`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 20px;
+  line-height: calc(24 / 16);
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+
+  &:last-of-type {
+    padding-bottom: 52px;
+  }
+`;
+
+export const Expense = styled.span`
+  color: ${({ theme }) => theme.colors.accentPink};
+`;
+
+export const Income = styled.span`
+  color: ${({ theme }) => theme.colors.accentGreen};
+`;
+
+export const TableHeader = styled.tr`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 30px;
+`;
+
+export const TableBody = styled.tbody`
+  display: block;
+  width: 100%;
+`;
+
+export const TableRow = styled.tr`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #dcdcdf;
+  }
+`;
+
+export const TableHead = styled.th`
+  display: block;
+`;
+
+export const Table = styled.table`
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+`;
+
 export const SelectDate = styled.ul`
   width: 100%;
   position: absolute;
@@ -87,11 +151,17 @@ export const SelectContainer = styled.div`
 `;
 
 export const ColorRect = styled.td`
+  display: flex;
+  align-items: center;
+  max-width: 180px;
+
   &::before {
     content: '';
     display: inline-block;
     width: 24px;
     height: 24px;
+    border-radius: 2px;
+    margin-right: 16px;
     background-color: ${props => props.color};
   }
 `;

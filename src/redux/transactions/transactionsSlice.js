@@ -18,15 +18,6 @@ const transactionsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    addColors: state => {
-      state.categoriesSummary = state.categoriesSummary.map((el, i) => ({
-        ...el,
-        color: state.colors[i],
-      }));
-      console.log(state.categoriesSummary);
-    },
-  },
   extraReducers: builder =>
     builder
       .addCase(fetchCategories.pending, state => {

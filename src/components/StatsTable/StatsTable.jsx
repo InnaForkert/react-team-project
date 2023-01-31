@@ -6,9 +6,22 @@ import {
   SelectInput,
   SelectContainer,
   ColorRect,
+  TableHeader,
+  TableRow,
+  Table,
+  TableHead,
+  TableBody,
+  Summary,
+  Expense,
+  Income,
 } from './StatsTable.styled';
-import { selectSummary } from 'redux/transactions/transactionsSlice';
+import {
+  selectExpenseSum,
+  selectIncomeSum,
+  selectSummary,
+} from 'redux/transactions/transactionsSlice';
 import { nanoid } from 'nanoid';
+import { formatMoney } from 'utils/formatMoney';
 
 const months = [
   'January',
@@ -42,6 +55,8 @@ const colors = [
 
 function StatsTable() {
   const summary = useSelector(selectSummary);
+  const expense = useSelector(selectExpenseSum);
+  const income = useSelector(selectIncomeSum);
   const dispatch = useDispatch();
   const colored = useRef(summary);
 
@@ -114,26 +129,34 @@ function StatsTable() {
           <li data-value="2023">2023</li>
         </SelectDate>
       </SelectContainer>
-      <table>
-        <thead>
-          <tr>
+      <Table>
+        <TableHead>
+          <TableHeader>
             <th>Category</th>
             <th>Sum</th>
-          </tr>
-        </thead>
+          </TableHeader>
+        </TableHead>
         {colored.current.length > 0 ? (
-          <tbody>
-            {colored.current.map(el => (
-              <tr key={nanoid()}>
-                <ColorRect color={el.color}>{el.name}</ColorRect>
-                <td>{el.total}</td>
-              </tr>
-            ))}
-          </tbody>
+          <TableBody>
+            {colored.current
+              .filter(el => el.total < 0)
+              .map(el => (
+                <TableRow key={nanoid()}>
+                  <ColorRect color={el.color}>{el.name}</ColorRect>
+                  <td>{formatMoney(el.total).replace('-', '')}</td>
+                </TableRow>
+              ))}
+          </TableBody>
         ) : (
           ''
         )}
-      </table>
+      </Table>
+      <Summary>
+        Expenses:<Expense>{formatMoney(expense).replace('-', '')}</Expense>
+      </Summary>
+      <Summary>
+        Income:<Income>{formatMoney(income)}</Income>
+      </Summary>
     </>
   );
 }
