@@ -5,16 +5,12 @@ import { useSelector } from 'react-redux';
 import { normalizeFormatDate, normalizeNum } from 'services/normalizeService';
 
 export default function HomeTabDesktop() {
-<<<<<<< Updated upstream
+
   const transactions = useSelector((state) => (state.transactions.allTransactions))
   let filterTrans = [...transactions].sort((a, b) => (a.date > b.date ? -1 : 1))
   
   console.log(transactions);
-=======
-  const transactions = useSelector((state) => getAllTransactions(state))
-  let filterTrans = [...transactions].sort((a, b) => (a.date > b.date ? -1 : 1));
-  console.log(filterTrans);
->>>>>>> Stashed changes
+
   return (
    <HomeTabContainer>
       <table className={s.table}>
