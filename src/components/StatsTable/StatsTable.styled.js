@@ -1,6 +1,24 @@
 import styled from 'styled-components';
 import arrow from '../../assets/icons/all_icons/dropdownArrow.svg';
 
+export const Selects = styled.div`
+  ${({ theme }) => theme.media.tabletFrom} {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const TableContainer = styled.div`
+  ${({ theme }) => theme.media.tabletFrom} {
+    width: 336px;
+    display: flex;
+    flex-direction: column;
+  }
+  ${({ theme }) => theme.media.desktop} {
+    width: 395px;
+  }
+`;
+
 export const Summary = styled.p`
   display: flex;
   justify-content: space-between;
@@ -85,6 +103,10 @@ export const SelectDate = styled.ul`
 
   transition: opacity 500ms, transform 500ms;
 
+  ${({ theme }) => theme.media.tabletFrom} {
+    padding: 13px 20px;
+  }
+
   & li {
     cursor: pointer;
     padding-inline: 20px;
@@ -119,6 +141,10 @@ export const SelectInput = styled.button`
 
   transition: border-color 200ms, color 200ms, background-color 200ms;
 
+  ${({ theme }) => theme.media.tabletFrom} {
+    padding: 13px 16px;
+  }
+
   &::after {
     content: url(${arrow});
     width: 18px;
@@ -129,6 +155,14 @@ export const SelectInput = styled.button`
 export const SelectContainer = styled.div`
   position: relative;
   margin-bottom: 20px;
+
+  ${({ theme }) => theme.media.tabletFrom} {
+    width: 160px;
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    width: 180px;
+  }
 
   &.dropdownShown {
     ${SelectDate} {

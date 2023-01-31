@@ -14,6 +14,8 @@ import {
   Summary,
   Expense,
   Income,
+  TableContainer,
+  Selects,
 } from './StatsTable.styled';
 import {
   selectExpenseSum,
@@ -101,34 +103,38 @@ function StatsTable() {
   }
 
   return (
-    <>
-      <SelectContainer className={monthDropdownShown ? 'dropdownShown' : ''}>
-        <SelectInput onClick={toggleMonthDropdown}>{months[month]}</SelectInput>
-        <SelectDate name="month" onClick={handleMonthChange}>
-          <li data-value="0">January</li>
-          <li data-value="1">February</li>
-          <li data-value="2">March</li>
-          <li data-value="3">April</li>
-          <li data-value="4">May</li>
-          <li data-value="5">June</li>
-          <li data-value="6">July</li>
-          <li data-value="7">August</li>
-          <li data-value="8">September</li>
-          <li data-value="9">October</li>
-          <li data-value="10">November</li>
-          <li data-value="11">December</li>
-        </SelectDate>
-      </SelectContainer>
-      <SelectContainer className={yearDropdownShown ? 'dropdownShown' : ''}>
-        <SelectInput onClick={toggleYearDropdown}>{year}</SelectInput>
-        <SelectDate name="year" onClick={handleYearChange}>
-          <li data-value="2019">2019</li>
-          <li data-value="2020">2020</li>
-          <li data-value="2021">2021</li>
-          <li data-value="2022">2022</li>
-          <li data-value="2023">2023</li>
-        </SelectDate>
-      </SelectContainer>
+    <TableContainer>
+      <Selects>
+        <SelectContainer className={monthDropdownShown ? 'dropdownShown' : ''}>
+          <SelectInput onClick={toggleMonthDropdown}>
+            {months[month]}
+          </SelectInput>
+          <SelectDate name="month" onClick={handleMonthChange}>
+            <li data-value="0">January</li>
+            <li data-value="1">February</li>
+            <li data-value="2">March</li>
+            <li data-value="3">April</li>
+            <li data-value="4">May</li>
+            <li data-value="5">June</li>
+            <li data-value="6">July</li>
+            <li data-value="7">August</li>
+            <li data-value="8">September</li>
+            <li data-value="9">October</li>
+            <li data-value="10">November</li>
+            <li data-value="11">December</li>
+          </SelectDate>
+        </SelectContainer>
+        <SelectContainer className={yearDropdownShown ? 'dropdownShown' : ''}>
+          <SelectInput onClick={toggleYearDropdown}>{year}</SelectInput>
+          <SelectDate name="year" onClick={handleYearChange}>
+            <li data-value="2019">2019</li>
+            <li data-value="2020">2020</li>
+            <li data-value="2021">2021</li>
+            <li data-value="2022">2022</li>
+            <li data-value="2023">2023</li>
+          </SelectDate>
+        </SelectContainer>
+      </Selects>
       <Table>
         <TableHead>
           <TableHeader>
@@ -157,7 +163,7 @@ function StatsTable() {
       <Summary>
         Income:<Income>{formatMoney(income)}</Income>
       </Summary>
-    </>
+    </TableContainer>
   );
 }
 

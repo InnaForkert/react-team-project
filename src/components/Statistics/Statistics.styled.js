@@ -6,4 +6,18 @@ export const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes.title};
   margin-bottom: 8px;
   margin-top: 40px;
+
+  ${({ theme }) => theme.media.tabletFrom} {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 `;
+
+export const TabletStats = styled.div`
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: top;
+`;
+
+export const LeftPanel = styled.div``;

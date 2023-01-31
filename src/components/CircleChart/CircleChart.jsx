@@ -51,7 +51,7 @@ function CircleChart() {
           '#00AD84',
         ],
         borderWidth: 0,
-        cutout: 95,
+        cutout: '72%',
       },
     ],
     options: {

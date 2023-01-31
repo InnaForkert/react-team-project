@@ -15,6 +15,7 @@ export const ChartContainer = styled.div`
   width: 100%;
   ${({ theme }) => theme.media.mobileFrom} {
     width: 280px;
+    margin-inline: auto;
   }
 
   ${({ theme }) => theme.media.tabletFrom} {
