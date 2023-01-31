@@ -22,14 +22,14 @@ export const ChartContainer = styled.div`
   ${({ theme }) => theme.media.tabletFrom} {
     width: 336px;
     grid-column: 1 / 2;
-    grid-row: 3 / 5;
+    grid-row: 4 / 5;
     
   }
 
   ${({ theme }) => theme.media.desktop} {
     width: 288px;
     grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    grid-row: 1 / 4;
   }
 
   margin-bottom: 32px;

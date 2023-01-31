@@ -23,10 +23,10 @@ ${({ theme }) => theme.media.desktop} {
 
 export const TabletStats = styled.div`
  grid-column: 2 / 3;
-  grid-row: 3 / 5;
+  grid-row: 3 / 7;
   ${({ theme }) => theme.media.desktop} {   
   grid-column: 3 / 4;
-  grid-row: 2 / 4;
+  grid-row: 2 / 7;
 }
 `;
 
