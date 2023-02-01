@@ -6,7 +6,6 @@ export default function Balance() {
   const balance = useSelector(state => state.auth.user.balance);
 
   return (
-    // <Title>Balance</Title>
     <BalanceContainer>
       Your balance
       <BalanceText>
