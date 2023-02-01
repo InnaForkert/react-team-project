@@ -27,16 +27,18 @@ function CircleChart() {
   const total = useSelector(selectPeriodTotal);
   const summary = useSelector(selectSummary);
 
+  const expenses = summary.filter(el => el.total < 0);
+
   const formattedTotal = formatMoney(total);
 
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
   const data = {
-    labels: summary.map(el => el.name),
+    labels: expenses.map(el => el.name),
     datasets: [
       {
-        data: summary.map(el => el.total),
+        data: expenses.map(el => el.total.toString().replace('-', '')),
         backgroundColor: [
           '#FED057',
           '#FFD8D0',
@@ -47,6 +49,7 @@ function CircleChart() {
           '#81E1FF',
           '#24CCA7',
           '#00AD84',
+          '#784fca',
         ],
         borderWidth: 0,
         cutout: '72%',

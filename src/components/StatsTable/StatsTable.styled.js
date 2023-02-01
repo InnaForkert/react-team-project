@@ -44,14 +44,7 @@ export const Income = styled.span`
   color: ${({ theme }) => theme.colors.accentGreen};
 `;
 
-export const TableHeader = styled.tr`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 16px 20px;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 30px;
-`;
+export const TableHeader = styled.th``;
 
 export const TableBody = styled.tbody`
   display: block;
@@ -77,8 +70,18 @@ export const TableRow = styled.tr`
   }
 `;
 
-export const TableHead = styled.th`
+export const TableHead = styled.tr`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 30px;
+`;
+
+export const THead = styled.thead`
   display: block;
+  width: 100%;
 `;
 
 export const Table = styled.table`
