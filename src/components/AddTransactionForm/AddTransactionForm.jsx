@@ -26,7 +26,6 @@ import {
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
 import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
-import { currentUser } from '../../redux/auth/operations';
 
 const setCurrentDate = () => {
   const d = new Date();
@@ -82,7 +81,6 @@ export const AddTransactionForm = () => {
 
     dispatch(addTransaction(values));
     dispatch(toggleModalAddTransactionOpen());
-    dispatch(currentUser());
     actions.resetForm();
   };
 

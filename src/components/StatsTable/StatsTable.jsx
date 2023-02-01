@@ -87,7 +87,6 @@ function StatsTable() {
 
   function handleYearChange(e) {
     setYear(e.target.dataset.value);
-    console.log('hi');
     toggleYearDropdown();
   }
 

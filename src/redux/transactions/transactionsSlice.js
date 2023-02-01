@@ -9,6 +9,7 @@ import {
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState: {
+    balance: 0,
     allTransactions: [],
     categories: [],
     categoriesSummary: [],
@@ -59,6 +60,7 @@ const transactionsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.allTransactions = [...state.allTransactions, payload];
+        state.balance = payload.balanceAfter;
       })
       .addCase(addTransaction.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -88,5 +90,6 @@ export const selectIncomeSum = state => state.transactions.incomeSummary;
 export const selectPeriodTotal = state => state.transactions.periodTotal;
 export const selectAllTransactions = state =>
   state.transactions.allTransactions;
+export const selectUserBalanceAfter = state => state.transactions.balance;
 
 export const { addColors } = transactionsSlice.actions;
