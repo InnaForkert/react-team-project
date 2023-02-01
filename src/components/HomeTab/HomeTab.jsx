@@ -32,7 +32,8 @@ const colors = [
 ];
 
 export default function HomeTab() {
-  const all = useSelector(selectAllTransactions);
+  const transactions = useSelector(selectAllTransactions);
+  const all = [...transactions].reverse();
   const categories = useSelector(selectCategories);
 
   return (
@@ -95,7 +96,7 @@ export default function HomeTab() {
             {all.length > 0 && categories.length > 0
               ? all.map(el => (
                   <TableRow key={el.id}>
-                    <td>{el.transactionDate}</td>
+                    <td>{new Date(el.transactionDate).toLocaleDateString()}</td>
                     <td>{el.amount > 0 ? '+' : '-'}</td>
                     <td>{categories.find(e => e.id === el.categoryId).name}</td>
                     <td>{el.comment}</td>
