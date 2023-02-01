@@ -29,10 +29,12 @@ export default function Currency() {
     }
     fetch();
   }, []);
-
+  
   const windowListener = () => {
     if (window.screen.availWidth > 768) {
-      navigate('/home', { replace: true });
+      if (document.location.pathname.indexOf("/currency") > -1) { 
+        navigate('/home', { replace: true });
+      }
     }
   };
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function Currency() {
                 <td>
                   <Triangle
                     type="TailSpin"
-                    color="#ff6c00"
+                    color="#fff"
                     height={80}
                     width={80}
                     wrapperStyle={{
