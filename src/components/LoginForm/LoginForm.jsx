@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 
@@ -23,6 +23,7 @@ import {
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const status = useSelector(state => state.auth.status);
 
   const loginFormik = useFormik({
     initialValues: {
@@ -34,7 +35,6 @@ export const LoginForm = () => {
 
     onSubmit: (values, actions) => {
       const { email, password } = values;
-      console.log('work');
 
       dispatch(signIn({ email, password })).then(resp =>
         resp?.error ? errorToast(resp.payload) : actions.resetForm()
@@ -42,15 +42,8 @@ export const LoginForm = () => {
     },
   });
 
-  const {
-    values,
-    isSubmitting,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = loginFormik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    loginFormik;
 
   const { email, password } = values;
 
@@ -72,6 +65,7 @@ export const LoginForm = () => {
             type="email"
             name="email"
             placeholder="E-mail"
+            disabled={status === 'loading'}
           />
           <EmailIcon
             style={{ color: errors.email && touched.email && 'red' }}
@@ -87,6 +81,7 @@ export const LoginForm = () => {
             type="password"
             name="password"
             placeholder="Password"
+            disabled={status === 'loading'}
           />
           <PasswordIcon
             style={{
@@ -98,14 +93,18 @@ export const LoginForm = () => {
           )}
         </Label>
         <Button
-          style={{ opacity: isSubmitting && 0.35 }}
           type="submit"
           content={'Log in'}
           hasAccent={true}
+          disabled={status === 'loading'}
         />
       </AuthForm>
       <NavLink to="/register">
-        <Button type="button" content={'Register'} />
+        <Button
+          type="button"
+          content={'Register'}
+          disabled={status === 'loading'}
+        />
       </NavLink>
     </AuthWrapper>
   );
