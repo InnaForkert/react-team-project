@@ -15,14 +15,46 @@ import { useNavigate } from 'react-router';
 
 export default function Currency() {
   const [currency, setCurrency] = useState([]);
-
   const navigate = useNavigate();
-
+  
+  
+  
+  function currencySave(currencyData) {
+    const currentDate = new Date().getTime();
+    localStorage.setItem('currency', JSON.stringify({ currencyData, currentDate })
+    );
+  }
+  
   useEffect(() => {
     async function fetch() {
       try {
-        const data = await fetchCurrency();
-        setCurrency(data);
+        const one_hour = 3600000;
+        let currencyData = [];
+         if (localStorage.getItem('currency')) {
+          const parseDate = JSON.parse(
+            localStorage.getItem('currency')
+          ).currentDate;
+          const newDate = new Date().getTime();
+          
+
+          if (newDate - parseDate > one_hour) {
+            currencyData = await fetchCurrency();
+            setCurrency(currencyData);
+            currencySave(currencyData);
+            return;
+           }
+           
+          const lsCurrencyData = localStorage.getItem('currency');
+          const lsCurrencyParsedData = JSON.parse(lsCurrencyData).currencyData;
+
+          setCurrency(lsCurrencyParsedData);
+          return;
+        }
+
+        currencyData = await fetchCurrency();
+
+        currencySave(currencyData);
+        setCurrency(currencyData);
       } catch (error) {
         throw error;
       }
