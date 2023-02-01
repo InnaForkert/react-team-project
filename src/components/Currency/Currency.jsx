@@ -11,12 +11,12 @@ import {
   Th,
   Title,
 } from './Currency.styled';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 export default function Currency() {
   const [currency, setCurrency] = useState([]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     async function fetch() {
