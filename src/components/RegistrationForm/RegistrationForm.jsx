@@ -22,10 +22,15 @@ import {
   PasswordIcon,
   UserIcon,
   Error,
+  IconEye,
   PassBox,
   StrongSpan,
 } from './RegistrationForm.styled';
 import { useEffect, useState } from 'react';
+
+import { BsEyeSlash } from 'react-icons/bs';
+import { BsEye } from 'react-icons/bs';
+import { useState } from 'react';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -66,6 +71,15 @@ export const RegistrationForm = () => {
   } = registerFormik;
   const { email, password, confirmPassword, username } = values;
 
+  const [type, setType] = useState('password');
+
+  const handleToggle = () => {
+    if (type === 'password') {
+      setType('text');
+    } else {
+      setType('password');
+    }
+  };
   useEffect(() => {
     if (
       password.match(
@@ -119,11 +133,20 @@ export const RegistrationForm = () => {
             onBlur={handleBlur}
             value={password}
             id="password"
-            type="password"
+            type={type}
             name="password"
             placeholder="Password"
             disabled={status === 'loading'}
           />
+          <IconEye>
+          <span onClick={handleToggle}>
+            {type === 'password' ? (
+              <BsEyeSlash size={20} />
+            ) : (
+              <BsEye size={20} />
+            )}
+          </span>
+        </IconEye>
           <PasswordIcon
             style={{
               color: errors.password && touched.password && 'red',
@@ -169,12 +192,20 @@ export const RegistrationForm = () => {
             onBlur={handleBlur}
             value={confirmPassword}
             id="confirmPassword"
-            type="password"
+            type={type}
             name="confirmPassword"
             placeholder="Confirm password"
             disabled={status === 'loading'}
           />
-
+          <IconEye>
+          <span onClick={handleToggle}>
+            {type === 'password' ? (
+              <BsEyeSlash size={20} />
+            ) : (
+              <BsEye size={20} />
+            )}
+          </span>
+        </IconEye>
           <PasswordIcon
             style={{
               color: errors.confirmPassword && touched.confirmPassword && 'red',

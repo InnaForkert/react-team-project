@@ -19,7 +19,12 @@ import {
   EmailIcon,
   PasswordIcon,
   Error,
+  IconEye,
 } from 'components/RegistrationForm/RegistrationForm.styled';
+
+import { BsEyeSlash } from 'react-icons/bs';
+import { BsEye } from 'react-icons/bs';
+import { useState } from 'react';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -50,6 +55,16 @@ export const LoginForm = () => {
     loginFormik;
 
   const { email, password } = values;
+
+  const [type, setType] = useState('password');
+
+  const handleToggle = () => {
+    if (type === 'password') {
+      setType('text');
+    } else {
+      setType('password');
+    }
+  };
 
   return (
     <AuthWrapper>
@@ -82,11 +97,20 @@ export const LoginForm = () => {
             onBlur={handleBlur}
             value={password}
             id="password"
-            type="password"
+            type={type}
             name="password"
             placeholder="Password"
             disabled={status === 'loading'}
           />
+          <IconEye>
+          <span onClick={handleToggle}>
+            {type === 'password' ? (
+              <BsEyeSlash size={20} />
+            ) : (
+              <BsEye size={20} />
+            )}
+          </span>
+        </IconEye>
           <PasswordIcon
             style={{
               color: errors.password && touched.password && 'red',

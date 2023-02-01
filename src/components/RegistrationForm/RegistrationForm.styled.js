@@ -133,6 +133,14 @@ export const Error = styled.p`
   color: red;
 `;
 
+`
+export const IconEye = styled.div`
+  display: inline;
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  color: #bdbdbd;
+
 export const StrongSpan = styled.span`
   position: absolute;
   top: 40px;
