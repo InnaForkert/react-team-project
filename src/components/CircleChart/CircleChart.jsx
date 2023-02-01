@@ -1,7 +1,4 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories } from 'redux/transactions/operations';
 import {
   selectPeriodTotal,
   selectSummary,
@@ -12,6 +9,7 @@ import {
   ChartLabel,
 } from './CircleChart.styled';
 import { formatMoney } from 'utils/formatMoney';
+import { useSelector } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -23,7 +21,6 @@ ChartJS.overrides.doughnut.plugins = {
 };
 
 function CircleChart() {
-  const dispatch = useDispatch();
   const total = useSelector(selectPeriodTotal);
   const summary = useSelector(selectSummary);
 
@@ -31,9 +28,6 @@ function CircleChart() {
 
   const formattedTotal = formatMoney(total);
 
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
   const data = {
     labels: expenses.map(el => el.name),
     datasets: [
