@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/react-team-project/static/css/main.80ab27fb.css",
-    "main.js": "/react-team-project/static/js/main.71644490.js",
+    "main.js": "/react-team-project/static/js/main.b5da93ac.js",
     "static/js/48.d1b067dc.chunk.js": "/react-team-project/static/js/48.d1b067dc.chunk.js",
     "static/js/968.ec752e7d.chunk.js": "/react-team-project/static/js/968.ec752e7d.chunk.js",
-    "static/js/593.3e816f10.chunk.js": "/react-team-project/static/js/593.3e816f10.chunk.js",
+    "static/js/593.3f762935.chunk.js": "/react-team-project/static/js/593.3f762935.chunk.js",
     "static/js/576.a4a9842b.chunk.js": "/react-team-project/static/js/576.a4a9842b.chunk.js",
     "static/js/309.a6a872d3.chunk.js": "/react-team-project/static/js/309.a6a872d3.chunk.js",
     "static/js/903.f4863e39.chunk.js": "/react-team-project/static/js/903.f4863e39.chunk.js",
@@ -34,10 +34,10 @@
     "static/media/minus.svg": "/react-team-project/static/media/minus.c1930871236002c803c7b6a6c0b99024.svg",
     "static/media/dropdownArrow.svg": "/react-team-project/static/media/dropdownArrow.5b7a0958806e373fe5b54dde6732e652.svg",
     "main.80ab27fb.css.map": "/react-team-project/static/css/main.80ab27fb.css.map",
-    "main.71644490.js.map": "/react-team-project/static/js/main.71644490.js.map",
+    "main.b5da93ac.js.map": "/react-team-project/static/js/main.b5da93ac.js.map",
     "48.d1b067dc.chunk.js.map": "/react-team-project/static/js/48.d1b067dc.chunk.js.map",
     "968.ec752e7d.chunk.js.map": "/react-team-project/static/js/968.ec752e7d.chunk.js.map",
-    "593.3e816f10.chunk.js.map": "/react-team-project/static/js/593.3e816f10.chunk.js.map",
+    "593.3f762935.chunk.js.map": "/react-team-project/static/js/593.3f762935.chunk.js.map",
     "576.a4a9842b.chunk.js.map": "/react-team-project/static/js/576.a4a9842b.chunk.js.map",
     "309.a6a872d3.chunk.js.map": "/react-team-project/static/js/309.a6a872d3.chunk.js.map",
     "903.f4863e39.chunk.js.map": "/react-team-project/static/js/903.f4863e39.chunk.js.map",
@@ -51,6 +51,6 @@
   },
   "entrypoints": [
     "static/css/main.80ab27fb.css",
-    "static/js/main.71644490.js"
+    "static/js/main.b5da93ac.js"
   ]
 }
