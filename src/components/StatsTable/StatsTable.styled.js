@@ -111,6 +111,7 @@ export const SelectDate = styled.ul`
   transition: opacity 500ms, transform 500ms;
 
   ${({ theme }) => theme.media.tabletFrom} {
+    width: 160px;
     padding: 13px 20px;
   }
 
@@ -150,6 +151,7 @@ export const SelectInput = styled.button`
 
   ${({ theme }) => theme.media.tabletFrom} {
     padding: 13px 16px;
+    width: 160px;
   }
 
   &::after {

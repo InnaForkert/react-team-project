@@ -1,6 +1,11 @@
 import CircleChart from 'components/CircleChart/CircleChart';
 import StatsTable from 'components/StatsTable/StatsTable';
-import { Title, TabletStats } from './Statistics.styled';
+import {
+  Title,
+  TabletStats,
+  LeftColumn,
+  StatsTablet,
+} from './Statistics.styled';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 function Statistics() {
@@ -13,11 +18,15 @@ function Statistics() {
       </MediaQuery>
 
       <MediaQuery deviceName={'tabletFrom'}>
-        <Title>Statistics</Title>
-        <CircleChart />
-        <TabletStats>
-          <StatsTable />
-        </TabletStats>
+        <StatsTablet>
+          <LeftColumn>
+            <Title>Statistics</Title>
+            <CircleChart />
+          </LeftColumn>
+          <TabletStats>
+            <StatsTable />
+          </TabletStats>
+        </StatsTablet>
       </MediaQuery>
     </>
   );
