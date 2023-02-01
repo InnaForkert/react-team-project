@@ -123,7 +123,7 @@ export const Error = styled.p`
 export const IconEye = styled.div`
   display: inline;
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 30px;
   color: #bdbdbd;
 `;
