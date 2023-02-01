@@ -11,11 +11,21 @@ export const Main = styled.main`
 `;
 
 export const LeftColumn = styled.div`
-  width: 480px;
-  /* padding: 0 69px 0 0; */
+  position: relative;
+  width: 464px;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    width: 1px;
+    height: 100%;
+    background-color: #e7e5f2;
+  }
 `;
 
 export const RightColumn = styled.div`
-  width: 800px;
-  padding: 45px 0 69px 0;
+  width: 784px;
+  padding: 45px 0px 0px 69px;
 `;

@@ -30,18 +30,18 @@ export default function Currency() {
     fetch();
   }, []);
 
-  const windowListener = () => {
-    if (window.screen.availWidth > 768) {
-      navigate('/home', { replace: true });
-    }
-  };
-  useEffect(() => {
-    window.addEventListener('resize', windowListener);
-    return () => {
-      window.removeEventListener('resize', windowListener);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.screen.availWidth]);
+  // const windowListener = () => {
+  //   if (window.screen.availWidth > 768) {
+  //     navigate('/home', { replace: true });
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener('resize', windowListener);
+  //   return () => {
+  //     window.removeEventListener('resize', windowListener);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [window.screen.availWidth]);
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function Currency() {
                 </TableRow>
               ))
             ) : (
-               <tr>
+              <tr>
                 <td>
                   <Triangle
                     type="TailSpin"

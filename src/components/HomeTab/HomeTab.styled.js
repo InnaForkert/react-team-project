@@ -38,6 +38,10 @@ export const SumText = styled.span`
 export const Table = styled.table`
   display: block;
   width: 100%;
+
+  ${({ theme }) => theme.media.desktop} {
+    width: 715px;
+  }
 `;
 
 export const TableBody = styled.tbody`

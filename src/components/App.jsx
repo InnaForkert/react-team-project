@@ -28,10 +28,10 @@ export const App = () => {
   const categories = useSelector(selectCategories);
 
   useEffect(() => {
-    if (categories.length === 0) {
+    if (categories.length === 0 && isAuth) {
       dispatch(fetchCategories());
     }
-  }, [categories.length, dispatch]);
+  }, [categories.length, dispatch, isAuth]);
 
   useEffect(() => {
     if (!isAuth && token) {
