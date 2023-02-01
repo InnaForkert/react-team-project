@@ -23,6 +23,7 @@ import {
   InputComment,
   InputAmount,
   ErrorMessageBox,
+  CloseBtn,
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
 import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
@@ -90,6 +91,12 @@ export const AddTransactionForm = () => {
 
   return (
     <Wrapper>
+      <CloseBtn
+        type="button"
+        onClick={() => {
+          dispatch(toggleModalAddTransactionOpen());
+        }}
+      />
       <Container>
         <ModalWrap>
           <FormTitle>Add transaction</FormTitle>
