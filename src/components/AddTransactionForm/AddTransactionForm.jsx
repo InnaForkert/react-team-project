@@ -8,7 +8,6 @@ import { addTransaction } from 'redux/transactions/operations';
 import { selectCategories } from 'redux/transactions/transactionsSlice';
 import Button from 'components/Button/Button';
 
-// import css from './AddTransactionForm.module.css';
 import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
 import DropdownMenu from 'components/DropdownMenu/DropdownMenu';
 import {
@@ -40,13 +39,11 @@ const setCurrentDate = () => {
 
 const initialValues = {
   transactionDate: setCurrentDate(),
-  // categoryId: '',
   comment: '',
   amount: '',
 };
 
 const schema = yup.object().shape({
-  // categoryId: yup.string().required('Pls select category'),
   amount: yup.number().required().positive(),
   comment: yup.string().min(2).max(1000),
   transactionDate: yup
@@ -107,14 +104,6 @@ export const AddTransactionForm = () => {
                   Income
                 </ToggleLabel>
                 <ChakraProvider>
-                  {/* <Switch
-                    defaultChecked
-                    onChange={toggleTransactionType}
-                    id="transactionType"
-                    size="lg"
-                    colorScheme="green"
-                    name="transactionType"
-                  /> */}
                   <CustomSwitch toggleTransactionType={toggleTransactionType} />
                 </ChakraProvider>
 
