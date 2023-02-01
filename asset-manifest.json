@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/react-team-project/static/css/main.80ab27fb.css",
-    "main.js": "/react-team-project/static/js/main.8d45dfda.js",
+    "main.js": "/react-team-project/static/js/main.5b36e0c6.js",
     "static/js/48.ddc051bc.chunk.js": "/react-team-project/static/js/48.ddc051bc.chunk.js",
     "static/js/470.e1667899.chunk.js": "/react-team-project/static/js/470.e1667899.chunk.js",
     "static/js/593.30ae7eed.chunk.js": "/react-team-project/static/js/593.30ae7eed.chunk.js",
-    "static/js/576.02d99b39.chunk.js": "/react-team-project/static/js/576.02d99b39.chunk.js",
+    "static/js/576.c2c318f9.chunk.js": "/react-team-project/static/js/576.c2c318f9.chunk.js",
     "static/js/309.79e1da67.chunk.js": "/react-team-project/static/js/309.79e1da67.chunk.js",
     "static/js/815.a95cdefa.chunk.js": "/react-team-project/static/js/815.a95cdefa.chunk.js",
     "static/js/668.fc30d89f.chunk.js": "/react-team-project/static/js/668.fc30d89f.chunk.js",
@@ -33,11 +33,11 @@
     "static/media/minus.svg": "/react-team-project/static/media/minus.c1930871236002c803c7b6a6c0b99024.svg",
     "static/media/dropdownArrow.svg": "/react-team-project/static/media/dropdownArrow.5b7a0958806e373fe5b54dde6732e652.svg",
     "main.80ab27fb.css.map": "/react-team-project/static/css/main.80ab27fb.css.map",
-    "main.8d45dfda.js.map": "/react-team-project/static/js/main.8d45dfda.js.map",
+    "main.5b36e0c6.js.map": "/react-team-project/static/js/main.5b36e0c6.js.map",
     "48.ddc051bc.chunk.js.map": "/react-team-project/static/js/48.ddc051bc.chunk.js.map",
     "470.e1667899.chunk.js.map": "/react-team-project/static/js/470.e1667899.chunk.js.map",
     "593.30ae7eed.chunk.js.map": "/react-team-project/static/js/593.30ae7eed.chunk.js.map",
-    "576.02d99b39.chunk.js.map": "/react-team-project/static/js/576.02d99b39.chunk.js.map",
+    "576.c2c318f9.chunk.js.map": "/react-team-project/static/js/576.c2c318f9.chunk.js.map",
     "309.79e1da67.chunk.js.map": "/react-team-project/static/js/309.79e1da67.chunk.js.map",
     "815.a95cdefa.chunk.js.map": "/react-team-project/static/js/815.a95cdefa.chunk.js.map",
     "668.fc30d89f.chunk.js.map": "/react-team-project/static/js/668.fc30d89f.chunk.js.map",
@@ -49,6 +49,6 @@
   },
   "entrypoints": [
     "static/css/main.80ab27fb.css",
-    "static/js/main.8d45dfda.js"
+    "static/js/main.5b36e0c6.js"
   ]
 }
