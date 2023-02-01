@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   selectAllTransactions,
   selectCategories,
@@ -16,8 +16,6 @@ import {
   Balance,
   Sum,
 } from './HomeTab.styled';
-import { useEffect } from 'react';
-import { fetchCategories } from 'redux/transactions/operations';
 import { formatMoney } from 'utils/formatMoney';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
@@ -36,11 +34,6 @@ const colors = [
 export default function HomeTab() {
   const all = useSelector(selectAllTransactions);
   const categories = useSelector(selectCategories);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
 
   return (
     <>
