@@ -139,7 +139,7 @@ export const SelectInput = styled.button`
   border: 1px solid black;
   padding: 12px 20px 14px;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: transparent;
   cursor: pointer;
 
   text-align: left;
