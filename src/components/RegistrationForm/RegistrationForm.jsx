@@ -22,14 +22,11 @@ import {
   PasswordIcon,
   UserIcon,
   Error,
-  PassBox,
 } from './RegistrationForm.styled';
-import { useEffect, useState } from 'react';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const status = useSelector(state => state.auth.status);
-  const [passStrength, setPassStrength] = useState(['33%', 'red']);
 
   const registerFormik = useFormik({
     initialValues: {
@@ -46,7 +43,9 @@ export const RegistrationForm = () => {
 
       dispatch(signUp({ username, email, password })).then(resp =>
         resp?.error
-          ? errorToast(resp.payload?.[0] || resp.payload)
+          ? errorToast(
+              resp.payload instanceof Object ? resp.payload[0] : resp.payload
+            )
           : actions.resetForm()
       );
     },
@@ -62,26 +61,6 @@ export const RegistrationForm = () => {
     handleSubmit,
   } = registerFormik;
   const { email, password, confirmPassword, username } = values;
-
-  useEffect(() => {
-    if (
-      password.match(
-        /^(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{6,}$/
-      )
-    ) {
-      setPassStrength(['100%', '#28ce65']);
-    } else if (
-      password.match(/^(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,}).{1,}$/) ||
-      password.match(
-        /^(?=(.*[A-Z]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{1,}$/
-      ) ||
-      password.match(/^(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{1,}$/)
-    ) {
-      setPassStrength(['66%', 'yellow']);
-    } else {
-      setPassStrength(['33%', 'red']);
-    }
-  }, [password]);
 
   return (
     <AuthWrapper>
@@ -146,7 +125,7 @@ export const RegistrationForm = () => {
               color: errors.confirmPassword && touched.confirmPassword && 'red',
             }}
           />
-          {password.length > 0 && (
+          {confirmPassword.length > 0 && (
             <Box
               position="absolute"
               bottom="-8px"
@@ -156,11 +135,14 @@ export const RegistrationForm = () => {
               height="4px"
               borderRadius="2px"
             >
-              <PassBox
-                width={passStrength[0]}
-                color={passStrength[1]}
+              <Box
+                style={{
+                  width: `calc(${confirmPassword.length}*(100% / ${password.length})`,
+                }}
+                backgroundColor={
+                  errors.password || errors.confirmPassword ? 'red' : '#28ce65'
+                }
                 height="5px"
-                data-name="dfd"
               />
             </Box>
           )}
