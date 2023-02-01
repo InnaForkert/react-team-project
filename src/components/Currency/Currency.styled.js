@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CurrencyVector from '../../assets/images/CurrencyVector.svg';
+import line from '../../assets/images/line.svg';
 
 export const TableContainer = styled.div`
   position: relative;
@@ -8,7 +8,7 @@ export const TableContainer = styled.div`
   transform: translateX(-50%);
   font-size: ${({ theme }) => theme.fontSizes.sm};
   background-repeat: no-repeat, no-repeat;
-  background-image: url(${CurrencyVector});
+  background-image: url(${line});
   background-position: bottom;
   border-radius: 30px;
   text-align: center;
@@ -45,7 +45,6 @@ export const TableContainer = styled.div`
 `;
 export const Table = styled.table`
   border-collapse: collapse;
-
   width: 100%;
   height: 174px;
   ${({ theme }) => theme.media.mobileFrom} {
