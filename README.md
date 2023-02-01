@@ -1,6 +1,6 @@
 # Wallet
 
-website created using create-react-app
+Website created using create-react-app
 
 ## Functionality
 
