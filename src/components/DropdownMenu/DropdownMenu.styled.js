@@ -22,7 +22,8 @@ export const SelectDate = styled.ul`
   transition: opacity 500ms, transform 500ms;
 
   border: none;
-  background-color: rgba(255, 255, 255, 0.7);
+  /* background-color: rgba(255, 255, 255, 0.7); */
+  background-color: rgba(0, 0, 0, 0.04);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(25px);
 
@@ -77,8 +78,8 @@ export const SelectInput = styled.button`
 
 export const SelectContainer = styled.div`
   position: relative;
-  margin-bottom: 20px;
-  width: 394px;
+  /* margin-bottom: 20px; */
+  width: 100%;
 
   &.dropdownShown {
     ${SelectDate} {
