@@ -153,15 +153,14 @@ export const ModalWrap = styled.div`
 
 export const CloseBtn = styled.button`
   position: absolute;
-  right: 8px;
-  top: 8px;
-  width: 30px;
-  height: 30px;
+  right: 20px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
-  background-color: #fff;
   background: url(${exitIcon}) no-repeat center;
   background-size: contain;
-  border-radius: 50%;
-  border: none;
-  fill: black;
+  ${({ theme }) => theme.media.mobileAll} {
+    display: none;
+  }
 `;
