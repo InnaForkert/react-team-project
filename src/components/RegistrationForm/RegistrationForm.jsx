@@ -23,6 +23,7 @@ import {
   UserIcon,
   Error,
   PassBox,
+  StrongSpan,
 } from './RegistrationForm.styled';
 import { useEffect, useState } from 'react';
 
@@ -129,6 +130,34 @@ export const RegistrationForm = () => {
           {errors.password && touched.password && (
             <Error>{errors.password}</Error>
           )}
+          {password.length > 0 && (
+            <>
+              <Box
+                position="absolute"
+                bottom="-8px"
+                width="100%"
+                overflow="hidden"
+                backgroundColor="#e5f1e9"
+                height="4px"
+                borderRadius="2px"
+                color="#000"
+              >
+                <PassBox
+                  width={passStrength[0]}
+                  color={passStrength[1]}
+                  height="5px"
+                  data-name="dfd"
+                />
+              </Box>
+            </>
+          )}
+          <StrongSpan>
+            {passStrength[0] === '33%'
+              ? 'weak'
+              : passStrength[0] === '66%'
+              ? 'medium'
+              : 'strong'}
+          </StrongSpan>
         </Label>
         <Label>
           <Input
@@ -141,12 +170,13 @@ export const RegistrationForm = () => {
             placeholder="Confirm password"
             disabled={status === 'loading'}
           />
+
           <PasswordIcon
             style={{
               color: errors.confirmPassword && touched.confirmPassword && 'red',
             }}
           />
-          {password.length > 0 && (
+          {confirmPassword.length > 0 && (
             <Box
               position="absolute"
               bottom="-8px"
@@ -156,11 +186,14 @@ export const RegistrationForm = () => {
               height="4px"
               borderRadius="2px"
             >
-              <PassBox
-                width={passStrength[0]}
-                color={passStrength[1]}
+              <Box
+                style={{
+                  width: `calc(${confirmPassword.length}*(100% / ${password.length})`,
+                }}
+                backgroundColor={
+                  errors.password || errors.confirmPassword ? 'red' : '#28ce65'
+                }
                 height="5px"
-                data-name="dfd"
               />
             </Box>
           )}
