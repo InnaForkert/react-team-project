@@ -46,7 +46,7 @@ export default function HomeTab() {
                   <TransactionDetailsItemTitle>
                     Date
                   </TransactionDetailsItemTitle>
-                  {el.transactionDate}
+                  {new Date(el.transactionDate).toLocaleDateString().replace(/\//g , ".")}
                 </TransactionDetailsItem>
                 <TransactionDetailsItem color={colors[i < 9 ? i : i % 9]}>
                   <TransactionDetailsItemTitle>
@@ -96,7 +96,7 @@ export default function HomeTab() {
             {all.length > 0 && categories.length > 0
               ? all.map(el => (
                   <TableRow key={el.id}>
-                    <td>{new Date(el.transactionDate).toLocaleDateString()}</td>
+                    <td>{new Date(el.transactionDate).toLocaleDateString().replace(/\//g , ".")}</td>
                     <td>{el.amount > 0 ? '+' : '-'}</td>
                     <td>{categories.find(e => e.id === el.categoryId).name}</td>
                     <td>{el.comment}</td>
