@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
+import calendar from '../../assets/icons/all_icons/calendar.svg';
 
 export const ErrorMessageBox = styled(ErrorMessage)`
   color: red;
@@ -66,6 +67,13 @@ export const Input = styled(Field)`
 
   &::placeholder {
     color: #bdbdbd;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    color: transparent;
+    opacity: 1;
+    background: url(${calendar}) no-repeat center;
+    background-size: contain;
   }
 `;
 
