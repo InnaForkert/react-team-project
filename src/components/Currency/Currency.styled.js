@@ -14,9 +14,12 @@ export const TableContainer = styled.div`
   text-align: center;
   background-color: ${({ theme }) => theme.colors.accentBlue};
   color: ${({ theme }) => theme.colors.white};
-  width: 280px;
+  width: 100%;
   height: 174px;
   overflow: hidden;
+  ${({ theme }) => theme.media.mobileFrom} {
+    width: 440px;
+  }
   ${({ theme }) => theme.media.tabletFrom} {
     grid-column: 2 / 3;
     grid-row: 1 / 3;
@@ -42,8 +45,11 @@ export const TableContainer = styled.div`
 `;
 export const Table = styled.table`
   border-collapse: collapse;
-  width: 280px;
+  width: 100%;
   height: 174px;
+  ${({ theme }) => theme.media.mobileFrom} {
+    width: 440px;
+  }
   ${({ theme }) => theme.media.tabletFrom} {
     width: 336px;
   }
