@@ -3,7 +3,6 @@ import line from '../../assets/images/line.svg';
 
 export const TableContainer = styled.div`
   position: relative;
-  height: 50px;
   margin-left: 50%;
   transform: translateX(-50%);
   font-size: ${({ theme }) => theme.fontSizes.sm};
