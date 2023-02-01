@@ -1,4 +1,3 @@
-// import css from './CustomSwitch.module.css';
 import { Input, Label } from './CustomSwitch.styled';
 
 export const CustomSwitch = ({ toggleTransactionType }) => (

@@ -1,20 +1,11 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
-// import { signOut } from 'redux/auth/operations';
-import {
-  toggleModalAddTransactionOpen,
-  // toggleModalLogoutOpen,
-} from 'redux/global/globalSlice';
+import { toggleModalAddTransactionOpen } from 'redux/global/globalSlice';
 
 import { AddTransactionForm } from 'components/AddTransactionForm/AddTransactionForm';
 
-import {
-  ModalWindow,
-  Overlay,
-  // Box, Text
-} from './Modal.styled';
-// import Button from 'components/Button/Button';
+import { ModalWindow, Overlay } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -23,7 +14,6 @@ export const Modal = ({ type, handleClick, hasAccent }) => {
 
   const handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
-      // dispatch(toggleModalLogoutOpen());
       dispatch(toggleModalAddTransactionOpen());
     }
   };
@@ -31,7 +21,6 @@ export const Modal = ({ type, handleClick, hasAccent }) => {
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.code === 'Escape') {
-        // dispatch(toggleModalLogoutOpen());
         dispatch(toggleModalAddTransactionOpen());
       }
     };

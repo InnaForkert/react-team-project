@@ -89,11 +89,11 @@ export default function HomeTab() {
               <TableHeader>Type</TableHeader>
               <TableHeader>Category</TableHeader>
               <TableHeader>Comment</TableHeader>
-              <TableHeader className="alignRight">Sum</TableHeader>
-              <TableHeader className="alignRight">Balance</TableHeader>
+              <TableHeader>Sum</TableHeader>
+              <TableHeader>Balance</TableHeader>
             </TableHead>
             {all.length > 0 && categories.length > 0
-              ? all.map((el, i) => (
+              ? all.map(el => (
                   <TableRow key={el.id}>
                     <td>{el.transactionDate}</td>
                     <td>{el.amount > 0 ? '+' : '-'}</td>
