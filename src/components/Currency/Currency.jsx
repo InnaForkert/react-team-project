@@ -66,22 +66,18 @@ export default function Currency() {
                 </TableRow>
               ))
             ) : (
-              <tr>
-                <td>
-                  <Triangle
-                    type="TailSpin"
-                    color="#ff6c00"
-                    height={80}
-                    width={80}
-                    wrapperStyle={{
-                      position: 'absolute',
-                      top: '40%',
-                      left: '50%',
-                      transform: 'translate(-50%)',
-                    }}
-                  />
-                </td>
-              </tr>
+              <Triangle
+                type="TailSpin"
+                color="#fff"
+                height={80}
+                width={80}
+                wrapperStyle={{
+                  position: 'absolute',
+                  top: '40%',
+                  left: '50%',
+                  transform: 'translate(-50%)',
+                }}
+              />
             )}
           </TableBody>
         </Table>
