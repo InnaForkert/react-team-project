@@ -120,3 +120,10 @@ export const Error = styled.p`
   color: red;
 
 `
+export const IconEye = styled.div`
+  display: inline;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  color: #bdbdbd;
+`;
