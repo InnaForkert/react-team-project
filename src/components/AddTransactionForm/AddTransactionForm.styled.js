@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
 import calendar from '../../assets/icons/all_icons/calendar.svg';
-import exitIcon from '../../assets/icons/all_icons/exitIcon.svg';
+import exitIcon from '../../assets/icons/all_icons/exit.svg';
 
 export const ErrorMessageBox = styled(ErrorMessage)`
   color: red;
