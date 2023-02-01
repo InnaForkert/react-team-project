@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import CurrencyVector from '../../assets/images/CurrencyVector.svg'
 
 export const TableContainer = styled.div`
-grid-area: cur;
 position: relative;
+height: 50px;
 margin-left: 50%;
 transform: translateX(-50%);
 font-size: ${({ theme }) => theme.fontSizes.sm};
@@ -12,11 +12,11 @@ background-image: url(${CurrencyVector});
 background-position: bottom;
 border-radius: 30px;
 text-align: center;
-font-family: ${({ theme }) => theme.fonts.primary};
 background-color: ${({ theme }) => theme.colors.accentBlue};
 color: ${({ theme }) => theme.colors.white};
 width: 280px;
 height: 174px;
+overflow: hidden;
  ${({ theme }) => theme.media.tabletFrom} {
   grid-column: 2 / 3;
   grid-row: 1 / 3;
@@ -57,19 +57,19 @@ height: 174px;
 export const TableHead = styled.thead`
 font-weight: ${({ theme }) => theme.fontWeight.bold};
 font-size: ${({ theme }) => theme.fontSizes.md};
+background-color: rgba(255, 255, 255, 0.2);
 height: 50px;
  ${({ theme }) => theme.media.desktop} {
-  padding: 60px;
+ height: 60px;
     }
 
 `
 export const TableRow = styled.tr`
-line-height: 30px;
 `
 export const Th = styled.th`
 padding: 12px;
  ${({ theme }) => theme.media.desktop} {
-  padding: 16px;
+  padding: 16px 35px;
     }
 
 `

@@ -66,7 +66,7 @@ export default function Currency() {
                 </TableRow>
               ))
             ) : (
-              <tr>
+               <tr>
                 <td>
                   <Triangle
                     type="TailSpin"
