@@ -99,23 +99,23 @@ export default function HomeTab() {
               <TableHeader className="alignRight">Sum</TableHeader>
               <TableHeader className="alignRight">Balance</TableHeader>
             </TableHead>
+            {all.length > 0 && categories.length > 0
+              ? all.map((el, i) => (
+                  <TableRow key={el.id}>
+                    <td>{el.transactionDate}</td>
+                    <td>{el.amount > 0 ? '+' : '-'}</td>
+                    <td>{categories.find(e => e.id === el.categoryId).name}</td>
+                    <td>{el.comment}</td>
+                    <Sum color={el.amount < 0 ? '#FF6596' : '#24CCA7'}>
+                      {formatMoney(el.amount).replace('-', '')}
+                    </Sum>
+                    <Balance>
+                      {formatMoney(el.balanceAfter).replace('-', '')}
+                    </Balance>
+                  </TableRow>
+                ))
+              : ''}
           </TableBody>
-          {all.length > 0 && categories.length > 0
-            ? all.map((el, i) => (
-                <TableRow>
-                  <td>{el.transactionDate}</td>
-                  <td>{el.amount > 0 ? '+' : '-'}</td>
-                  <td>{categories.find(e => e.id === el.categoryId).name}</td>
-                  <td>{el.comment}</td>
-                  <Sum color={el.amount < 0 ? '#FF6596' : '#24CCA7'}>
-                    {formatMoney(el.amount).replace('-', '')}
-                  </Sum>
-                  <Balance>
-                    {formatMoney(el.balanceAfter).replace('-', '')}
-                  </Balance>
-                </TableRow>
-              ))
-            : ''}
         </Table>
       </MediaQuery>
     </>
