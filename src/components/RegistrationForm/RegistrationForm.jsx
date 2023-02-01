@@ -22,11 +22,15 @@ import {
   PasswordIcon,
   UserIcon,
   Error,
+  PassBox,
+  StrongSpan,
 } from './RegistrationForm.styled';
+import { useEffect, useState } from 'react';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const status = useSelector(state => state.auth.status);
+  const [passStrength, setPassStrength] = useState(['33%', 'red']);
 
   const registerFormik = useFormik({
     initialValues: {
@@ -42,7 +46,11 @@ export const RegistrationForm = () => {
       const { username, email, password } = values;
 
       dispatch(signUp({ username, email, password })).then(resp =>
-        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+        resp?.error
+          ? errorToast(
+              resp.payload instanceof Object ? resp.payload[0] : resp.payload
+            )
+          : actions.resetForm()
       );
     },
   });
@@ -57,6 +65,26 @@ export const RegistrationForm = () => {
     handleSubmit,
   } = registerFormik;
   const { email, password, confirmPassword, username } = values;
+
+  useEffect(() => {
+    if (
+      password.match(
+        /^(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{6,}$/
+      )
+    ) {
+      setPassStrength(['100%', '#28ce65']);
+    } else if (
+      password.match(/^(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,}).{1,}$/) ||
+      password.match(
+        /^(?=(.*[A-Z]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{1,}$/
+      ) ||
+      password.match(/^(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{1,}$/)
+    ) {
+      setPassStrength(['66%', 'yellow']);
+    } else {
+      setPassStrength(['33%', 'red']);
+    }
+  }, [password]);
 
   return (
     <AuthWrapper>
@@ -104,6 +132,36 @@ export const RegistrationForm = () => {
           {errors.password && touched.password && (
             <Error>{errors.password}</Error>
           )}
+          {password.length > 0 && (
+            <>
+              <Box
+                position="absolute"
+                bottom="-8px"
+                width="100%"
+                overflow="hidden"
+                backgroundColor="#e5f1e9"
+                height="4px"
+                borderRadius="2px"
+                color="#000"
+              >
+                <PassBox
+                  width={passStrength[0]}
+                  color={passStrength[1]}
+                  height="5px"
+                  data-name="dfd"
+                />
+              </Box>
+            </>
+          )}
+          {password.length > 0 && (
+            <StrongSpan>
+              {passStrength[0] === '33%'
+                ? 'weak'
+                : passStrength[0] === '66%'
+                ? 'medium'
+                : 'strong'}
+            </StrongSpan>
+          )}
         </Label>
         <Label>
           <Input
@@ -116,6 +174,7 @@ export const RegistrationForm = () => {
             placeholder="Confirm password"
             disabled={status === 'loading'}
           />
+
           <PasswordIcon
             style={{
               color: errors.confirmPassword && touched.confirmPassword && 'red',
@@ -125,14 +184,16 @@ export const RegistrationForm = () => {
             <Box
               position="absolute"
               bottom="-8px"
-              width="409.5px"
+              width="100%"
               overflow="hidden"
               backgroundColor="#e5f1e9"
               height="4px"
               borderRadius="2px"
             >
               <Box
-                width={`${confirmPassword.length * 34.1}px`}
+                style={{
+                  width: `calc(${confirmPassword.length}*(100% / ${password.length})`,
+                }}
                 backgroundColor={
                   errors.password || errors.confirmPassword ? 'red' : '#28ce65'
                 }

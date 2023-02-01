@@ -16,9 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter
-        // basename="react-team-project"
-        >
+        <BrowserRouter basename="react-team-project">
           <ThemeProvider theme={theme}>
             <App />
             <GlobalStyleComponent />
