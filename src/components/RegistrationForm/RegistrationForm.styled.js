@@ -83,6 +83,14 @@ export const Input = styled.input`
   &:focus + svg{
     color: ${({ theme }) => theme.colors.accentGreen};
   }
+
+  &:disabled{
+    opacity: 0.35
+  }
+
+  &:focus:valid + svg{
+    color: ${({ theme }) => theme.colors.accentGreen};
+  }
 `
 
 export const Label = styled.label`
@@ -114,9 +122,8 @@ export const UserIcon = styled(MdAccountBox)`
 
 export const Error = styled.p`
   position: absolute;
-  bottom: -16px;
-  left: 40px;
-  line-height:0;
+  bottom: 8px;
+  right: 8px;
+  line-height: 1.15;
   color: red;
-
 `
