@@ -37,11 +37,12 @@ export const ContainerAuth = styled(Container)`
 `;
 
 export const Grid = styled.div`
-  ${({ theme }) => theme.media.tablet} {
+  ${({ theme }) => theme.media.tabletFrom} {
     display: grid;
   }
 
   ${({ theme }) => theme.media.desktop} {
+    position: relative;
     display: flex;
     justify-content: space-between;
   }

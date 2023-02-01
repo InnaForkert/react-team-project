@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   selectAllTransactions,
   selectCategories,
@@ -16,8 +16,6 @@ import {
   Balance,
   Sum,
 } from './HomeTab.styled';
-import { useEffect } from 'react';
-import { fetchCategories } from 'redux/transactions/operations';
 import { formatMoney } from 'utils/formatMoney';
 import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
@@ -34,13 +32,9 @@ const colors = [
 ];
 
 export default function HomeTab() {
-  const all = useSelector(selectAllTransactions);
+  const transactions = useSelector(selectAllTransactions);
+  const all = [...transactions].reverse();
   const categories = useSelector(selectCategories);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
 
   return (
     <>
@@ -52,7 +46,7 @@ export default function HomeTab() {
                   <TransactionDetailsItemTitle>
                     Date
                   </TransactionDetailsItemTitle>
-                  {el.transactionDate}
+                  {new Date(el.transactionDate).toLocaleDateString().replace(/\//g , ".")}
                 </TransactionDetailsItem>
                 <TransactionDetailsItem color={colors[i < 9 ? i : i % 9]}>
                   <TransactionDetailsItemTitle>
@@ -96,26 +90,26 @@ export default function HomeTab() {
               <TableHeader>Type</TableHeader>
               <TableHeader>Category</TableHeader>
               <TableHeader>Comment</TableHeader>
-              <TableHeader className="alignRight">Sum</TableHeader>
-              <TableHeader className="alignRight">Balance</TableHeader>
+              <TableHeader>Sum</TableHeader>
+              <TableHeader>Balance</TableHeader>
             </TableHead>
+            {all.length > 0 && categories.length > 0
+              ? all.map(el => (
+                  <TableRow key={el.id}>
+                    <td>{new Date(el.transactionDate).toLocaleDateString().replace(/\//g , ".")}</td>
+                    <td>{el.amount > 0 ? '+' : '-'}</td>
+                    <td>{categories.find(e => e.id === el.categoryId).name}</td>
+                    <td>{el.comment}</td>
+                    <Sum color={el.amount < 0 ? '#FF6596' : '#24CCA7'}>
+                      {formatMoney(el.amount).replace('-', '')}
+                    </Sum>
+                    <Balance>
+                      {formatMoney(el.balanceAfter).replace('-', '')}
+                    </Balance>
+                  </TableRow>
+                ))
+              : ''}
           </TableBody>
-          {all.length > 0 && categories.length > 0
-            ? all.map((el, i) => (
-                <TableRow>
-                  <td>{el.transactionDate}</td>
-                  <td>{el.amount > 0 ? '+' : '-'}</td>
-                  <td>{categories.find(e => e.id === el.categoryId).name}</td>
-                  <td>{el.comment}</td>
-                  <Sum color={el.amount < 0 ? '#FF6596' : '#24CCA7'}>
-                    {formatMoney(el.amount).replace('-', '')}
-                  </Sum>
-                  <Balance>
-                    {formatMoney(el.balanceAfter).replace('-', '')}
-                  </Balance>
-                </TableRow>
-              ))
-            : ''}
         </Table>
       </MediaQuery>
     </>

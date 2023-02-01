@@ -8,6 +8,8 @@ import { currentUser } from 'redux/auth/operations';
 
 import Loader from './Loader/Loader';
 import { ProtectedRoute } from './ProtectedRoute';
+import { fetchCategories } from 'redux/transactions/operations';
+import { selectCategories } from 'redux/transactions/transactionsSlice';
 
 const ProtectedLoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const ProtectedRegistrationPage = lazy(() =>
@@ -23,6 +25,13 @@ export const App = () => {
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
   const token = useSelector(state => state.auth.token);
   const isAuth = useSelector(state => state.auth.isAuth);
+  const categories = useSelector(selectCategories);
+
+  useEffect(() => {
+    if (categories.length === 0 && isAuth) {
+      dispatch(fetchCategories());
+    }
+  }, [categories.length, dispatch, isAuth]);
 
   useEffect(() => {
     if (!isAuth && token) {

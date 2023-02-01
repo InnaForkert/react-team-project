@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { BalanceContainer, BalanceText, LightText } from './Balance.styled';
 import { formatMoney } from 'utils/formatMoney';
+import { selectBalance } from 'redux/store';
 
 export default function Balance() {
-  const balance = useSelector(state => state.auth.user.balance);
+  const balance = useSelector(selectBalance);
 
   return (
-    // <Title>Balance</Title>
     <BalanceContainer>
       Your balance
       <BalanceText>

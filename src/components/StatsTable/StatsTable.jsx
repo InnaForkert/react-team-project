@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactionsSummary } from 'redux/transactions/operations';
 import {
@@ -15,6 +15,7 @@ import {
   Expense,
   Income,
   Selects,
+  THead,
 } from './StatsTable.styled';
 import {
   selectAllTransactions,
@@ -22,7 +23,6 @@ import {
   selectIncomeSum,
   selectSummary,
 } from 'redux/transactions/transactionsSlice';
-import { nanoid } from 'nanoid';
 import { formatMoney } from 'utils/formatMoney';
 
 const months = [
@@ -50,9 +50,7 @@ const colors = [
   '#81E1FF',
   '#24CCA7',
   '#00AD84',
-  '#FED057',
-  '#FFD8D0',
-  '#FD9498',
+  '#784fca',
 ];
 
 function StatsTable() {
@@ -60,15 +58,15 @@ function StatsTable() {
   const expense = useSelector(selectExpenseSum);
   const income = useSelector(selectIncomeSum);
   const dispatch = useDispatch();
-  const colored = useRef(summary);
   const all = useSelector(selectAllTransactions);
+  let expenses = summary.filter(el => el.total < 0);
 
-  useEffect(() => {
-    colored.current = summary.map((el, i) => ({
+  if (expenses.length > 0) {
+    expenses = expenses.map((el, i) => ({
       ...el,
       color: colors[i],
     }));
-  }, [summary, dispatch]);
+  }
 
   const [monthDropdownShown, setMonthDropdownShown] = useState(false);
   const [yearDropdownShown, setYearDropdownShown] = useState(false);
@@ -109,49 +107,81 @@ function StatsTable() {
           <SelectInput onClick={toggleMonthDropdown}>
             {months[month]}
           </SelectInput>
-          <SelectDate name="month" onClick={handleMonthChange}>
-            <li data-value="0">January</li>
-            <li data-value="1">February</li>
-            <li data-value="2">March</li>
-            <li data-value="3">April</li>
-            <li data-value="4">May</li>
-            <li data-value="5">June</li>
-            <li data-value="6">July</li>
-            <li data-value="7">August</li>
-            <li data-value="8">September</li>
-            <li data-value="9">October</li>
-            <li data-value="10">November</li>
-            <li data-value="11">December</li>
+          <SelectDate name="month">
+            <li data-value="0" onClick={handleMonthChange}>
+              January
+            </li>
+            <li data-value="1" onClick={handleMonthChange}>
+              February
+            </li>
+            <li data-value="2" onClick={handleMonthChange}>
+              March
+            </li>
+            <li data-value="3" onClick={handleMonthChange}>
+              April
+            </li>
+            <li data-value="4" onClick={handleMonthChange}>
+              May
+            </li>
+            <li data-value="5" onClick={handleMonthChange}>
+              June
+            </li>
+            <li data-value="6" onClick={handleMonthChange}>
+              July
+            </li>
+            <li data-value="7" onClick={handleMonthChange}>
+              August
+            </li>
+            <li data-value="8" onClick={handleMonthChange}>
+              September
+            </li>
+            <li data-value="9" onClick={handleMonthChange}>
+              October
+            </li>
+            <li data-value="10" onClick={handleMonthChange}>
+              November
+            </li>
+            <li data-value="11" onClick={handleMonthChange}>
+              December
+            </li>
           </SelectDate>
         </SelectContainer>
         <SelectContainer className={yearDropdownShown ? 'dropdownShown' : ''}>
           <SelectInput onClick={toggleYearDropdown}>{year}</SelectInput>
-          <SelectDate name="year" onClick={handleYearChange}>
-            <li data-value="2019">2019</li>
-            <li data-value="2020">2020</li>
-            <li data-value="2021">2021</li>
-            <li data-value="2022">2022</li>
-            <li data-value="2023">2023</li>
+          <SelectDate name="year">
+            <li data-value="2019" onClick={handleYearChange}>
+              2019
+            </li>
+            <li data-value="2020" onClick={handleYearChange}>
+              2020
+            </li>
+            <li data-value="2021" onClick={handleYearChange}>
+              2021
+            </li>
+            <li data-value="2022" onClick={handleYearChange}>
+              2022
+            </li>
+            <li data-value="2023" onClick={handleYearChange}>
+              2023
+            </li>
           </SelectDate>
         </SelectContainer>
       </Selects>
       <Table>
-        <TableHead>
-          <TableHeader>
-            <th>Category</th>
-            <th>Sum</th>
-          </TableHeader>
-        </TableHead>
-        {colored.current.length > 0 ? (
+        <THead>
+          <TableHead>
+            <TableHeader>Category</TableHeader>
+            <TableHeader>Sum</TableHeader>
+          </TableHead>
+        </THead>
+        {expenses.length > 0 ? (
           <TableBody>
-            {colored.current
-              .filter(el => el.total < 0)
-              .map(el => (
-                <TableRow key={nanoid()}>
-                  <ColorRect color={el.color}>{el.name}</ColorRect>
-                  <td>{formatMoney(el.total).replace('-', '')}</td>
-                </TableRow>
-              ))}
+            {expenses.map(el => (
+              <TableRow key={el.name}>
+                <ColorRect color={el.color}>{el.name}</ColorRect>
+                <td>{formatMoney(el.total).replace('-', '')}</td>
+              </TableRow>
+            ))}
           </TableBody>
         ) : (
           ''

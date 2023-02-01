@@ -42,7 +42,6 @@ export default function DropdownMenu({ expenseCategories, handleDropDown }) {
             {name}
           </li>
         ))}
-        {/* <li data-value="0">January</li> */}
       </SelectDate>
     </SelectContainer>
   );

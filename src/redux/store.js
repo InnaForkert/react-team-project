@@ -9,10 +9,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  createSelector,
+} from '@reduxjs/toolkit';
 
-import { authReducer } from './auth/authSlice';
-import { transactionsReducer } from './transactions/transactionsSlice';
+import { authReducer, selectUserBalance } from './auth/authSlice';
+import {
+  selectUserBalanceAfter,
+  transactionsReducer,
+} from './transactions/transactionsSlice';
 import { globalReducer } from './global/globalSlice';
 
 const persistConfig = {
@@ -38,3 +45,10 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export const selectBalance = createSelector(
+  [selectUserBalance, selectUserBalanceAfter],
+  (balance, balanceAfter) => {
+    return balanceAfter || balance;
+  }
+);

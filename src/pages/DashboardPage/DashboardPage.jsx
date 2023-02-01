@@ -57,9 +57,9 @@ export default function DashboardPage() {
               </RightColumn>
             </Grid>
           </MediaQuery>
-          <AddTransactionBtn />
         </Container>
       </Main>
+      <AddTransactionBtn />
       {isModalAddTransactionOpen && <Modal />}
     </>
   );

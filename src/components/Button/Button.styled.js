@@ -24,10 +24,15 @@ export const MainButton = styled.button`
   padding-bottom: ${({ theme }) => theme.spacing(3)};
   transition: all ${({ theme }) => theme.animation.cubicBezier} 0s;
   cursor: pointer;
-  &:hover,
-  &:focus {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     box-shadow: ${({ theme }) => theme.shadows.regular};
   }
+
+  &:disabled{
+    opacity: 0.35;
+  }
+
   ${({ theme }) => theme.media.mobileFrom} {
     min-width: ${({ theme }) => theme.spacing(75)};
   }
