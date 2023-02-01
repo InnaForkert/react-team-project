@@ -151,13 +151,15 @@ export const RegistrationForm = () => {
               </Box>
             </>
           )}
-          <StrongSpan>
-            {passStrength[0] === '33%'
-              ? 'weak'
-              : passStrength[0] === '66%'
-              ? 'medium'
-              : 'strong'}
-          </StrongSpan>
+          {password.length > 0 && (
+            <StrongSpan>
+              {passStrength[0] === '33%'
+                ? 'weak'
+                : passStrength[0] === '66%'
+                ? 'medium'
+                : 'strong'}
+            </StrongSpan>
+          )}
         </Label>
         <Label>
           <Input

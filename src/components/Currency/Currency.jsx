@@ -11,12 +11,12 @@ import {
   Th,
   Title,
 } from './Currency.styled';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function Currency() {
   const [currency, setCurrency] = useState([]);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetch() {
@@ -30,18 +30,18 @@ export default function Currency() {
     fetch();
   }, []);
 
-  // const windowListener = () => {
-  //   if (window.screen.availWidth > 768) {
-  //     navigate('/home', { replace: true });
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener('resize', windowListener);
-  //   return () => {
-  //     window.removeEventListener('resize', windowListener);
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [window.screen.availWidth]);
+  const windowListener = () => {
+    if (window.screen.availWidth > 768) {
+      navigate('/home', { replace: true });
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('resize', windowListener);
+    return () => {
+      window.removeEventListener('resize', windowListener);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.screen.availWidth]);
 
   return (
     <>
