@@ -42,7 +42,9 @@ export const RegistrationForm = () => {
       const { username, email, password } = values;
 
       dispatch(signUp({ username, email, password })).then(resp =>
-        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+        resp?.error
+          ? errorToast(resp.payload?.[0] || resp.payload)
+          : actions.resetForm()
       );
     },
   });
@@ -125,14 +127,16 @@ export const RegistrationForm = () => {
             <Box
               position="absolute"
               bottom="-8px"
-              width="409.5px"
+              width="100%"
               overflow="hidden"
               backgroundColor="#e5f1e9"
               height="4px"
               borderRadius="2px"
             >
               <Box
-                width={`${confirmPassword.length * 34.1}px`}
+                style={{
+                  width: `calc(${confirmPassword.length}*(100% / ${password.length})`,
+                }}
                 backgroundColor={
                   errors.password || errors.confirmPassword ? 'red' : '#28ce65'
                 }

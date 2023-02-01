@@ -37,7 +37,9 @@ export const LoginForm = () => {
       const { email, password } = values;
 
       dispatch(signIn({ email, password })).then(resp =>
-        resp?.error ? errorToast(resp.payload) : actions.resetForm()
+        resp?.error
+          ? errorToast(resp.payload?.[0] || resp.payload)
+          : actions.resetForm()
       );
     },
   });
