@@ -132,3 +132,10 @@ export const Error = styled.p`
   line-height: 1.15;
   color: red;
 `;
+
+export const StrongSpan = styled.span`
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+`;

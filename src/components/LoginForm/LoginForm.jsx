@@ -38,7 +38,9 @@ export const LoginForm = () => {
 
       dispatch(signIn({ email, password })).then(resp =>
         resp?.error
-          ? errorToast(resp.payload?.[0] || resp.payload)
+          ? errorToast(
+              resp.payload instanceof Object ? resp.payload[0] : resp.payload
+            )
           : actions.resetForm()
       );
     },
