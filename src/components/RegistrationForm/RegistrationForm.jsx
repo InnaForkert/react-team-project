@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 
@@ -26,6 +26,7 @@ import {
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const status = useSelector(state => state.auth.status);
 
   const registerFormik = useFormik({
     initialValues: {
@@ -75,9 +76,12 @@ export const RegistrationForm = () => {
             type="email"
             name="email"
             placeholder="E-mail"
+            disabled={status === 'loading'}
           />
           <EmailIcon
-            style={{ color: errors.email && touched.email && 'red' }}
+            style={{
+              color: errors.email && touched.email && 'red',
+            }}
           />
           {errors.email && touched.email && <Error>{errors.email}</Error>}
         </Label>
@@ -90,6 +94,7 @@ export const RegistrationForm = () => {
             type="password"
             name="password"
             placeholder="Password"
+            disabled={status === 'loading'}
           />
           <PasswordIcon
             style={{
@@ -109,6 +114,7 @@ export const RegistrationForm = () => {
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
+            disabled={status === 'loading'}
           />
           <PasswordIcon
             style={{
@@ -144,6 +150,7 @@ export const RegistrationForm = () => {
             type="text"
             name="username"
             placeholder="First name"
+            disabled={status === 'loading'}
           />
           <UserIcon
             style={{
@@ -159,10 +166,15 @@ export const RegistrationForm = () => {
           type="submit"
           content={'Register'}
           hasAccent={true}
+          disabled={status === 'loading'}
         />
       </AuthForm>
       <NavLink to="/login">
-        <Button type="button" content={'Log in'} />
+        <Button
+          type="button"
+          content={'Log in'}
+          disabled={status === 'loading'}
+        />
       </NavLink>
     </AuthWrapper>
   );
