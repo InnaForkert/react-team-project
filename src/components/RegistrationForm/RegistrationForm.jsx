@@ -30,7 +30,6 @@ import { useEffect, useState } from 'react';
 
 import { BsEyeSlash } from 'react-icons/bs';
 import { BsEye } from 'react-icons/bs';
-import { useState } from 'react';
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -139,14 +138,14 @@ export const RegistrationForm = () => {
             disabled={status === 'loading'}
           />
           <IconEye>
-          <span onClick={handleToggle}>
-            {type === 'password' ? (
-              <BsEyeSlash size={20} />
-            ) : (
-              <BsEye size={20} />
-            )}
-          </span>
-        </IconEye>
+            <span onClick={handleToggle}>
+              {type === 'password' ? (
+                <BsEyeSlash size={20} />
+              ) : (
+                <BsEye size={20} />
+              )}
+            </span>
+          </IconEye>
           <PasswordIcon
             style={{
               color: errors.password && touched.password && 'red',
@@ -198,14 +197,14 @@ export const RegistrationForm = () => {
             disabled={status === 'loading'}
           />
           <IconEye>
-          <span onClick={handleToggle}>
-            {type === 'password' ? (
-              <BsEyeSlash size={20} />
-            ) : (
-              <BsEye size={20} />
-            )}
-          </span>
-        </IconEye>
+            <span onClick={handleToggle}>
+              {type === 'password' ? (
+                <BsEyeSlash size={20} />
+              ) : (
+                <BsEye size={20} />
+              )}
+            </span>
+          </IconEye>
           <PasswordIcon
             style={{
               color: errors.confirmPassword && touched.confirmPassword && 'red',

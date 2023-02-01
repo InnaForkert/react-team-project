@@ -128,18 +128,19 @@ export const UserIcon = styled(MdAccountBox)`
 export const Error = styled.p`
   position: absolute;
   bottom: 8px;
-  right: 8px;
+  right: 40px;
   line-height: 1.15;
   color: red;
 `;
 
-`
 export const IconEye = styled.div`
   display: inline;
   position: absolute;
   top: 5px;
-  right: 30px;
+  right: 10px;
   color: #bdbdbd;
+  cursor: pointer;
+`;
 
 export const StrongSpan = styled.span`
   position: absolute;
