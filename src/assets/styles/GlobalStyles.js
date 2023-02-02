@@ -41,7 +41,7 @@ body {
 	${({ theme }) => theme.media.desktop} {
 	background-repeat: no-repeat, no-repeat;
   background-image: url(${bg_pink}), url(${bg_violet});
-  background-position: top -150px right -150px, bottom -150px left -150px;;
+  background-position: top -150px right -150px, top 368px left -150px;;
   }
 
   td{text-align: center}
