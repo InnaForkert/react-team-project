@@ -43,4 +43,6 @@ body {
   background-image: url(${bg_pink}), url(${bg_violet});
   background-position: top -150px right -150px, bottom -150px left -150px;;
   }
+
+  td{text-align: center}
 }`;
