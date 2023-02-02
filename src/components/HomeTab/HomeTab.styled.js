@@ -60,7 +60,7 @@ export const TableHead = styled.tr`
   font-size: 18px;
 `;
 
-export const TableHeader = styled.td`
+export const TableHeader = styled.th`
   &.alignRight {
     text-align: right;
   }

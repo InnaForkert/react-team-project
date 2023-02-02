@@ -18,7 +18,21 @@ const transactionsSlice = createSlice({
     periodTotal: 0,
     isLoading: false,
     error: null,
+    filteredValue: {
+      transactionDate: '',
+      amount: '',
+      type: '',
+      comment: '',
+      categoryId: '',
+    },
   },
+
+  reducers: {
+    filteredValue(state, {payload}){
+      state.filteredValue = {...state.filteredValue, ...payload}
+    }
+  },
+
   extraReducers: builder =>
     builder
       .addCase(fetchCategories.pending, state => {
@@ -91,5 +105,6 @@ export const selectPeriodTotal = state => state.transactions.periodTotal;
 export const selectAllTransactions = state =>
   state.transactions.allTransactions;
 export const selectUserBalanceAfter = state => state.transactions.balance;
+export const selectFilteredValue = state => state.transactions.filteredValue
 
-export const { addColors } = transactionsSlice.actions;
+export const { addColors, filteredValue } = transactionsSlice.actions;
