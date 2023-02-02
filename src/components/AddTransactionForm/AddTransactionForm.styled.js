@@ -160,7 +160,7 @@ export const CloseBtn = styled.button`
   cursor: pointer;
   background: url(${exitIcon}) no-repeat center;
   background-size: contain;
-  ${({ theme }) => theme.media.mobileAll} {
+  /* ${({ theme }) => theme.media.mobileAll} {
     display: none;
-  }
+  } */
 `;

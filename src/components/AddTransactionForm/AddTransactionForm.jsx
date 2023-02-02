@@ -27,6 +27,7 @@ import {
 } from './AddTransactionForm.styled';
 import { Container } from 'components/Container/Container.styled';
 import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
+import { MediaQuery } from 'components/MediaQuery/MediaQuery';
 
 const setCurrentDate = () => {
   const d = new Date();
@@ -91,12 +92,15 @@ export const AddTransactionForm = () => {
 
   return (
     <Wrapper>
-      <CloseBtn
-        type="button"
-        onClick={() => {
-          dispatch(toggleModalAddTransactionOpen());
-        }}
-      />
+      <MediaQuery deviceName={'tabletFrom'}>
+        <CloseBtn
+          type="button"
+          onClick={() => {
+            dispatch(toggleModalAddTransactionOpen());
+          }}
+        />
+      </MediaQuery>
+
       <Container>
         <ModalWrap>
           <FormTitle>Add transaction</FormTitle>
