@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field, ErrorMessage } from 'formik';
+import calendar from '../../assets/icons/all_icons/calendar.svg';
+import exitIcon from '../../assets/icons/all_icons/exit.svg';
 
 export const ErrorMessageBox = styled(ErrorMessage)`
   color: red;
@@ -66,6 +68,13 @@ export const Input = styled(Field)`
 
   &::placeholder {
     color: #bdbdbd;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    color: transparent;
+    opacity: 1;
+    background: url(${calendar}) no-repeat center;
+    background-size: contain;
   }
 `;
 
@@ -140,4 +149,18 @@ export const InputAmount = styled(Field)`
 
 export const ModalWrap = styled.div`
   margin: 0 auto;
+`;
+
+export const CloseBtn = styled.button`
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background: url(${exitIcon}) no-repeat center;
+  background-size: contain;
+  /* ${({ theme }) => theme.media.mobileAll} {
+    display: none;
+  } */
 `;
